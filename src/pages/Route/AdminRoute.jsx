@@ -4,6 +4,7 @@ import SubCategary from "../../Admin/container/SubCategary/SubCategary";
 import NotFound from "../../Admin/container/NotFound/NotFound";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../../Admin/components/Layout/Layout";
+import Products from "../../Admin/container/Products/Products";
 
 function AdminRoute() {
   return (
@@ -11,6 +12,7 @@ function AdminRoute() {
       <Routes>
         <Route path="/categary" element={<Categary />} />
         <Route path="/sub-categary" element={<SubCategary />} />
+        <Route path="/products" element={<Products />} />
 
         <Route path="/*" element={<NotFound />} />
       </Routes>

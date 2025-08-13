@@ -93,15 +93,15 @@ function SubCategary() {
                 select
                 label="SubCategary-select"
                 // defaultValue="food"
-                // slotProps={{
-                //   select: {
-                //     native: true,
-                //   },
-                // }}
+                slotProps={{
+                  select: {
+                    native: true,
+                  },
+                }}
                 fullWidth
                 variant="standard"
                 onChange={handleChange}
-                value={values.name}
+                value={values.SubCategarySelect}
                 onBlur={handleBlur}
                 helperText={
                   errors.SubCategarySelect && touched.SubCategarySelect

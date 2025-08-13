@@ -124,6 +124,11 @@ export default function Layout({ children }) {
       icon: <CategoryIcon />,
       to: "/admin/sub-categary",
     },
+    {
+      label: "Products",
+      icon: <CategoryIcon />,
+      to: "/admin/products",
+    },
   ];
 
   return (
