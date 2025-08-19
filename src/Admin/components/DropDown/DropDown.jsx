@@ -1,30 +1,23 @@
 import { MenuItem, TextField } from "@mui/material";
+import { useField } from "formik";
 import React from "react";
 
-function DropDown({
-  id,
-  name,
-  label,
-  variant = "standard",
-  onChange,
-  onBlur,
-  error,
-  helperText,
-  data = [],
-}) {
+function DropDown({ id, label, variant = "standard", data = [], ...props }) {
+  const [field, meta] = useField(props);
+  console.log(field, meta);
+
   return (
     <TextField
+      {...props}
+      {...field}
       margin="dense"
       id={id}
-      name={name}
       select
       label={label}
       variant={variant}
       fullWidth
-      onChange={onChange}
-      onBlur={onBlur}
-      error={error}
-      helperText={helperText}
+      error={meta.error && meta.touched}
+      helperText={meta.error && meta.touched ? meta.error : ""}
     >
       {data.map((option) => (
         <MenuItem key={option.value} value={option.value}>

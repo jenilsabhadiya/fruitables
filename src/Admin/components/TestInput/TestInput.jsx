@@ -1,34 +1,33 @@
 import { TextField } from "@mui/material";
+import { useField } from "formik";
 import React from "react";
 
 function TestInput({
   id,
-  name,
   label,
   type = "text",
   variant = "standard",
-  onChange,
-  onBlur,
-  error,
-  helperText,
   multiline = false,
   rows = 0,
+  ...props
 }) {
+  const [field, meta] = useField(props);
+  console.log(field, meta);
+
   return (
     <TextField
-      margin="dense"
+      {...props}
+      {...field}
       id={id}
-      name={name}
       label={label}
       type={type}
+      margin="dense"
       fullWidth
       variant={variant}
-      onChange={onChange}
-      onBlur={onBlur}
-      error={error}
-      helperText={helperText}
       multiline={multiline}
       rows={rows}
+      error={meta.error && meta.touched}
+      helperText={meta.error && meta.touched ? meta.error : ""}
     />
   );
 }

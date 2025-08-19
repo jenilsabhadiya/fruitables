@@ -5,18 +5,12 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { useField } from "formik";
 import React from "react";
 
-function RadioButton({
-  label,
-  id,
-  name,
-  onChange,
-  onBlur,
-  error,
-  data,
-  helperText,
-}) {
+function RadioButton({ label, id, data, ...props }) {
+  const [field, meta] = useField(props);
+  console.log(field, meta);
   return (
     <FormControl
       style={{
@@ -28,12 +22,11 @@ function RadioButton({
     >
       <FormLabel id={id}>{label}:-</FormLabel>
       <RadioGroup
+        {...props}
+        {...field}
         row
         aria-labelledby={id}
-        name={name}
-        onChange={onChange}
-        onBlur={onBlur}
-        error={error}
+        error={meta.error && meta.touched}
       >
         {data.map((v) => (
           <FormControlLabel
@@ -43,7 +36,11 @@ function RadioButton({
           />
         ))}
       </RadioGroup>
-      {error ? <p className="error">{helperText}</p> : ""}
+      {meta.error && meta.touched ? (
+        <p className="error">{meta.error && meta.touched ? meta.error : ""}</p>
+      ) : (
+        ""
+      )}
     </FormControl>
   );
 }

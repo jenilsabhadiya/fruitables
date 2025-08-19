@@ -17,10 +17,13 @@ import FormLabel from "@mui/material/FormLabel";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Checkbox from "@mui/material/Checkbox";
 import { array, boolean, date, mixed, number, object, string } from "yup";
-import { useFormik } from "formik";
+import { Form, Formik } from "formik";
 import TestInput from "../../components/TestInput/TestInput";
 import DropDown from "../../components/DropDown/DropDown";
 import RadioButton from "../../components/RadioButton/RadioButton";
+import FileUpload from "../../components/FileUpload/FileUpload";
+import Checkbox1 from "../../components/Checkbox/Checkbox1";
+import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
 
 function Products() {
   const [open, setOpen] = React.useState(false);
@@ -103,6 +106,8 @@ function Products() {
     products_image: mixed()
       .required()
       .test("products_image", "Only png or jpeg file allowed", (val) => {
+        console.log(val);
+
         let type = val.type.toLowerCase();
 
         if (type === "image/png" || type === "image/jpeg") {
@@ -112,7 +117,7 @@ function Products() {
         }
       })
       .test("products_image", "Only 2MB size file allowed", (val) => {
-        console.log(val);
+        console.log("eeeeeeeeeeeee", val);
         if (val.size <= 2 * 1024 * 1024) {
           return true;
         } else {
@@ -122,39 +127,6 @@ function Products() {
     discount: array().required().min(1),
     status: boolean().oneOf([true], "Status must be active"),
   });
-
-  const formik = useFormik({
-    initialValues: {
-      categary: "",
-      subcategary: "",
-      name: "",
-      password: "",
-      rpassword: "",
-      jd: "",
-      description: "",
-      price: "",
-      type: "",
-      products_image: "",
-      discount: [],
-      status: false,
-    },
-    validationSchema: productsSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    touched,
-    setFieldValue,
-  } = formik;
-
-  console.log(errors, values);
 
   return (
     <div>
@@ -174,375 +146,102 @@ function Products() {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Products</DialogTitle>
           <DialogContent>
-            <form onSubmit={handleSubmit} id="subscription-form">
-              {/* <TextField
-                id="categary"
-                margin="dense"
-                name="categary"
-                select
-                label="Select Categary"
-                variant="standard"
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.categary && touched.categary}
-                helperText={
-                  errors.categary && touched.categary ? errors.categary : ""
-                }
-              >
-                {categary.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField> */}
+            <Formik
+              initialValues={{
+                categary: "",
+                subcategary: "",
+                name: "",
+                password: "",
+                rpassword: "",
+                jd: "",
+                description: "",
+                price: "",
+                type: "",
+                products_image: null,
+                discount: [],
+                status: false,
+              }}
+              validationSchema={productsSchema}
+              onSubmit={(values) => {
+                console.log(values);
+              }}
+            >
+              <Form id="subscription-form">
+                <DropDown
+                  id="categary"
+                  name="categary"
+                  select
+                  label="Select Categary"
+                  data={categary}
+                />
 
-              <DropDown
-                id="categary"
-                margin="dense"
-                name="categary"
-                select
-                label="Select Categary"
-                variant="standard"
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.categary && touched.categary}
-                helperText={
-                  errors.categary && touched.categary ? errors.categary : ""
-                }
-                data={categary}
-              />
+                <DropDown
+                  id="subcategary"
+                  name="subcategary"
+                  select
+                  label="Select SubCategary"
+                  data={subcategary}
+                />
 
-              {/* <TextField
-                id="subcategary"
-                name="subcategary"
-                margin="dense"
-                select
-                label="Select SubCategary"
-                variant="standard"
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.subcategary && touched.subcategary}
-                helperText={
-                  errors.subcategary && touched.subcategary
-                    ? errors.subcategary
-                    : ""
-                }
-              >
-                {subcategary.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField> */}
+                <TestInput id="name" name="name" label="Name:-" />
 
-              <DropDown
-                id="subcategary"
-                name="subcategary"
-                margin="dense"
-                select
-                label="Select SubCategary"
-                variant="standard"
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.subcategary && touched.subcategary}
-                helperText={
-                  errors.subcategary && touched.subcategary
-                    ? errors.subcategary
-                    : ""
-                }
-                data={subcategary}
-              />
+                <TestInput
+                  id="password"
+                  name="password"
+                  label="Password:-"
+                  type="password"
+                />
 
-              {/* <TextField
-                margin="dense"
-                id="name"
-                name="name"
-                label="Name:-"
-                type="text"
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.name && touched.name}
-                helperText={errors.name && touched.name ? errors.name : ""}
-              /> */}
+                <TestInput
+                  id="rpassword"
+                  name="rpassword"
+                  label="Repeat Password:-"
+                  type="password"
+                />
 
-              <TestInput
-                id="name"
-                name="name"
-                label="Name:-"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.name && touched.name}
-                helperText={errors.name && touched.name ? errors.name : ""}
-              />
-
-              {/* <TextField
-                margin="dense"
-                id="password"
-                name="password"
-                label="Password:-"
-                type="text"
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.password && touched.password}
-                helperText={
-                  errors.password && touched.password ? errors.password : ""
-                }
-              /> */}
-
-              <TestInput
-                id="password"
-                name="password"
-                label="Password:-"
-                type="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.password && touched.password}
-                helperText={
-                  errors.password && touched.password ? errors.password : ""
-                }
-              />
-
-              {/* <TextField
-                margin="dense"
-                id="rpassword"
-                name="rpassword"
-                label="Repeat Password:-"
-                type="text"
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.rpassword && touched.rpassword}
-                helperText={
-                  errors.rpassword && touched.rpassword ? errors.rpassword : ""
-                }
-              /> */}
-
-              <TestInput
-                id="rpassword"
-                name="rpassword"
-                label="Repeat Password:-"
-                type="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.rpassword && touched.rpassword}
-                helperText={
-                  errors.rpassword && touched.rpassword ? errors.rpassword : ""
-                }
-              />
-
-              <FormLabel id="date_label" style={{ marginTop: "20px" }}>
-                Joining Date:
-              </FormLabel>
-              {/* <TextField
-                margin="dense"
-                id="jd"
-                name="jd"
-                type="date"
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.jd && touched.jd}
-                helperText={errors.jd && touched.jd ? errors.jd : ""}
-              /> */}
-
-              <TestInput
-                id="jd"
-                name="jd"
-                type="date"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.jd && touched.jd}
-                helperText={errors.jd && touched.jd ? errors.jd : ""}
-              />
-
-              {/* <TextField
-                id="description"
-                label="Description"
-                name="description"
-                fullWidth
-                margin="dense"
-                multiline
-                rows={4}
-                variant="standard"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.description && touched.description}
-                helperText={
-                  errors.description && touched.description
-                    ? errors.description
-                    : ""
-                }
-              /> */}
-
-              <TestInput
-                id="description"
-                label="Description"
-                name="description"
-                multiline={true}
-                rows={4}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.description && touched.description}
-                helperText={
-                  errors.description && touched.description
-                    ? errors.description
-                    : ""
-                }
-              />
-
-              {/* <TextField
-                margin="dense"
-                id="price"
-                name="price"
-                label="Price:-"
-                type="number"
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.price && touched.price}
-                helperText={errors.price && touched.price ? errors.price : ""}
-              /> */}
-
-              <TestInput
-                id="price"
-                name="price"
-                label="Price:-"
-                type="number"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.price && touched.price}
-                helperText={errors.price && touched.price ? errors.price : ""}
-              />
-
-              {/* <FormControl
-                style={{
-                  marginTop: "20px",
-                  display: "block",
-                  justifyContent: "space-between",
-                  marginBottom: "20px",
-                }}
-              >
-                <FormLabel id="type_label">type:-</FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="type_label"
-                  name="type"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.type && touched.type}
-                >
-                  <FormControlLabel
-                    value="organic "
-                    control={<Radio />}
-                    label="Organic "
-                  />
-                  <FormControlLabel
-                    value="not organic "
-                    control={<Radio />}
-                    label="Not Organic "
-                  />
-                </RadioGroup>
-                {errors.type && touched.type ? (
-                  <p className="error">{errors.type}</p>
-                ) : (
-                  ""
-                )}
-              </FormControl> */}
-
-              <RadioButton
-                label="Type"
-                id="type_label"
-                name="type"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.type && touched.type}
-                data={[
-                  { value: "organic", label: "Organic" },
-                  { value: "not_organic", label: "Not Organic" },
-                ]}
-                helperText={errors.type && touched.type ? errors.type : ""}
-              />
-
-              <FormControl
-                style={{
-                  display: "block",
-                  marginTop: "20px",
-                  marginBottom: "20px",
-                }}
-              >
-                <FormLabel
-                  id="Upload_Image"
-                  style={{
-                    display: "block",
-                  }}
-                >
-                  Upload Image:-
+                <FormLabel id="date_label" style={{ marginTop: "20px" }}>
+                  Joining Date:
                 </FormLabel>
 
-                <input
-                  type="file"
-                  name="products_image"
-                  onBlur={handleBlur}
-                  onChange={(event) =>
-                    setFieldValue("products_image", event.target.files[0])
-                  }
-                />
-                {errors.products_image && touched.products_image ? (
-                  <p className="error">{errors.products_image}</p>
-                ) : (
-                  ""
-                )}
-              </FormControl>
+                <TestInput id="jd" name="jd" type="date" />
 
-              <FormGroup>
-                <FormLabel id="discount">Discount</FormLabel>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value={"yes"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                  }
-                  label="Yes"
-                  name="discount"
+                <TestInput
+                  id="description"
+                  label="Description"
+                  name="description"
+                  multiline={true}
+                  rows={4}
                 />
-                {errors.discount && touched.discount ? (
-                  <p className="error">{errors.discount}</p>
-                ) : (
-                  ""
-                )}
-              </FormGroup>
 
-              <FormGroup>
-                <FormLabel id="active">Active</FormLabel>
-                <FormControlLabel
-                  control={<Switch defaultChecked />}
+                <TestInput
+                  id="price"
+                  name="price"
+                  label="Price:-"
+                  type="number"
+                />
+
+                <RadioButton
+                  label="Type"
+                  id="type_label"
+                  name="type"
+                  data={[
+                    { value: "organic", label: "Organic" },
+                    { value: "not_organic", label: "Not Organic" },
+                  ]}
+                />
+
+                <FileUpload type="file" name="products_image" />
+
+                <Checkbox1 id="Discount" name="discount" label="Yes" />
+
+                <SwitchOnOff
+                  id="active"
+                  name="status"
                   label="Active or Not Active"
-                  name={"status"}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  checked={values.status}
+                  // checked={values.status}
                 />
-                {errors.status && touched.status ? (
-                  <p className="error">{errors.status}</p>
-                ) : (
-                  ""
-                )}
-              </FormGroup>
-            </form>
+              </Form>
+            </Formik>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
