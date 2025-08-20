@@ -4,7 +4,8 @@ import React from "react";
 
 function SwitchOnOff({ id, label, ...props }) {
   const [field, meta] = useField(props);
-  console.log(field, meta);
+  // console.log(field, meta);
+
   return (
     <>
       <FormGroup>
@@ -12,6 +13,7 @@ function SwitchOnOff({ id, label, ...props }) {
         <FormControlLabel
           control={<Switch {...field} {...props} />}
           label={label}
+          checked={field.value || false}
           error={meta.error && meta.touched}
         />
         {meta.error && meta.touched ? (

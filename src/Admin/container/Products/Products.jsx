@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, FormGroup, Switch } from "@mui/material";
+import { Box, FormGroup, IconButton, Switch } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -24,9 +24,25 @@ import RadioButton from "../../components/RadioButton/RadioButton";
 import FileUpload from "../../components/FileUpload/FileUpload";
 import Checkbox1 from "../../components/Checkbox/Checkbox1";
 import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
-
+import { DataGrid } from "@mui/x-data-grid";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 function Products() {
   const [open, setOpen] = React.useState(false);
+  const [productsData, setProductsData] = useState([]);
+  const [update, setUpdate] = useState();
+
+  const getData = () => {
+    const localProductsData =
+      JSON.parse(localStorage.getItem("products")) || [];
+    console.log(localProductsData);
+
+    setProductsData(localProductsData);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -93,7 +109,7 @@ function Products() {
       .test("description", "Max 30 word allowed", (val) => {
         const arr = val.split(" ");
 
-        console.log(arr);
+        // console.log(arr);
 
         if (arr.length <= 5) {
           return true;
@@ -106,7 +122,7 @@ function Products() {
     products_image: mixed()
       .required()
       .test("products_image", "Only png or jpeg file allowed", (val) => {
-        console.log(val);
+        // console.log(val);
 
         let type = val.type.toLowerCase();
 
@@ -117,7 +133,7 @@ function Products() {
         }
       })
       .test("products_image", "Only 2MB size file allowed", (val) => {
-        console.log("eeeeeeeeeeeee", val);
+        // console.log("eeeeeeeeeeeee", val);
         if (val.size <= 2 * 1024 * 1024) {
           return true;
         } else {
@@ -127,6 +143,77 @@ function Products() {
     discount: array().required().min(1),
     status: boolean().oneOf([true], "Status must be active"),
   });
+
+  const handleProuctsSubmit = (data) => {
+    console.log(data);
+
+    const localProductsData =
+      JSON.parse(localStorage.getItem("products")) || [];
+
+    console.log(localProductsData);
+
+    delete data.rpassword.name;
+
+    localProductsData.push({
+      ...data,
+      products_image: data.products_image.name,
+      id: Math.floor(Math.random() * 1000),
+    });
+
+    localStorage.setItem("products", JSON.stringify(localProductsData));
+    console.log(localProductsData);
+
+    setProductsData(localProductsData);
+  };
+
+  const handleEdit = (data) => {
+    console.log(data);
+    setUpdate(data);
+    handleClickOpen();
+  };
+
+  const handleDelete = (id) => {
+    console.log(id);
+    const localProductsData = JSON.parse(localStorage.getItem("products"));
+
+    const index = localProductsData.findIndex((v) => v.id === id);
+    console.log(index);
+
+    localProductsData.splice(index, 1);
+    localStorage.setItem("products", JSON.stringify(localProductsData));
+
+    setProductsData(localProductsData);
+  };
+
+  const columns = [
+    { field: "categary", headerName: "Categary", width: 70 },
+    { field: "subcategary", headerName: "Subcategary", width: 70 },
+    { field: "name", headerName: "Name", width: 70 },
+    { field: "jd", headerName: "JD", width: 70 },
+    { field: "price", headerName: "Price", width: 70 },
+    { field: "type", headerName: "Type", width: 70 },
+    { field: "products_image", headerName: "Image", width: 70 },
+    { field: "discount", headerName: "Discount", width: 70 },
+    { field: "status", headerName: "Status", width: 70 },
+    {
+      headerName: "Action",
+      renderCell: (params) => (
+        <>
+          <IconButton aria-label="edit" onClick={() => handleEdit(params.row)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            onClick={() => handleDelete(params.row.id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </>
+      ),
+    },
+  ];
+
+  const paginationModel = { page: 0, pageSize: 5 };
 
   return (
     <div>
@@ -143,27 +230,42 @@ function Products() {
             Add Products
           </Button>
         </Box>
+        <DataGrid
+          rows={productsData}
+          columns={columns}
+          initialState={{ pagination: { paginationModel } }}
+          pageSizeOptions={[5, 10]}
+          checkboxSelection
+          sx={{ border: 0 }}
+        />
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Products</DialogTitle>
           <DialogContent>
             <Formik
-              initialValues={{
-                categary: "",
-                subcategary: "",
-                name: "",
-                password: "",
-                rpassword: "",
-                jd: "",
-                description: "",
-                price: "",
-                type: "",
-                products_image: null,
-                discount: [],
-                status: false,
-              }}
+              initialValues={
+                update
+                  ? update
+                  : {
+                      categary: "",
+                      subcategary: "",
+                      name: "",
+                      password: "",
+                      rpassword: "",
+                      jd: "",
+                      description: "",
+                      price: "",
+                      type: "",
+                      products_image: null,
+                      discount: [],
+                      status: false,
+                    }
+              }
               validationSchema={productsSchema}
-              onSubmit={(values) => {
+              onSubmit={(values, { resetForm }) => {
                 console.log(values);
+                handleProuctsSubmit(values);
+                resetForm();
+                handleClose();
               }}
             >
               <Form id="subscription-form">

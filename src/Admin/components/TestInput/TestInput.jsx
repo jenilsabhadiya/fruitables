@@ -12,7 +12,7 @@ function TestInput({
   ...props
 }) {
   const [field, meta] = useField(props);
-  console.log(field, meta);
+  // console.log(field, meta);
 
   return (
     <TextField

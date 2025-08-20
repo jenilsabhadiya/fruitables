@@ -9,7 +9,8 @@ import React from "react";
 
 function Checkbox1({ id, label, ...props }) {
   const [field, meta] = useField(props);
-  console.log(field, meta);
+  // console.log(field, meta);
+
   return (
     <>
       <FormGroup>
@@ -19,6 +20,7 @@ function Checkbox1({ id, label, ...props }) {
           label={label}
           {...props}
           {...field}
+          checked={field.value || false}
           error={meta.error && meta.touched}
         />
         {meta.error && meta.touched ? (

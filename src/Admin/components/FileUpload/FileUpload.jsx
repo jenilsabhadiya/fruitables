@@ -2,7 +2,7 @@ import { useField } from "formik";
 
 function FileUpload({ type, ...props }) {
   const [field, meta, helpers] = useField(props.name);
-  console.log(field, meta);
+  // console.log(field, meta);
 
   return (
     <div>
@@ -12,6 +12,11 @@ function FileUpload({ type, ...props }) {
         {...field}
         onChange={(event) => helpers.setValue(event.target.files[0])}
         value=""
+      />
+
+      <img
+        style={{ width: "100px", height: "100px" }}
+        src={"../public/assets/img/" + field.value}
       />
 
       {meta.error && meta.touched ? (
