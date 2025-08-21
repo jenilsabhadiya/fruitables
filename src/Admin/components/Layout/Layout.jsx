@@ -20,6 +20,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import CategoryIcon from "@mui/icons-material/Category";
 import { NavLink } from "react-router-dom";
+import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
+import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
 
 const drawerWidth = 240;
 
@@ -121,12 +123,12 @@ export default function Layout({ children }) {
     },
     {
       label: "SubCategary",
-      icon: <CategoryIcon />,
+      icon: <SubdirectoryArrowRightIcon />,
       to: "/admin/sub-categary",
     },
     {
       label: "Products",
-      icon: <CategoryIcon />,
+      icon: <ProductionQuantityLimitsIcon />,
       to: "/admin/products",
     },
   ];

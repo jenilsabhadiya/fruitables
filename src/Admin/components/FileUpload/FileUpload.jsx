@@ -16,7 +16,13 @@ function FileUpload({ type, ...props }) {
 
       <img
         style={{ width: "100px", height: "100px" }}
-        src={"../public/assets/img/" + field.value}
+        src={
+          typeof field?.value === "string"
+            ? "../public/assets/img/" + field?.value
+            : field?.value
+            ? URL.createObjectURL(field?.value)
+            : ""
+        }
       />
 
       {meta.error && meta.touched ? (

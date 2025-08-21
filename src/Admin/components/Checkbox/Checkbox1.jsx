@@ -20,7 +20,7 @@ function Checkbox1({ id, label, ...props }) {
           label={label}
           {...props}
           {...field}
-          checked={field.value || false}
+          checked={field.value[0] || false}
           error={meta.error && meta.touched}
         />
         {meta.error && meta.touched ? (

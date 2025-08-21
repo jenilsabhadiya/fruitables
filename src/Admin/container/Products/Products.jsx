@@ -124,6 +124,10 @@ function Products() {
       .test("products_image", "Only png or jpeg file allowed", (val) => {
         // console.log(val);
 
+        if (typeof val === "string") {
+          return true;
+        }
+
         let type = val.type.toLowerCase();
 
         if (type === "image/png" || type === "image/jpeg") {
@@ -134,6 +138,11 @@ function Products() {
       })
       .test("products_image", "Only 2MB size file allowed", (val) => {
         // console.log("eeeeeeeeeeeee", val);
+
+        if (typeof val === "string") {
+          return true;
+        }
+
         if (val.size <= 2 * 1024 * 1024) {
           return true;
         } else {
@@ -141,7 +150,7 @@ function Products() {
         }
       }),
     discount: array().required().min(1),
-    status: boolean().oneOf([true], "Status must be active"),
+    // status: boolean().oneOf([true], "Status must be active"),
   });
 
   const handleProuctsSubmit = (data) => {
@@ -192,9 +201,29 @@ function Products() {
     { field: "jd", headerName: "JD", width: 70 },
     { field: "price", headerName: "Price", width: 70 },
     { field: "type", headerName: "Type", width: 70 },
-    { field: "products_image", headerName: "Image", width: 70 },
+    {
+      field: "products_image",
+      headerName: "Image",
+      width: 70,
+      renderCell: (params) => (
+        <img
+          style={{ width: "100px", height: "100px", objectFit: "contain" }}
+          src={"../public/assets/img/" + params.row.products_image}
+        />
+      ),
+    },
     { field: "discount", headerName: "Discount", width: 70 },
-    { field: "status", headerName: "Status", width: 70 },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 70,
+      renderCell: (params) => (
+        <Switch
+          checked={params.row.status || false}
+          onChange={() => handleStatus(params.row)}
+        />
+      ),
+    },
     {
       headerName: "Action",
       renderCell: (params) => (
@@ -214,6 +243,40 @@ function Products() {
   ];
 
   const paginationModel = { page: 0, pageSize: 5 };
+
+  const handleUpdate = (data) => {
+    const localProductsData = JSON.parse(localStorage.getItem("products"));
+
+    console.log(data);
+
+    const index = localProductsData.findIndex((v) => v.id === data.id);
+
+    if (typeof data === "string") {
+      localProductsData[index] = data;
+    } else {
+      localProductsData[index] = {
+        ...data,
+        products_image: data.products_image.name,
+      };
+    }
+
+    localStorage.setItem("products", JSON.stringify(localProductsData));
+    setProductsData(localProductsData);
+    setUpdate();
+  };
+
+  const handleStatus = (data) => {
+    console.log(data);
+
+    const localProductsData = JSON.parse(localStorage.getItem("products"));
+
+    const index = localProductsData.findIndex((v) => v.id === data.id);
+
+    localProductsData[index] = { ...data, status: !data.status };
+
+    localStorage.setItem("products", JSON.stringify(localProductsData));
+    setProductsData(localProductsData);
+  };
 
   return (
     <div>
@@ -244,7 +307,10 @@ function Products() {
             <Formik
               initialValues={
                 update
-                  ? update
+                  ? {
+                      ...update,
+                      rpassword: update.password,
+                    }
                   : {
                       categary: "",
                       subcategary: "",
@@ -263,7 +329,13 @@ function Products() {
               validationSchema={productsSchema}
               onSubmit={(values, { resetForm }) => {
                 console.log(values);
-                handleProuctsSubmit(values);
+
+                if (update) {
+                  handleUpdate(values);
+                } else {
+                  handleProuctsSubmit(values);
+                }
+
                 resetForm();
                 handleClose();
               }}
