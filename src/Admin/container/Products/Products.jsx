@@ -16,7 +16,7 @@ import FormLabel from "@mui/material/FormLabel";
 // import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Checkbox from "@mui/material/Checkbox";
-import { array, boolean, date, mixed, number, object, string } from "yup";
+import { array, date, mixed, number, object, string } from "yup";
 import { Form, Formik } from "formik";
 import TestInput from "../../components/TestInput/TestInput";
 import DropDown from "../../components/DropDown/DropDown";

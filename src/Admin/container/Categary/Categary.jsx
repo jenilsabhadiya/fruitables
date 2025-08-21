@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -8,12 +8,30 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import { DataGrid } from "@mui/x-data-grid";
-import { object, string } from "yup";
-import { Formik, useFormik } from "formik";
-import { Box } from "@mui/material";
+import { mixed, object, string } from "yup";
+import { Form, Formik } from "formik";
+import { Box, IconButton, Switch } from "@mui/material";
+import TestInput from "../../components/TestInput/TestInput";
+import FileUpload from "../../components/FileUpload/FileUpload";
+import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 function Categary() {
   const [open, setOpen] = React.useState(false);
+  const [categaryData, setCategaryData] = useState([]);
+  const [update, setUpdate] = useState();
+
+  const getData = () => {
+    const localData = JSON.parse(localStorage.getItem("categary")) || [];
+    console.log(localData);
+
+    setCategaryData(localData);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,71 +39,194 @@ function Categary() {
 
   const handleClose = () => {
     setOpen(false);
-    resetForm();
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
+    { field: "name", headerName: "Name", width: 170 },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 90,
+      field: "categary_image",
+      headerName: "Image",
+      width: 170,
+      renderCell: (params) => (
+        <img
+          style={{ width: "100px", height: "100px", objectFit: "contain" }}
+          src={"../public/assets/img/" + params.row.categary_image}
+        />
+      ),
     },
     {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (value, row) =>
-        `${row.firstName || ""} ${row.lastName || ""}`,
+      field: "status",
+      headerName: "Status",
+      width: 170,
+      renderCell: (params) => (
+        <Switch
+          checked={params.row.status || false}
+          onChange={() => handleStatus(params.row)}
+        />
+      ),
     },
-  ];
-
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+    {
+      headerName: "Action",
+      renderCell: (params) => (
+        <>
+          <IconButton aria-label="edit" onClick={() => handleEdit(params.row)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            onClick={() => handleDelete(params.row.id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </>
+      ),
+    },
   ];
 
   const paginationModel = { page: 0, pageSize: 5 };
 
   let categarySchema = object({
-    name: string().required("Please enter Name:"),
-    description: string().required("Please enter Description:"),
+    name: string()
+      .required()
+      .matches(/^[a-zA-Z ]+$/, "Only alphabets are allowed"),
+    description: string()
+      .required()
+      .test("description", "Max 5 word allowed", (val) => {
+        const arr = val.split(" ");
+        // console.log(arr);
+
+        if (arr.length <= 5) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+    categary_image: mixed()
+      .required()
+      .test("categary_image", "Only png or jpeg file allowed", (val) => {
+        // console.log(val);
+
+        if (typeof val === "string") {
+          return true;
+        }
+
+        let type = val.type.toLowerCase();
+        if (type === "image/png" || type === "image/jpeg") {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .test("categary_image", "Only 2MB size file allowed", (val) => {
+        // console.log("eeeeeeeeeeeee", val);
+
+        if (typeof val === "string") {
+          return true;
+        }
+
+        if (val.size <= 2 * 1024 * 1024) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
   });
 
-  const formikObj = useFormik({
-    initialValues: {
-      name: "",
-      description: "",
-    },
-    validationSchema: categarySchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  // const formikObj = useFormik({
+  //   initialValues: {
+  //     name: "",
+  //     description: "",
+  //   },
+  //   validationSchema: categarySchema,
+  //   onSubmit: (values) => {
+  //     alert(JSON.stringify(values, null, 2));
+  //   },
+  // });
 
-  const {
-    handleSubmit,
-    handleBlur,
-    handleChange,
-    values,
-    errors,
-    touched,
-    resetForm,
-  } = formikObj;
+  // const {
+  //   handleSubmit,
+  //   handleBlur,
+  //   handleChange,
+  //   values,
+  //   errors,
+  //   touched,
+  //   resetForm,
+  // } = formikObj;
 
   // console.log(errors, touched);
+
+  const handleCategarySubmit = (data) => {
+    console.log(data);
+
+    const localData = JSON.parse(localStorage.getItem("categary")) || [];
+
+    console.log(localData);
+
+    localData.push({
+      ...data,
+      categary_image: data.categary_image.name,
+      id: Math.floor(Math.random() * 1000),
+    });
+
+    localStorage.setItem("categary", JSON.stringify(localData));
+    console.log(localData);
+
+    setCategaryData(localData);
+  };
+
+  const handleDelete = (id) => {
+    console.log(id);
+    const localData = JSON.parse(localStorage.getItem("categary"));
+    console.log(localData);
+
+    const index = localData.findIndex((v) => v.id === id);
+    console.log(index);
+
+    localData.splice(index, 1);
+    localStorage.setItem("categary", JSON.stringify(localData));
+
+    setCategaryData(localData);
+  };
+
+  const handleEdit = (data) => {
+    console.log(data);
+    setUpdate(data);
+    handleClickOpen();
+  };
+
+  const handleUpdate = (data) => {
+    const localData = JSON.parse(localStorage.getItem("categary"));
+
+    console.log(data);
+
+    const index = localData.findIndex((v) => v.id === data.id);
+
+    if (typeof data === "string") {
+      localData[index] = data;
+    } else {
+      localData[index] = {
+        ...data,
+        categary_image: data.categary_image.name,
+      };
+    }
+
+    localStorage.setItem("categary", JSON.stringify(localData));
+    setCategaryData(localData);
+    setUpdate();
+  };
+
+  const handleStatus = (data) => {
+    console.log(data);
+
+    const localData = JSON.parse(localStorage.getItem("categary"));
+
+    const index = localData.findIndex((v) => v.id === data.id);
+
+    localData[index] = { ...data, status: !data.status };
+
+    localStorage.setItem("categary", JSON.stringify(localData));
+    setCategaryData(localData);
+  };
 
   return (
     <div>
@@ -105,54 +246,62 @@ function Categary() {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Categary</DialogTitle>
           <DialogContent>
-            <form onSubmit={handleSubmit} id="subscription-form">
-              <TextField
-                error={errors.name && touched.name}
-                margin="dense"
-                id="name"
-                name="name"
-                label="Name"
-                type="text"
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                value={values.name}
-                onBlur={handleBlur}
-                helperText={errors.name && touched.name ? errors.name : ""}
-              />
-
-              <TextField
-                error={errors.description && touched.description}
-                id="description"
-                label="Description"
-                multiline
-                fullWidth
-                rows={4}
-                defaultValue="Default Value"
-                variant="standard"
-                onChange={handleChange}
-                value={values.description}
-                onBlur={handleBlur}
-                helperText={
-                  errors.description && touched.description
-                    ? errors.description
-                    : ""
+            <Formik
+              initialValues={
+                update
+                  ? update
+                  : {
+                      name: "",
+                      description: "",
+                      categary_image: "",
+                    }
+              }
+              validationSchema={categarySchema}
+              onSubmit={(values, { resetForm }) => {
+                console.log(values);
+                if (update) {
+                  handleUpdate(values);
+                } else {
+                  handleCategarySubmit(values);
                 }
-              />
 
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button type="submit" form="subscription-form">
-                  Submit
-                </Button>
-              </DialogActions>
-            </form>
+                resetForm();
+                handleClose();
+              }}
+            >
+              <Form id="subscription-form">
+                <TestInput id="name" name="name" label="Name:-" />
+
+                <TestInput
+                  id="description"
+                  label="Description"
+                  name="description"
+                  multiline={true}
+                  rows={4}
+                />
+
+                <FileUpload type="file" name="categary_image" />
+
+                <SwitchOnOff
+                  id="active"
+                  name="status"
+                  label="Active or Not Active"
+                />
+
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button type="submit" form="subscription-form">
+                    Submit
+                  </Button>
+                </DialogActions>
+              </Form>
+            </Formik>
           </DialogContent>
         </Dialog>
       </React.Fragment>
 
       <DataGrid
-        rows={rows}
+        rows={categaryData}
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}

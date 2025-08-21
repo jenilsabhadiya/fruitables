@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,13 +6,33 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { object, string } from "yup";
-import { Formik, useFormik } from "formik";
-import { Box } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import { DataGrid } from "@mui/x-data-grid";
+import { mixed, object, string } from "yup";
+import { Form, Formik } from "formik";
+import { Box, IconButton, Switch } from "@mui/material";
+import TestInput from "../../components/TestInput/TestInput";
+import FileUpload from "../../components/FileUpload/FileUpload";
+import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import DropDown from "../../components/DropDown/DropDown";
 
 function SubCategary() {
   const [open, setOpen] = React.useState(false);
+  const [subcategaryData, setSubCategaryData] = useState([]);
+  const [update, setUpdate] = useState();
+
+  const getData = () => {
+    const localData = JSON.parse(localStorage.getItem("sub-categary")) || [];
+    console.log(localData);
+
+    setSubCategaryData(localData);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,56 +40,191 @@ function SubCategary() {
 
   const handleClose = () => {
     setOpen(false);
-    resetForm();
   };
 
-  let SubCategarySchema = object({
-    name: string().required("Please enter Name:"),
-    description: string().required("Please enter Description:"),
-    SubCategarySelect: string().required("Please select a SubCategary:"),
-  });
-
-  const formikObj = useFormik({
-    initialValues: {
-      name: "",
-      description: "",
-      SubCategarySelect: "",
-    },
-    validationSchema: SubCategarySchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
-  const {
-    handleSubmit,
-    handleBlur,
-    handleChange,
-    values,
-    errors,
-    touched,
-    resetForm,
-  } = formikObj;
-
-  // console.log(errors, touched);
-
-  const currencies = [
+  const columns = [
+    { field: "categary", headerName: "Categary", width: 170 },
+    { field: "name", headerName: "Name", width: 170 },
     {
-      value: "food",
-      label: "Food",
+      field: "sub_categary_image",
+      headerName: "Image",
+      width: 170,
+      renderCell: (params) => (
+        <img
+          style={{ width: "100px", height: "100px", objectFit: "contain" }}
+          src={"../public/assets/img/" + params.row.sub_categary_image}
+        />
+      ),
     },
     {
-      value: "food1",
-      label: "Food1",
+      field: "status",
+      headerName: "Status",
+      width: 170,
+      renderCell: (params) => (
+        <Switch
+          checked={params.row.status || false}
+          onChange={() => handleStatus(params.row)}
+        />
+      ),
     },
     {
-      value: "Food2",
-      label: "Food2",
+      headerName: "Action",
+      renderCell: (params) => (
+        <>
+          <IconButton aria-label="edit" onClick={() => handleEdit(params.row)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            onClick={() => handleDelete(params.row.id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </>
+      ),
     },
   ];
+
+  const paginationModel = { page: 0, pageSize: 5 };
+
+  let subcategarySchema = object({
+    categary: string().required(),
+    name: string()
+      .required()
+      .matches(/^[a-zA-Z ]+$/, "Only alphabets are allowed"),
+    description: string()
+      .required()
+      .test("description", "Max 5 word allowed", (val) => {
+        const arr = val.split(" ");
+        // console.log(arr);
+
+        if (arr.length <= 5) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+    sub_categary_image: mixed()
+      .required()
+      .test("sub_categary_image", "Only png or jpeg file allowed", (val) => {
+        // console.log(val);
+
+        if (typeof val === "string") {
+          return true;
+        }
+
+        let type = val.type.toLowerCase();
+        if (type === "image/png" || type === "image/jpeg") {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .test("sub_categary_image", "Only 2MB size file allowed", (val) => {
+        // console.log("eeeeeeeeeeeee", val);
+
+        if (typeof val === "string") {
+          return true;
+        }
+
+        if (val.size <= 2 * 1024 * 1024) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+  });
+
+  const handleCategarySubmit = (data) => {
+    console.log(data);
+
+    const localData = JSON.parse(localStorage.getItem("sub-categary")) || [];
+
+    console.log(localData);
+
+    localData.push({
+      ...data,
+      sub_categary_image: data.sub_categary_image.name,
+      id: Math.floor(Math.random() * 1000),
+    });
+
+    localStorage.setItem("sub-categary", JSON.stringify(localData));
+    console.log(localData);
+
+    setSubCategaryData(localData);
+  };
+
+  const handleDelete = (id) => {
+    console.log(id);
+    const localData = JSON.parse(localStorage.getItem("sub-categary"));
+    console.log(localData);
+
+    const index = localData.findIndex((v) => v.id === id);
+    console.log(index);
+
+    localData.splice(index, 1);
+    localStorage.setItem("sub-categary", JSON.stringify(localData));
+
+    setSubCategaryData(localData);
+  };
+
+  const handleEdit = (data) => {
+    console.log(data);
+    setUpdate(data);
+    handleClickOpen();
+  };
+
+  const handleUpdate = (data) => {
+    const localData = JSON.parse(localStorage.getItem("sub-categary"));
+
+    console.log(data);
+
+    const index = localData.findIndex((v) => v.id === data.id);
+
+    if (typeof data === "string") {
+      localData[index] = data;
+    } else {
+      localData[index] = {
+        ...data,
+        sub_categary_image: data.sub_categary_image.name,
+      };
+    }
+
+    localStorage.setItem("sub-categary", JSON.stringify(localData));
+    setSubCategaryData(localData);
+    setUpdate();
+  };
+
+  const handleStatus = (data) => {
+    console.log(data);
+
+    const localData = JSON.parse(localStorage.getItem("sub-categary"));
+
+    const index = localData.findIndex((v) => v.id === data.id);
+
+    localData[index] = { ...data, status: !data.status };
+
+    localStorage.setItem("sub-categary", JSON.stringify(localData));
+    setSubCategaryData(localData);
+  };
+
+  const categary = [
+    {
+      value: "fruits",
+      label: "Fruits",
+    },
+    {
+      value: "vegetable",
+      label: "Vegetable",
+    },
+    {
+      value: "dry fruits",
+      label: "Dry Fruits",
+    },
+  ];
+
   return (
     <div>
-      <h2>SubCategary</h2>
       <React.Fragment>
         <Box
           sx={{
@@ -78,87 +233,85 @@ function SubCategary() {
             marginBottom: "50px",
           }}
         >
-          <h2>SubCategary</h2>
+          <h2>Sub Categary</h2>
           <Button variant="outlined" onClick={handleClickOpen}>
-            Add SubCategary
+            Add Sub Categary
           </Button>
         </Box>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>SubCategary</DialogTitle>
+          <DialogTitle>Sub Categary</DialogTitle>
           <DialogContent>
-            <form onSubmit={handleSubmit} id="subscription-form">
-              <TextField
-                error={errors.SubCategarySelect && touched.SubCategarySelect}
-                id="SubCategarySelect"
-                select
-                label="SubCategary-select"
-                // defaultValue="food"
-                slotProps={{
-                  select: {
-                    native: true,
-                  },
-                }}
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                value={values.SubCategarySelect}
-                onBlur={handleBlur}
-                helperText={
-                  errors.SubCategarySelect && touched.SubCategarySelect
-                    ? errors.SubCategarySelect
-                    : ""
+            <Formik
+              initialValues={
+                update
+                  ? update
+                  : {
+                      categary: "",
+                      name: "",
+                      description: "",
+                      sub_categary_image: "",
+                    }
+              }
+              validationSchema={subcategarySchema}
+              onSubmit={(values, { resetForm }) => {
+                console.log(values);
+                if (update) {
+                  handleUpdate(values);
+                } else {
+                  handleCategarySubmit(values);
                 }
-              >
-                {currencies.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-              <TextField
-                error={errors.name && touched.name}
-                margin="dense"
-                id="name"
-                name="name"
-                label="Name"
-                type="text"
-                fullWidth
-                variant="standard"
-                onChange={handleChange}
-                value={values.name}
-                onBlur={handleBlur}
-                helperText={errors.name && touched.name ? errors.name : ""}
-              />
 
-              <TextField
-                error={errors.description && touched.description}
-                id="description"
-                label="Description"
-                multiline
-                fullWidth
-                rows={4}
-                defaultValue="Default Value"
-                variant="standard"
-                onChange={handleChange}
-                value={values.description}
-                onBlur={handleBlur}
-                helperText={
-                  errors.description && touched.description
-                    ? errors.description
-                    : ""
-                }
-              />
+                resetForm();
+                handleClose();
+              }}
+            >
+              <Form id="subscription-form">
+                <DropDown
+                  id="categary"
+                  name="categary"
+                  select
+                  label="Select Categary"
+                  data={categary}
+                />
 
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button type="submit" form="subscription-form">
-                  Submit
-                </Button>
-              </DialogActions>
-            </form>
+                <TestInput id="name" name="name" label="Name:-" />
+
+                <TestInput
+                  id="description"
+                  label="Description"
+                  name="description"
+                  multiline={true}
+                  rows={4}
+                />
+
+                <FileUpload type="file" name="sub_categary_image" />
+
+                <SwitchOnOff
+                  id="active"
+                  name="status"
+                  label="Active or Not Active"
+                />
+
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button type="submit" form="subscription-form">
+                    Submit
+                  </Button>
+                </DialogActions>
+              </Form>
+            </Formik>
           </DialogContent>
         </Dialog>
       </React.Fragment>
+
+      <DataGrid
+        rows={subcategaryData}
+        columns={columns}
+        initialState={{ pagination: { paginationModel } }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        sx={{ border: 0 }}
+      />
     </div>
   );
 }
