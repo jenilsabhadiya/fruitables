@@ -22,6 +22,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import { NavLink } from "react-router-dom";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
+import CalculateIcon from "@mui/icons-material/Calculate";
 
 const drawerWidth = 240;
 
@@ -130,6 +131,11 @@ export default function Layout({ children }) {
       label: "Products",
       icon: <ProductionQuantityLimitsIcon />,
       to: "/admin/products",
+    },
+    {
+      label: "Counter",
+      icon: <CalculateIcon />,
+      to: "/admin/counter",
     },
   ];
 
