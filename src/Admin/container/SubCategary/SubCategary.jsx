@@ -181,7 +181,7 @@ function SubCategary() {
 
     const index = localData.findIndex((v) => v.id === data.id);
 
-    if (typeof data === "string") {
+    if (typeof data.sub_categary_image === "string") {
       localData[index] = data;
     } else {
       localData[index] = {

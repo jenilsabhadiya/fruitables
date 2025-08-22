@@ -251,7 +251,7 @@ function Products() {
 
     const index = localProductsData.findIndex((v) => v.id === data.id);
 
-    if (typeof data === "string") {
+    if (typeof data.products_image === "string") {
       localProductsData[index] = data;
     } else {
       localProductsData[index] = {
