@@ -1,0 +1,140 @@
+{
+  "products": [
+    {
+      "id": "f85a",
+      "categary": "vegetable",
+      "subcategary": "winter fruits",
+      "name": "ABCQQ",
+      "password": "Aaa@123",
+      "rpassword": "Aaa@123",
+      "jd": "2025-08-15",
+      "description": "sss",
+      "price": 321,
+      "type": "organic",
+      "products_image": "best-product-4.jpg",
+      "discount": [
+        "yes"
+      ],
+      "status": true
+    },
+    {
+      "id": "b55d",
+      "categary": "fruits",
+      "subcategary": "winter fruits",
+      "name": "CSD",
+      "password": "Aa@1234",
+      "rpassword": "Aa@1234",
+      "jd": "2025-08-16",
+      "description": "sasa",
+      "price": 898,
+      "type": "organic",
+      "products_image": "vegetable-item-4.jpg",
+      "discount": [
+        "yes"
+      ],
+      "status": false
+    },
+    {
+      "id": "1981",
+      "categary": "fruits",
+      "subcategary": "summer fruits",
+      "name": "ABC",
+      "password": "Jenil@123",
+      "rpassword": "Jenil@123",
+      "jd": "2025-08-22",
+      "description": "Jqwer",
+      "price": 100,
+      "type": "not_organic",
+      "products_image": "baner-1.png",
+      "discount": [
+        "yes"
+      ],
+      "status": true
+    },
+    {
+      "id": "d896",
+      "categary": "fruits",
+      "subcategary": "summer fruits",
+      "name": "ABC",
+      "password": "Lo@1234",
+      "rpassword": "Lo@1234",
+      "jd": "2025-08-23",
+      "description": "qwqwok",
+      "price": 97,
+      "type": "organic",
+      "products_image": "hero-img-1.png",
+      "discount": [
+        "yes"
+      ],
+      "status": true
+    },
+    {
+      "id": "9f0f",
+      "categary": "fruits",
+      "subcategary": "summer fruits",
+      "name": "ABC",
+      "password": "Aa@123",
+      "rpassword": "Aa@123",
+      "jd": "2025-08-16",
+      "description": "qwqw",
+      "price": 119,
+      "type": "not_organic",
+      "products_image": "best-product-2.jpg",
+      "discount": [
+        "yes"
+      ],
+      "status": true
+    },
+    {
+      "id": "a687",
+      "categary": "fruits",
+      "subcategary": "summer fruits",
+      "name": "ABC",
+      "password": "Aa@123",
+      "rpassword": "Aa@123",
+      "jd": "2025-08-22",
+      "description": "qwqw",
+      "price": 119,
+      "type": "organic",
+      "products_image": "best-product-2.jpg",
+      "discount": [
+        "yes"
+      ],
+      "status": true
+    },
+    {
+      "id": "f18a",
+      "categary": "fruits",
+      "subcategary": "winter fruits",
+      "name": "ABC",
+      "password": "Abcd@123",
+      "rpassword": "Abcd@123",
+      "jd": "2025-08-09",
+      "description": "ssd s",
+      "price": 11,
+      "type": "organic",
+      "products_image": "best-product-3.jpg",
+      "discount": [
+        "yes"
+      ],
+      "status": true
+    },
+    {
+      "id": "87a5",
+      "categary": "vegetable",
+      "subcategary": "summer fruits",
+      "name": "csok",
+      "password": "Aa@123",
+      "rpassword": "Aa@123",
+      "jd": "2025-08-23",
+      "description": "okok",
+      "price": 119,
+      "type": "organic",
+      "products_image": "hero-img-2.jpg",
+      "discount": [
+        "yes"
+      ],
+      "status": false
+    }
+  ]
+}

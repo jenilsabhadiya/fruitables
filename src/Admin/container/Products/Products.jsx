@@ -32,12 +32,11 @@ function Products() {
   const [productsData, setProductsData] = useState([]);
   const [update, setUpdate] = useState();
 
-  const getData = () => {
-    const localProductsData =
-      JSON.parse(localStorage.getItem("products")) || [];
-    console.log(localProductsData);
+  const getData = async () => {
+    const response = await fetch("http://localhost:3000/products");
+    const data = await response.json();
 
-    setProductsData(localProductsData);
+    setProductsData(data);
   };
 
   useEffect(() => {
@@ -153,26 +152,27 @@ function Products() {
     // status: boolean().oneOf([true], "Status must be active"),
   });
 
-  const handleProuctsSubmit = (data) => {
-    console.log(data);
+  const handleProuctsSubmit = async (data) => {
+    try {
+      const response = await fetch("http://localhost:3000/products", {
+        method: "POST",
+        body: JSON.stringify({
+          ...data,
+          products_image: data.products_image.name,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const localProductsData =
-      JSON.parse(localStorage.getItem("products")) || [];
+      const rdata = await response.json();
 
-    console.log(localProductsData);
+      setProductsData((prev) => [...prev, rdata]);
 
-    delete data.rpassword.name;
-
-    localProductsData.push({
-      ...data,
-      products_image: data.products_image.name,
-      id: Math.floor(Math.random() * 1000),
-    });
-
-    localStorage.setItem("products", JSON.stringify(localProductsData));
-    console.log(localProductsData);
-
-    setProductsData(localProductsData);
+      console.log(productsData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEdit = (data) => {
@@ -181,17 +181,13 @@ function Products() {
     handleClickOpen();
   };
 
-  const handleDelete = (id) => {
-    console.log(id);
-    const localProductsData = JSON.parse(localStorage.getItem("products"));
+  const handleDelete = async (id) => {
+    await fetch("http://localhost:3000/products/" + id, {
+      method: "DELETE",
+    });
 
-    const index = localProductsData.findIndex((v) => v.id === id);
-    console.log(index);
-
-    localProductsData.splice(index, 1);
-    localStorage.setItem("products", JSON.stringify(localProductsData));
-
-    setProductsData(localProductsData);
+    const fData = productsData.filter((v) => v.id !== id);
+    setProductsData(fData);
   };
 
   const columns = [
@@ -244,25 +240,33 @@ function Products() {
 
   const paginationModel = { page: 0, pageSize: 5 };
 
-  const handleUpdate = (data) => {
-    const localProductsData = JSON.parse(localStorage.getItem("products"));
-
-    console.log(data);
-
-    const index = localProductsData.findIndex((v) => v.id === data.id);
+  const handleUpdate = async (data) => {
+    let updateData = [];
 
     if (typeof data.products_image === "string") {
-      localProductsData[index] = data;
+      updateData = { ...data };
     } else {
-      localProductsData[index] = {
+      updateData = {
         ...data,
         products_image: data.products_image.name,
       };
     }
 
-    localStorage.setItem("products", JSON.stringify(localProductsData));
-    setProductsData(localProductsData);
-    setUpdate();
+    await fetch("http://localhost:3000/products/" + data.id, {
+      method: "PUT",
+      body: JSON.stringify(updateData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const index = productsData.findIndex((v) => v.id === data.id);
+
+    const copyData = [...productsData];
+
+    copyData[index] = updateData;
+
+    setProductsData(copyData);
   };
 
   const handleStatus = (data) => {
