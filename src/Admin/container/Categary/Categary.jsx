@@ -16,17 +16,27 @@ import FileUpload from "../../components/FileUpload/FileUpload";
 import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCategary,
+  deleteCategary,
+  getAllData,
+  updateCategary,
+  updateStatus,
+} from "../../../redux/slice/categary.slice";
 
 function Categary() {
   const [open, setOpen] = React.useState(false);
-  const [categaryData, setCategaryData] = useState([]);
+  // const [categaryData, setCategaryData] = useState([]);
   const [update, setUpdate] = useState();
 
-  const getData = () => {
-    const localData = JSON.parse(localStorage.getItem("categary")) || [];
-    console.log(localData);
+  const dispatch = useDispatch();
 
-    setCategaryData(localData);
+  const categarySlice = useSelector((state) => state.categary);
+  console.log(categarySlice);
+
+  const getData = () => {
+    dispatch(getAllData());
   };
 
   useEffect(() => {
@@ -156,36 +166,11 @@ function Categary() {
   // console.log(errors, touched);
 
   const handleCategarySubmit = (data) => {
-    console.log(data);
-
-    const localData = JSON.parse(localStorage.getItem("categary")) || [];
-
-    console.log(localData);
-
-    localData.push({
-      ...data,
-      categary_image: data.categary_image.name,
-      id: Math.floor(Math.random() * 1000),
-    });
-
-    localStorage.setItem("categary", JSON.stringify(localData));
-    console.log(localData);
-
-    setCategaryData(localData);
+    dispatch(addCategary(data));
   };
 
   const handleDelete = (id) => {
-    console.log(id);
-    const localData = JSON.parse(localStorage.getItem("categary"));
-    console.log(localData);
-
-    const index = localData.findIndex((v) => v.id === id);
-    console.log(index);
-
-    localData.splice(index, 1);
-    localStorage.setItem("categary", JSON.stringify(localData));
-
-    setCategaryData(localData);
+    dispatch(deleteCategary(id));
   };
 
   const handleEdit = (data) => {
@@ -195,37 +180,21 @@ function Categary() {
   };
 
   const handleUpdate = (data) => {
-    const localData = JSON.parse(localStorage.getItem("categary"));
-
-    console.log(data);
-
-    const index = localData.findIndex((v) => v.id === data.id);
+    let updateData = [];
 
     if (typeof data.categary_image === "string") {
-      localData[index] = data;
+      updateData = { ...data };
     } else {
-      localData[index] = {
+      updateData = {
         ...data,
         categary_image: data.categary_image.name,
       };
     }
-
-    localStorage.setItem("categary", JSON.stringify(localData));
-    setCategaryData(localData);
-    setUpdate();
+    dispatch(updateCategary(updateData));
   };
 
   const handleStatus = (data) => {
-    console.log(data);
-
-    const localData = JSON.parse(localStorage.getItem("categary"));
-
-    const index = localData.findIndex((v) => v.id === data.id);
-
-    localData[index] = { ...data, status: !data.status };
-
-    localStorage.setItem("categary", JSON.stringify(localData));
-    setCategaryData(localData);
+    dispatch(updateStatus(data));
   };
 
   return (
@@ -301,7 +270,7 @@ function Categary() {
       </React.Fragment>
 
       <DataGrid
-        rows={categaryData}
+        rows={categarySlice.categary}
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}

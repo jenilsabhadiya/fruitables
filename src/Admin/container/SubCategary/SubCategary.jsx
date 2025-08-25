@@ -17,17 +17,27 @@ import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DropDown from "../../components/DropDown/DropDown";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addsubCategary,
+  deletesubCategary,
+  getAllData,
+  updateStatus,
+  updatesubCategary,
+} from "../../../redux/slice/subCategary.slice";
 
 function SubCategary() {
   const [open, setOpen] = React.useState(false);
-  const [subcategaryData, setSubCategaryData] = useState([]);
+  // const [subcategaryData, setSubCategaryData] = useState([]);
   const [update, setUpdate] = useState();
 
-  const getData = () => {
-    const localData = JSON.parse(localStorage.getItem("sub-categary")) || [];
-    console.log(localData);
+  const dispatch = useDispatch();
 
-    setSubCategaryData(localData);
+  const subCategarySlice = useSelector((state) => state.subCategary);
+  console.log(subCategarySlice);
+
+  const getData = () => {
+    dispatch(getAllData());
   };
 
   useEffect(() => {
@@ -136,36 +146,11 @@ function SubCategary() {
   });
 
   const handleCategarySubmit = (data) => {
-    console.log(data);
-
-    const localData = JSON.parse(localStorage.getItem("sub-categary")) || [];
-
-    console.log(localData);
-
-    localData.push({
-      ...data,
-      sub_categary_image: data.sub_categary_image.name,
-      id: Math.floor(Math.random() * 1000),
-    });
-
-    localStorage.setItem("sub-categary", JSON.stringify(localData));
-    console.log(localData);
-
-    setSubCategaryData(localData);
+    dispatch(addsubCategary(data));
   };
 
   const handleDelete = (id) => {
-    console.log(id);
-    const localData = JSON.parse(localStorage.getItem("sub-categary"));
-    console.log(localData);
-
-    const index = localData.findIndex((v) => v.id === id);
-    console.log(index);
-
-    localData.splice(index, 1);
-    localStorage.setItem("sub-categary", JSON.stringify(localData));
-
-    setSubCategaryData(localData);
+    dispatch(deletesubCategary(id));
   };
 
   const handleEdit = (data) => {
@@ -175,37 +160,21 @@ function SubCategary() {
   };
 
   const handleUpdate = (data) => {
-    const localData = JSON.parse(localStorage.getItem("sub-categary"));
-
-    console.log(data);
-
-    const index = localData.findIndex((v) => v.id === data.id);
+    let updateData = [];
 
     if (typeof data.sub_categary_image === "string") {
-      localData[index] = data;
+      updateData = { ...data };
     } else {
-      localData[index] = {
+      updateData = {
         ...data,
         sub_categary_image: data.sub_categary_image.name,
       };
     }
-
-    localStorage.setItem("sub-categary", JSON.stringify(localData));
-    setSubCategaryData(localData);
-    setUpdate();
+    dispatch(updatesubCategary(updateData));
   };
 
   const handleStatus = (data) => {
-    console.log(data);
-
-    const localData = JSON.parse(localStorage.getItem("sub-categary"));
-
-    const index = localData.findIndex((v) => v.id === data.id);
-
-    localData[index] = { ...data, status: !data.status };
-
-    localStorage.setItem("sub-categary", JSON.stringify(localData));
-    setSubCategaryData(localData);
+    dispatch(updateStatus(data));
   };
 
   const categary = [
@@ -305,7 +274,7 @@ function SubCategary() {
       </React.Fragment>
 
       <DataGrid
-        rows={subcategaryData}
+        rows={subCategarySlice.subCategary}
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}

@@ -11,8 +11,10 @@
       "description": "sss",
       "price": 321,
       "type": "organic",
-      "products_image": "best-product-3.jpg",
-      "discount": ["yes"],
+      "products_image": "baner-1.png",
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -27,7 +29,9 @@
       "price": 100,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -42,7 +46,9 @@
       "price": 97,
       "type": "organic",
       "products_image": "hero-img-1.png",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -57,7 +63,9 @@
       "price": 119,
       "type": "organic",
       "products_image": "best-product-2.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -72,7 +80,9 @@
       "price": 110,
       "type": "organic",
       "products_image": "best-product-3.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -87,7 +97,9 @@
       "price": 119,
       "type": "organic",
       "products_image": "hero-img-2.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -102,7 +114,9 @@
       "price": 198,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -117,10 +131,52 @@
       "price": 295,
       "type": "organic",
       "products_image": "featur-2.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     }
   ],
-  "categary": [],
-  "sub-categary": []
+  "categary": [
+    {
+      "id": "c1c7",
+      "name": "ABCokqk",
+      "description": "ksksks",
+      "categary_image": "best-product-2.jpg",
+      "status": false
+    },
+    {
+      "id": "0d20",
+      "name": "csok",
+      "description": "kkk",
+      "categary_image": "banner-fruits.jpg",
+      "status": true
+    }
+  ],
+  "subCategary": [
+    {
+      "id": "6817",
+      "categary": "fruits",
+      "name": "csok",
+      "description": "kiki",
+      "sub_categary_image": "banner-fruits.jpg",
+      "status": false
+    },
+    {
+      "id": "6890",
+      "categary": "fruits",
+      "name": "cs",
+      "description": "kiki",
+      "sub_categary_image": "baner-1.png",
+      "status": false
+    },
+    {
+      "id": "7e22",
+      "categary": "fruits",
+      "name": "ABCDOK",
+      "description": "kiji",
+      "sub_categary_image": "best-product-3.jpg",
+      "status": true
+    }
+  ]
 }
