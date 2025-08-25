@@ -27,16 +27,27 @@ import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProduct,
+  deleteProduct,
+  getAllProductsData,
+  updateProduct,
+  updateStatus,
+} from "../../../redux/slice/products.slice";
+
 function Products() {
   const [open, setOpen] = React.useState(false);
-  const [productsData, setProductsData] = useState([]);
+  // const [productsData, setProductsData] = useState([]);
   const [update, setUpdate] = useState();
 
-  const getData = async () => {
-    const response = await fetch("http://localhost:3000/products");
-    const data = await response.json();
+  const dispatch = useDispatch();
 
-    setProductsData(data);
+  const productsSlice = useSelector((state) => state.product);
+  console.log(productsSlice);
+
+  const getData = async () => {
+    dispatch(getAllProductsData());
   };
 
   useEffect(() => {
@@ -153,26 +164,7 @@ function Products() {
   });
 
   const handleProuctsSubmit = async (data) => {
-    try {
-      const response = await fetch("http://localhost:3000/products", {
-        method: "POST",
-        body: JSON.stringify({
-          ...data,
-          products_image: data.products_image.name,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const rdata = await response.json();
-
-      setProductsData((prev) => [...prev, rdata]);
-
-      console.log(productsData);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(addProduct(data));
   };
 
   const handleEdit = (data) => {
@@ -182,12 +174,7 @@ function Products() {
   };
 
   const handleDelete = async (id) => {
-    await fetch("http://localhost:3000/products/" + id, {
-      method: "DELETE",
-    });
-
-    const fData = productsData.filter((v) => v.id !== id);
-    setProductsData(fData);
+    dispatch(deleteProduct(id));
   };
 
   const columns = [
@@ -251,35 +238,13 @@ function Products() {
         products_image: data.products_image.name,
       };
     }
-
-    await fetch("http://localhost:3000/products/" + data.id, {
-      method: "PUT",
-      body: JSON.stringify(updateData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const index = productsData.findIndex((v) => v.id === data.id);
-
-    const copyData = [...productsData];
-
-    copyData[index] = updateData;
-
-    setProductsData(copyData);
+    dispatch(updateProduct(updateData));
   };
 
   const handleStatus = (data) => {
     console.log(data);
 
-    const localProductsData = JSON.parse(localStorage.getItem("products"));
-
-    const index = localProductsData.findIndex((v) => v.id === data.id);
-
-    localProductsData[index] = { ...data, status: !data.status };
-
-    localStorage.setItem("products", JSON.stringify(localProductsData));
-    setProductsData(localProductsData);
+    dispatch(updateStatus(data));
   };
 
   return (
@@ -298,7 +263,7 @@ function Products() {
           </Button>
         </Box>
         <DataGrid
-          rows={productsData}
+          rows={productsSlice.products}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}

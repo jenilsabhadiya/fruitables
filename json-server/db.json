@@ -4,34 +4,15 @@
       "id": "f85a",
       "categary": "vegetable",
       "subcategary": "winter fruits",
-      "name": "ABCQQ",
+      "name": "ABCDOK",
       "password": "Aaa@123",
       "rpassword": "Aaa@123",
       "jd": "2025-08-15",
       "description": "sss",
       "price": 321,
       "type": "organic",
-      "products_image": "best-product-4.jpg",
-      "discount": [
-        "yes"
-      ],
-      "status": true
-    },
-    {
-      "id": "b55d",
-      "categary": "fruits",
-      "subcategary": "winter fruits",
-      "name": "CSD",
-      "password": "Aa@1234",
-      "rpassword": "Aa@1234",
-      "jd": "2025-08-16",
-      "description": "sasa",
-      "price": 898,
-      "type": "organic",
-      "products_image": "vegetable-item-4.jpg",
-      "discount": [
-        "yes"
-      ],
+      "products_image": "best-product-3.jpg",
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -46,9 +27,7 @@
       "price": 100,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -63,26 +42,7 @@
       "price": 97,
       "type": "organic",
       "products_image": "hero-img-1.png",
-      "discount": [
-        "yes"
-      ],
-      "status": true
-    },
-    {
-      "id": "9f0f",
-      "categary": "fruits",
-      "subcategary": "summer fruits",
-      "name": "ABC",
-      "password": "Aa@123",
-      "rpassword": "Aa@123",
-      "jd": "2025-08-16",
-      "description": "qwqw",
-      "price": 119,
-      "type": "not_organic",
-      "products_image": "best-product-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -97,9 +57,7 @@
       "price": 119,
       "type": "organic",
       "products_image": "best-product-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -111,13 +69,11 @@
       "rpassword": "Abcd@123",
       "jd": "2025-08-09",
       "description": "ssd s",
-      "price": 11,
+      "price": 110,
       "type": "organic",
       "products_image": "best-product-3.jpg",
-      "discount": [
-        "yes"
-      ],
-      "status": true
+      "discount": ["yes"],
+      "status": false
     },
     {
       "id": "87a5",
@@ -131,10 +87,40 @@
       "price": 119,
       "type": "organic",
       "products_image": "hero-img-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
+    },
+    {
+      "id": "2264",
+      "categary": "fruits",
+      "subcategary": "summer fruits",
+      "name": "ABCqwokqq",
+      "password": "Aa@1234",
+      "rpassword": "Aa@1234",
+      "jd": "2025-08-20",
+      "description": "jiji ",
+      "price": 198,
+      "type": "not_organic",
+      "products_image": "baner-1.png",
+      "discount": ["yes"],
+      "status": false
+    },
+    {
+      "id": "ae7c",
+      "categary": "vegetable",
+      "subcategary": "seasonal fruit",
+      "name": "MY FRUIT",
+      "password": "Aa@1234",
+      "rpassword": "Aa@1234",
+      "jd": "2025-08-20",
+      "description": "MY FRUIT",
+      "price": 295,
+      "type": "organic",
+      "products_image": "featur-2.jpg",
+      "discount": ["yes"],
+      "status": true
     }
-  ]
+  ],
+  "categary": [],
+  "sub-categary": []
 }
