@@ -103,7 +103,7 @@ const categarySlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(getAllData.fulfilled, (state, action) => {
-      state.categary.push(...action.payload);
+      state.categary = action.payload;
     });
     builder.addCase(addCategary.fulfilled, (state, action) => {
       state.categary.push(action.payload);

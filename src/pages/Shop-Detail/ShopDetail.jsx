@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getAllProductsData } from "../../redux/slice/products.slice";
 
-function ShopDetail(props) {
+function ShopDetail() {
+  const { id } = useParams();
+  console.log(id);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsData());
+  }, []);
+
+  const productsData = useSelector((state) => state.product);
+  console.log(productsData);
+
+  const fData = productsData?.products?.find((v) => v.id === id);
+  console.log(fData);
+
   return (
     <div>
       {/* Modal Search Start */}
@@ -65,7 +83,7 @@ function ShopDetail(props) {
                   <div className="border rounded">
                     <a href="#">
                       <img
-                        src="public/assets/img/single-item.jpg"
+                        src={`../public/assets/img/${fData?.products_image}`}
                         className="img-fluid rounded"
                         alt="Image"
                       />
@@ -73,9 +91,9 @@ function ShopDetail(props) {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <h4 className="fw-bold mb-3">Brocoli</h4>
-                  <p className="mb-3">Category: Vegetables</p>
-                  <h5 className="fw-bold mb-3">3,35 $</h5>
+                  <h4 className="fw-bold mb-3">{fData?.name}</h4>
+                  <p className="mb-3">${`Category:${fData?.categary} `} </p>
+                  <h5 className="fw-bold mb-3">${`${fData?.price}$`}</h5>
                   <div className="d-flex mb-4">
                     <i className="fa fa-star text-secondary" />
                     <i className="fa fa-star text-secondary" />
@@ -83,15 +101,8 @@ function ShopDetail(props) {
                     <i className="fa fa-star text-secondary" />
                     <i className="fa fa-star" />
                   </div>
-                  <p className="mb-4">
-                    The generated Lorem Ipsum is therefore always free from
-                    repetition injected humour, or non-characteristic words etc.
-                  </p>
-                  <p className="mb-4">
-                    Susp endisse ultricies nisi vel quam suscipit. Sabertooth
-                    peacock flounder; chain pickerel hatchetfish, pencilfish
-                    snailfish
-                  </p>
+                  <p className="mb-4">{fData?.description}</p>
+
                   <div
                     className="input-group quantity mb-5"
                     style={{ width: 100 }}

@@ -106,7 +106,7 @@ const subCategarySlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(getAllData.fulfilled, (state, action) => {
-      state.subCategary.push(...action.payload);
+      state.subCategary = action.payload;
     });
     builder.addCase(addsubCategary.fulfilled, (state, action) => {
       state.subCategary.push(action.payload);

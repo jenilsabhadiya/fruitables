@@ -140,35 +140,29 @@
   "categary": [
     {
       "id": "c1c7",
-      "name": "ABCokqk",
+      "name": "ABCokqkok",
       "description": "ksksks",
-      "categary_image": "best-product-2.jpg",
+      "categary_image": "banner-fruits.jpg",
       "status": false
     },
     {
-      "id": "0d20",
-      "name": "csok",
-      "description": "kkk",
-      "categary_image": "banner-fruits.jpg",
-      "status": true
+      "id": "3a76",
+      "name": "ABCDkkkk",
+      "description": "hhhmmm",
+      "categary_image": "best-product-3.jpg",
+      "status": [
+        "on"
+      ]
     }
   ],
   "subCategary": [
-    {
-      "id": "6817",
-      "categary": "fruits",
-      "name": "csok",
-      "description": "kiki",
-      "sub_categary_image": "banner-fruits.jpg",
-      "status": false
-    },
     {
       "id": "6890",
       "categary": "fruits",
       "name": "cs",
       "description": "kiki",
       "sub_categary_image": "baner-1.png",
-      "status": false
+      "status": true
     },
     {
       "id": "7e22",
@@ -176,7 +170,15 @@
       "name": "ABCDOK",
       "description": "kiji",
       "sub_categary_image": "best-product-3.jpg",
-      "status": true
+      "status": false
+    },
+    {
+      "id": "5343",
+      "categary": "vegetable",
+      "name": "ABCDOK",
+      "description": "k",
+      "sub_categary_image": "best-product-3.jpg",
+      "status": []
     }
   ]
 }

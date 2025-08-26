@@ -22,7 +22,7 @@ function UserRoute() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/shopDetail" element={<ShopDetail />} />
+        <Route path="/shopDetail/:id" element={<ShopDetail />} />
 
         <Route element={<PrivateRoute />}>
           <Route path="/cart" element={<Cart />} />

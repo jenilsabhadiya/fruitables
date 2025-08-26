@@ -36,6 +36,9 @@ function SubCategary() {
   const subCategarySlice = useSelector((state) => state.subCategary);
   console.log(subCategarySlice);
 
+  const categarySlice = useSelector((state) => state.categary);
+  console.log(categarySlice.categary);
+
   const getData = () => {
     dispatch(getAllData());
   };
