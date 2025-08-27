@@ -1,4 +1,11 @@
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import Tastimonial from "./Tastimonial";
+import FreshOrganicVegetables from "./FreshOrganicVegetables";
 
 function Home() {
   return (
@@ -923,7 +930,7 @@ function Home() {
       </div>
       {/* Featurs End */}
       {/* Vesitable Shop Start*/}
-      <div className="container-fluid vesitable py-5">
+      {/* <div className="container-fluid vesitable py-5">
         <div className="container py-5">
           <h1 className="mb-0">Fresh Organic Vegetables</h1>
           <div className="owl-carousel vegetable-carousel justify-content-center">
@@ -1185,7 +1192,8 @@ function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+      <FreshOrganicVegetables />
       {/* Vesitable Shop End */}
       {/* Banner Section Start*/}
       <div className="container-fluid banner bg-secondary my-5">
@@ -1600,124 +1608,7 @@ function Home() {
       </div>
       {/* Fact Start */}
       {/* Tastimonial Start */}
-      <div className="container-fluid testimonial py-5">
-        <div className="container py-5">
-          <div className="testimonial-header text-center">
-            <h4 className="text-primary">Our Testimonial</h4>
-            <h1 className="display-5 mb-5 text-dark">Our Client Saying!</h1>
-          </div>
-          <div className="owl-carousel testimonial-carousel">
-            <div className="testimonial-item img-border-radius bg-light rounded p-4">
-              <div className="position-relative">
-                <i
-                  className="fa fa-quote-right fa-2x text-secondary position-absolute"
-                  style={{ bottom: 30, right: 0 }}
-                />
-                <div className="mb-4 pb-4 border-bottom border-secondary">
-                  <p className="mb-0">
-                    Lorem Ipsum is simply dummy text of the printing Ipsum has
-                    been the industry's standard dummy text ever since the
-                    1500s,
-                  </p>
-                </div>
-                <div className="d-flex align-items-center flex-nowrap">
-                  <div className="bg-secondary rounded">
-                    <img
-                      src="public/assets/img/testimonial-1.jpg"
-                      className="img-fluid rounded"
-                      style={{ width: 100, height: 100 }}
-                      alt=""
-                    />
-                  </div>
-                  <div className="ms-4 d-block">
-                    <h4 className="text-dark">Client Name</h4>
-                    <p className="m-0 pb-3">Profession</p>
-                    <div className="d-flex pe-5">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="testimonial-item img-border-radius bg-light rounded p-4">
-              <div className="position-relative">
-                <i
-                  className="fa fa-quote-right fa-2x text-secondary position-absolute"
-                  style={{ bottom: 30, right: 0 }}
-                />
-                <div className="mb-4 pb-4 border-bottom border-secondary">
-                  <p className="mb-0">
-                    Lorem Ipsum is simply dummy text of the printing Ipsum has
-                    been the industry's standard dummy text ever since the
-                    1500s,
-                  </p>
-                </div>
-                <div className="d-flex align-items-center flex-nowrap">
-                  <div className="bg-secondary rounded">
-                    <img
-                      src="public/assets/img/testimonial-1.jpg"
-                      className="img-fluid rounded"
-                      style={{ width: 100, height: 100 }}
-                      alt=""
-                    />
-                  </div>
-                  <div className="ms-4 d-block">
-                    <h4 className="text-dark">Client Name</h4>
-                    <p className="m-0 pb-3">Profession</p>
-                    <div className="d-flex pe-5">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="testimonial-item img-border-radius bg-light rounded p-4">
-              <div className="position-relative">
-                <i
-                  className="fa fa-quote-right fa-2x text-secondary position-absolute"
-                  style={{ bottom: 30, right: 0 }}
-                />
-                <div className="mb-4 pb-4 border-bottom border-secondary">
-                  <p className="mb-0">
-                    Lorem Ipsum is simply dummy text of the printing Ipsum has
-                    been the industry's standard dummy text ever since the
-                    1500s,
-                  </p>
-                </div>
-                <div className="d-flex align-items-center flex-nowrap">
-                  <div className="bg-secondary rounded">
-                    <img
-                      src="public/assets/img/testimonial-1.jpg"
-                      className="img-fluid rounded"
-                      style={{ width: 100, height: 100 }}
-                      alt=""
-                    />
-                  </div>
-                  <div className="ms-4 d-block">
-                    <h4 className="text-dark">Client Name</h4>
-                    <p className="m-0 pb-3">Profession</p>
-                    <div className="d-flex pe-5">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Tastimonial />
       {/* Tastimonial End */}
     </>
   );

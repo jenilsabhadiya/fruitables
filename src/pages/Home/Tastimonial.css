@@ -1,0 +1,57 @@
+.testimonial .swiper-button-prev:hover,
+.testimonial .swiper-button-next:hover,
+.vegetables .swiper-button-prev:hover,
+.vegetables .swiper-button-next:hover {
+  background: var(--bs-secondary);
+  color: var(--bs-white);
+}
+
+.testimonial .swiper-wrapper,
+.vegetables .swiper-wrapper {
+  padding-top: 60px;
+}
+
+.testimonial .swiper-button-prev:after,
+.testimonial .swiper-button-next:after,
+.vegetables .swiper-button-prev:after,
+.vegetables .swiper-button-next:after {
+  color: var(--bs-primary);
+  font-size: large;
+}
+
+.testimonial .swiper-button-prev,
+.vegetables .swiper-button-prev {
+  top: 30px;
+  right: 0;
+  left: 85.5%;
+  color: var(--bs-primary);
+  padding: 0px 34px;
+  border: 1px solid var(--bs-secondary);
+  border-radius: 20px;
+  transition: 0.5s;
+  height: 36px;
+}
+
+.testimonial .swiper-button-next,
+.vegetables .swiper-button-next {
+  top: 30px;
+  right: 0;
+  color: var(--bs-primary);
+  padding: 0px 34px;
+  border: 1px solid var(--bs-secondary);
+  border-radius: 20px;
+  transition: 0.5s;
+  height: 36px;
+}
+
+.testimonial .swiper-button-next:after,
+.vegetables .swiper-button-next:after {
+  content: "\f138";
+  font-family: bootstrap-icons !important;
+}
+
+.testimonial .swiper-button-prev:after,
+.vegetables .swiper-button-prev:after {
+  content: "\f12f";
+  font-family: bootstrap-icons !important;
+}
