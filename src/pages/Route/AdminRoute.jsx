@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../../Admin/components/Layout/Layout";
 import Products from "../../Admin/container/Products/Products";
 import Counter from "../../Admin/container/Counter/Counter";
+import Tastimonial from "../../Admin/container/Tastimonial/Tastimonial";
 
 function AdminRoute() {
   return (
@@ -14,8 +15,9 @@ function AdminRoute() {
         <Route path="/categary" element={<Categary />} />
         <Route path="/sub-categary" element={<SubCategary />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/counter" element={<Counter />} />
+        <Route path="/tastimonial" element={<Tastimonial />} />
 
+        <Route path="/counter" element={<Counter />} />
 
         <Route path="/*" element={<NotFound />} />
       </Routes>

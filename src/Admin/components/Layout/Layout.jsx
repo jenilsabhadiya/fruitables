@@ -23,6 +23,7 @@ import { NavLink } from "react-router-dom";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
 import CalculateIcon from "@mui/icons-material/Calculate";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 const drawerWidth = 240;
 
@@ -136,6 +137,11 @@ export default function Layout({ children }) {
       label: "Counter",
       icon: <CalculateIcon />,
       to: "/admin/counter",
+    },
+    {
+      label: "Counter",
+      icon: <ChatBubbleOutlineIcon />,
+      to: "/admin/tastimonial",
     },
   ];
 

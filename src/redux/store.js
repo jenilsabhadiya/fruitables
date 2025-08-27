@@ -3,6 +3,7 @@ import counterSlice from "./slice/counter.slice";
 import productsSlice from "./slice/products.slice";
 import categarySlice from "./slice/categary.slice";
 import subCategarySlice from "./slice/subCategary.slice";
+import tastimonialSlice from "./slice/Tastimonial.slice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     product: productsSlice,
     categary: categarySlice,
     subCategary: subCategarySlice,
+    tastimonial: tastimonialSlice,
   },
 });

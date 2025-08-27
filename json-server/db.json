@@ -10,11 +10,9 @@
       "jd": "2025-08-15",
       "description": "sss",
       "price": 321,
-      "type": "organic",
+      "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -29,9 +27,7 @@
       "price": 100,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -46,9 +42,7 @@
       "price": 97,
       "type": "organic",
       "products_image": "hero-img-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -63,9 +57,7 @@
       "price": 119,
       "type": "organic",
       "products_image": "best-product-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -80,9 +72,7 @@
       "price": 110,
       "type": "organic",
       "products_image": "best-product-3.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -97,9 +87,7 @@
       "price": 119,
       "type": "organic",
       "products_image": "hero-img-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -114,9 +102,7 @@
       "price": 198,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -131,9 +117,7 @@
       "price": 295,
       "type": "organic",
       "products_image": "featur-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     }
   ],
@@ -150,9 +134,7 @@
       "name": "ABCDkkkk",
       "description": "hhhmmm",
       "categary_image": "best-product-3.jpg",
-      "status": [
-        "on"
-      ]
+      "status": ["on"]
     }
   ],
   "subCategary": [
@@ -179,6 +161,32 @@
       "description": "k",
       "sub_categary_image": "best-product-3.jpg",
       "status": []
+    }
+  ],
+  "tastimonial": [
+    {
+      "id": "dd7c",
+      "name": "Client Name1",
+      "description": "Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "tastimonial_image": "baner-1.png",
+      "profession": "Profession",
+      "half_rating": "4.5"
+    },
+    {
+      "id": "0220",
+      "name": "Client Name2",
+      "description": "Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "tastimonial_image": "best-product-4.jpg",
+      "profession": "Profession",
+      "half_rating": "4"
+    },
+    {
+      "id": "1b63",
+      "name": "Client Name3",
+      "description": "Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "profession": "Profession",
+      "tastimonial_image": "best-product-3.jpg",
+      "half_rating": "4.5"
     }
   ]
 }
