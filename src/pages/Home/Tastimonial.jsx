@@ -8,6 +8,7 @@ import "./Tastimonial.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllData } from "../../redux/slice/Tastimonial.slice";
 import Rating1 from "../../Admin/components/Rating/Rating1";
+import { Rating } from "@mui/material";
 
 function Tastimonial() {
   const dispatch = useDispatch();
@@ -77,12 +78,15 @@ function Tastimonial() {
                       <div className="ms-4 d-block">
                         <h4 className="text-dark">{v.name}</h4>
                         <p className="m-0 pb-3">{v.profession}</p>
+
                         <div className="d-flex pe-5">
-                          <i className="fas fa-star text-primary" />
-                          <i className="fas fa-star text-primary" />
-                          <i className="fas fa-star text-primary" />
-                          <i className="fas fa-star text-primary" />
-                          <i className="fas fa-star" />
+                          <Rating
+                            name="size-medium"
+                            className="text-primary"
+                            defaultValue={v.half_rating}
+                            precision={0.5}
+                            readOnly
+                          />
                         </div>
                       </div>
                     </div>

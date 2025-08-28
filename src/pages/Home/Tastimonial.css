@@ -55,3 +55,7 @@
   content: "\f12f";
   font-family: bootstrap-icons !important;
 }
+
+.text-primary {
+  color: #81c408 !important;
+}

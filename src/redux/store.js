@@ -4,6 +4,7 @@ import productsSlice from "./slice/products.slice";
 import categarySlice from "./slice/categary.slice";
 import subCategarySlice from "./slice/subCategary.slice";
 import tastimonialSlice from "./slice/Tastimonial.slice";
+import cartSlice from "./slice/cart.slice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     categary: categarySlice,
     subCategary: subCategarySlice,
     tastimonial: tastimonialSlice,
+    cart: cartSlice,
   },
 });

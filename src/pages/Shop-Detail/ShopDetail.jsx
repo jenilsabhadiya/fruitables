@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { getAllProductsData } from "../../redux/slice/products.slice";
+import { Addtocart } from "../../redux/slice/cart.slice";
 
 function ShopDetail() {
+  const [counter, setCounter] = useState(1);
   const { id } = useParams();
   console.log(id);
 
@@ -14,10 +16,32 @@ function ShopDetail() {
   }, []);
 
   const productsData = useSelector((state) => state.product);
-  console.log(productsData);
+  const cartData = useSelector((state) => state.cart);
+
+  console.log(cartData);
 
   const fData = productsData?.products?.find((v) => v.id === id);
-  console.log(fData);
+  // console.log(fData);
+
+  const handleIncrement = () => {
+    if (counter <= 10) {
+      setCounter(counter + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (counter >= 1) {
+      setCounter(counter - 1);
+    }
+  };
+
+  const handleCounter = (val) => {
+    if (val >= 1 && val <= 10) {
+      setCounter(val);
+    }
+  };
+
+  console.log(counter);
 
   return (
     <div>
@@ -92,8 +116,8 @@ function ShopDetail() {
                 </div>
                 <div className="col-lg-6">
                   <h4 className="fw-bold mb-3">{fData?.name}</h4>
-                  <p className="mb-3">${`Category:${fData?.categary} `} </p>
-                  <h5 className="fw-bold mb-3">${`${fData?.price}$`}</h5>
+                  <p className="mb-3">{`Category: ${fData?.categary}`} </p>
+                  <h5 className="fw-bold mb-3">{`${fData?.price}$`}</h5>
                   <div className="d-flex mb-4">
                     <i className="fa fa-star text-secondary" />
                     <i className="fa fa-star text-secondary" />
@@ -108,28 +132,42 @@ function ShopDetail() {
                     style={{ width: 100 }}
                   >
                     <div className="input-group-btn">
-                      <button className="btn btn-sm btn-minus rounded-circle bg-light border">
+                      <button
+                        className="btn btn-sm btn-minus rounded-circle bg-light border"
+                        disabled={counter === 1}
+                        onClick={() => handleDecrement()}
+                      >
                         <i className="fa fa-minus" />
                       </button>
                     </div>
                     <input
                       type="text"
                       className="form-control form-control-sm text-center border-0"
-                      defaultValue={1}
+                      value={counter}
+                      onChange={(event) =>
+                        handleCounter(parseInt(event.target.value))
+                      }
                     />
                     <div className="input-group-btn">
-                      <button className="btn btn-sm btn-plus rounded-circle bg-light border">
+                      <button
+                        className="btn btn-sm btn-plus rounded-circle bg-light border"
+                        disabled={counter === 10}
+                        onClick={() => handleIncrement()}
+                      >
                         <i className="fa fa-plus" />
                       </button>
                     </div>
                   </div>
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/cart"}
+                    onClick={() =>
+                      dispatch(Addtocart({ id: fData.id, qty: counter }))
+                    }
                     className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
                   >
                     <i className="fa fa-shopping-bag me-2 text-primary" /> Add
                     to cart
-                  </a>
+                  </NavLink>
                 </div>
                 <div className="col-lg-12">
                   <nav>

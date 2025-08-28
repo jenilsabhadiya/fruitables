@@ -12,7 +12,9 @@
       "price": 321,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -27,7 +29,9 @@
       "price": 100,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -42,7 +46,9 @@
       "price": 97,
       "type": "organic",
       "products_image": "hero-img-1.png",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -57,7 +63,9 @@
       "price": 119,
       "type": "organic",
       "products_image": "best-product-2.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -72,7 +80,9 @@
       "price": 110,
       "type": "organic",
       "products_image": "best-product-3.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -87,7 +97,9 @@
       "price": 119,
       "type": "organic",
       "products_image": "hero-img-2.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -102,7 +114,9 @@
       "price": 198,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -117,7 +131,9 @@
       "price": 295,
       "type": "organic",
       "products_image": "featur-2.jpg",
-      "discount": ["yes"],
+      "discount": [
+        "yes"
+      ],
       "status": true
     }
   ],
@@ -134,7 +150,9 @@
       "name": "ABCDkkkk",
       "description": "hhhmmm",
       "categary_image": "best-product-3.jpg",
-      "status": ["on"]
+      "status": [
+        "on"
+      ]
     }
   ],
   "subCategary": [
@@ -187,6 +205,14 @@
       "profession": "Profession",
       "tastimonial_image": "best-product-3.jpg",
       "half_rating": "4.5"
+    },
+    {
+      "id": "0a6e",
+      "name": "ABCqwokqq",
+      "description": "kkk",
+      "profession": "ii",
+      "tastimonial_image": "best-product-2.jpg",
+      "half_rating": "3"
     }
   ]
 }
