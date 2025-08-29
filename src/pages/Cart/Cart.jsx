@@ -1,27 +1,32 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  countQut,
+  decrementQut,
+  incrementQut,
+  removeQut,
+} from "../../redux/slice/cart.slice";
+import { NavLink } from "react-router-dom";
 
 function Cart() {
-  const productsData = useSelector((state) => state.product);
-  const cartData = useSelector((state) => state.cart);
-  console.log(productsData, cartData);
+  const dispatch = useDispatch();
 
-  const cartDisplay = cartData.cart.map((v) => {
-    const product = productsData.products.find((c) => c.id === v.id);
-    console.log(product);
-    if (product) {
-      return { ...product, qty: v.qty };
+  const cartData = useSelector((state) => state.cart?.cart);
+  const productsData = useSelector((state) => state.product?.products);
+
+  // console.log(cartData, productsData);
+
+  const cartDisplay = cartData.map((v) => {
+    const product = productsData.find((v1) => v1.id === v.id);
+
+    return { ...product, qty: v.qty };
+  });
+
+  const handleCounter = (val, id) => {
+    if (val >= 1 && val <= 10) {
+      dispatch(countQut({ id: id, qty: val }));
     }
-
-    return product;
-  });
-
-  console.log(cartDisplay);
-
-  const b = cartDisplay.map((v) => {
-    console.log(v.price);
-  });
-  console.log(b);
+  };
 
   return (
     <div>
@@ -68,7 +73,7 @@ function Cart() {
         <h1 className="text-center text-white display-6">Cart</h1>
         <ol className="breadcrumb justify-content-center mb-0">
           <li className="breadcrumb-item">
-            <a href="#">Home</a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li className="breadcrumb-item">
             <a href="#">Pages</a>
@@ -93,7 +98,7 @@ function Cart() {
                 </tr>
               </thead>
               <tbody>
-                {cartDisplay.map((v) => (
+                {cartDisplay?.map((v) => (
                   <tr key={v.id}>
                     <th scope="row">
                       <div className="d-flex align-items-center">
@@ -101,7 +106,7 @@ function Cart() {
                           src={`../public/assets/img/${v.products_image}`}
                           className="img-fluid me-5 rounded-circle"
                           style={{ width: 80, height: 80 }}
-                          alt=""
+                          alt
                         />
                       </div>
                     </th>
@@ -109,7 +114,7 @@ function Cart() {
                       <p className="mb-0 mt-4">{v.name}</p>
                     </td>
                     <td>
-                      <p className="mb-0 mt-4">{v.price}$</p>
+                      <p className="mb-0 mt-4">{v.price} $</p>
                     </td>
                     <td>
                       <div
@@ -117,7 +122,11 @@ function Cart() {
                         style={{ width: 100 }}
                       >
                         <div className="input-group-btn">
-                          <button className="btn btn-sm btn-minus rounded-circle bg-light border">
+                          <button
+                            className="btn btn-sm btn-minus rounded-circle bg-light border"
+                            onClick={() => dispatch(decrementQut(v.id))}
+                            disabled={v.qty === 1}
+                          >
                             <i className="fa fa-minus" />
                           </button>
                         </div>
@@ -125,28 +134,34 @@ function Cart() {
                           type="text"
                           className="form-control form-control-sm text-center border-0"
                           value={v.qty}
-                          // defaultValue={1}
+                          onChange={(event) =>
+                            handleCounter(parseInt(event.target.value), v.id)
+                          }
                         />
                         <div className="input-group-btn">
-                          <button className="btn btn-sm btn-plus rounded-circle bg-light border">
+                          <button
+                            className="btn btn-sm btn-plus rounded-circle bg-light border"
+                            onClick={() => dispatch(incrementQut(v.id))}
+                            disabled={v.qty === 10}
+                          >
                             <i className="fa fa-plus" />
                           </button>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p className="mb-0 mt-4">
-                        {(v.price * v.qty).toFixed(2)} $
-                      </p>
+                      <p className="mb-0 mt-4">{v.price * v.qty} $</p>
                     </td>
                     <td>
-                      <button className="btn btn-md rounded-circle bg-light border mt-4">
+                      <button
+                        className="btn btn-md rounded-circle bg-light border mt-4"
+                        onClick={() => dispatch(removeQut(v.id))}
+                      >
                         <i className="fa fa-times text-danger" />
                       </button>
                     </td>
                   </tr>
                 ))}
-
                 {/* <tr>
                   <th scope="row">
                     <div className="d-flex align-items-center">
@@ -194,8 +209,8 @@ function Cart() {
                       <i className="fa fa-times text-danger" />
                     </button>
                   </td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <th scope="row">
                     <div className="d-flex align-items-center">
                       <img
@@ -269,11 +284,17 @@ function Cart() {
                   </h1>
                   <div className="d-flex justify-content-between mb-4">
                     <h5 className="mb-0 me-4">Subtotal:</h5>
-                    <p className="mb-0">$96.00</p>
+                    <p className="mb-0">
+                      $
+                      {cartDisplay?.reduce(
+                        (acc, v) => acc + v.price * v.qty,
+                        0
+                      )}
+                    </p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <h5 className="mb-0 me-4">Shipping</h5>
-                    <div className>
+                    <div className="">
                       <p className="mb-0">Flat rate: $3.00</p>
                     </div>
                   </div>
@@ -281,7 +302,11 @@ function Cart() {
                 </div>
                 <div className="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                   <h5 className="mb-0 ps-4 me-4">Total</h5>
-                  <p className="mb-0 pe-4">$99.00</p>
+                  <p className="mb-0 pe-4">
+                    $
+                    {cartDisplay.reduce((acc, v) => acc + v.price * v.qty, 0) +
+                      3}
+                  </p>
                 </div>
                 <button
                   className="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"

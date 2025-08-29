@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 function Herder() {
+  const cartData = useSelector((state) => state.cart?.cart);
+
   return (
     <div>
       {/* Spinner Start */}
@@ -45,9 +48,9 @@ function Herder() {
         </div>
         <div className="container px-0">
           <nav className="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="index.html" className="navbar-brand">
+            <NavLink to="/" className="navbar-brand">
               <h1 className="text-primary display-6">Fruitables</h1>
-            </a>
+            </NavLink>
             <button
               className="navbar-toggler py-2 px-3"
               type="button"
@@ -105,15 +108,15 @@ function Herder() {
                 >
                   <i className="fas fa-search text-primary" />
                 </button>
-                <a href="#" className="position-relative me-4 my-auto">
+                <NavLink to="/cart" className="position-relative me-4 my-auto">
                   <i className="fa fa-shopping-bag fa-2x" />
                   <span
                     className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                     style={{ top: "-5px", left: 15, height: 20, minWidth: 20 }}
                   >
-                    3
+                    {cartData?.reduce((acc, v) => acc + v.qty, 0)}
                   </span>
-                </a>
+                </NavLink>
                 <a href="#" className="my-auto">
                   <i className="fas fa-user fa-2x" />
                 </a>

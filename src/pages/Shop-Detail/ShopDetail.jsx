@@ -7,7 +7,7 @@ import { Addtocart } from "../../redux/slice/cart.slice";
 function ShopDetail() {
   const [counter, setCounter] = useState(1);
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   const dispatch = useDispatch();
 
@@ -16,9 +16,8 @@ function ShopDetail() {
   }, []);
 
   const productsData = useSelector((state) => state.product);
-  const cartData = useSelector((state) => state.cart);
-
-  console.log(cartData);
+  // const cartData = useSelector((state) => state.cart);
+  // console.log(cartData);
 
   const fData = productsData?.products?.find((v) => v.id === id);
   // console.log(fData);
@@ -41,7 +40,7 @@ function ShopDetail() {
     }
   };
 
-  console.log(counter);
+  // console.log(counter);
 
   return (
     <div>

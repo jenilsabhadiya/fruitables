@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsData } from "../../redux/slice/products.slice";
 import { NavLink } from "react-router-dom";
+import { Addtocart } from "../../redux/slice/cart.slice";
 
 function Shop() {
   const [search, setSearch] = useState("");
@@ -449,7 +450,11 @@ function Shop() {
                                   {` $ ${v.price} / kg`}
                                 </p>
                                 <a
-                                  href="#"
+                                  onClick={(event) =>
+                                    event.preventDefault(
+                                      dispatch(Addtocart({ id: v.id, qty: 1 }))
+                                    )
+                                  }
                                   className="btn border border-secondary rounded-pill px-3 text-primary"
                                 >
                                   <i className="fa fa-shopping-bag me-2 text-primary" />{" "}
