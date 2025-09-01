@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   countQut,
@@ -7,9 +7,14 @@ import {
   removeQut,
 } from "../../redux/slice/cart.slice";
 import { NavLink } from "react-router-dom";
+import { getAllProductsData } from "../../redux/slice/products.slice";
 
 function Cart() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsData());
+  });
 
   const cartData = useSelector((state) => state.cart?.cart);
   const productsData = useSelector((state) => state.product?.products);
