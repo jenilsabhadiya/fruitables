@@ -7,6 +7,7 @@ import Layout from "../../Admin/components/Layout/Layout";
 import Products from "../../Admin/container/Products/Products";
 import Counter from "../../Admin/container/Counter/Counter";
 import Tastimonial from "../../Admin/container/Tastimonial/Tastimonial";
+import Reviews from "../../Admin/container/Reviews/Reviews";
 
 function AdminRoute() {
   return (
@@ -18,6 +19,7 @@ function AdminRoute() {
         <Route path="/tastimonial" element={<Tastimonial />} />
 
         <Route path="/counter" element={<Counter />} />
+        <Route path="/reviews" element={<Reviews />} />
 
         <Route path="/*" element={<NotFound />} />
       </Routes>

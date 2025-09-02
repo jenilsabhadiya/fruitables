@@ -3,17 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { getAllProductsData } from "../../redux/slice/products.slice";
 import { Addtocart } from "../../redux/slice/cart.slice";
+import ReviewForm from "./ReviewForm";
+import { Rating } from "@mui/material";
 
 function ShopDetail() {
   const [counter, setCounter] = useState(1);
+  const [reviews, setReviews] = useState([]);
   const { id } = useParams();
-  // console.log(id);
+  console.log(id);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProductsData());
+    getAllData();
   }, []);
+
+  const getAllData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/reviews");
+      const data = await response.json();
+
+      const filtered = data.filter(
+        (review) => review.productId === id && review.status === true
+      );
+      setReviews(filtered);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
 
   const productsData = useSelector((state) => state.product);
   // const cartData = useSelector((state) => state.cart);
@@ -273,36 +291,33 @@ function ShopDetail() {
                       role="tabpanel"
                       aria-labelledby="nav-mission-tab"
                     >
-                      <div className="d-flex">
-                        <img
-                          src="public/assets/img/avatar.jpg"
-                          className="img-fluid rounded-circle p-3"
-                          style={{ width: 100, height: 100 }}
-                          alt
-                        />
-                        <div className>
-                          <p className="mb-2" style={{ fontSize: 14 }}>
-                            April 12, 2024
-                          </p>
-                          <div className="d-flex justify-content-between">
-                            <h5>Jason Smith</h5>
-                            <div className="d-flex mb-3">
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star" />
+                      {reviews.map((f) => (
+                        <div className="d-flex mb-4" key={f.id}>
+                          <img
+                            src="/assets/img/avatar.jpg"
+                            className="img-fluid rounded-circle p-3"
+                            style={{ width: 100, height: 100 }}
+                            alt="Avatar"
+                          />
+                          <div>
+                            <div className="d-flex justify-content-between align-items-center">
+                              <h5 className="mb-0">{f.name}</h5>
+                              <div className="d-flex mb-3 ms-3">
+                                <Rating
+                                  name="read-only-rating"
+                                  // className="text-primary"
+                                  value={f.half_rating}
+                                  precision={0.5}
+                                  readOnly
+                                />
+                              </div>
                             </div>
+                            <p>{f.review}</p>
                           </div>
-                          <p>
-                            The generated Lorem Ipsum is therefore always free
-                            from repetition injected humour, or
-                            non-characteristic words etc. Susp endisse ultricies
-                            nisi vel quam suscipit{" "}
-                          </p>
                         </div>
-                      </div>
-                      <div className="d-flex">
+                      ))}
+
+                      {/* <div className="d-flex">
                         <img
                           src="public/assets/img/avatar.jpg"
                           className="img-fluid rounded-circle p-3"
@@ -330,7 +345,7 @@ function ShopDetail() {
                             nisi vel quam suscipit{" "}
                           </p>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="tab-pane" id="nav-vision" role="tabpanel">
                       <p className="text-dark">
@@ -344,7 +359,7 @@ function ShopDetail() {
                     </div>
                   </div>
                 </div>
-                <form action="#">
+                {/* <form action="#">
                   <h4 className="mb-5 fw-bold">Leave a Reply</h4>
                   <div className="row g-4">
                     <div className="col-lg-6">
@@ -404,7 +419,8 @@ function ShopDetail() {
                       </div>
                     </div>
                   </div>
-                </form>
+                </form> */}
+                <ReviewForm />
               </div>
             </div>
             <div className="col-lg-4 col-xl-3">

@@ -219,7 +219,7 @@ function Tastimonial() {
                 handleClose();
               }}
             >
-              <Form id="subscription-form">
+              <Form id="tastimonial-form">
                 <TestInput id="name" name="name" label="Name:-" />
 
                 <TestInput
@@ -242,7 +242,7 @@ function Tastimonial() {
 
                 <DialogActions>
                   <Button onClick={handleClose}>Cancel</Button>
-                  <Button type="submit" form="subscription-form">
+                  <Button type="submit" form="tastimonial-form">
                     Submit
                   </Button>
                 </DialogActions>

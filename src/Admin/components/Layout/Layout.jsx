@@ -24,6 +24,7 @@ import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantity
 import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import PreviewIcon from "@mui/icons-material/Preview";
 
 const drawerWidth = 240;
 
@@ -142,6 +143,11 @@ export default function Layout({ children }) {
       label: "Counter",
       icon: <ChatBubbleOutlineIcon />,
       to: "/admin/tastimonial",
+    },
+    {
+      label: "Reviews",
+      icon: <PreviewIcon />,
+      to: "/admin/reviews",
     },
   ];
 
