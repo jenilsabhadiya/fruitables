@@ -21,7 +21,7 @@ function Cart() {
 
   // console.log(cartData, productsData);
 
-  const cartDisplay = cartData.map((v) => {
+  const cartDisplay = cartData?.cart?.map((v) => {
     const product = productsData.find((v1) => v1.id === v.id);
 
     return { ...product, qty: v.qty };

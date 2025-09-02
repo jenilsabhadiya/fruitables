@@ -213,6 +213,14 @@
       "profession": "ii",
       "tastimonial_image": "best-product-2.jpg",
       "half_rating": "3"
+    },
+    {
+      "id": "8c05",
+      "name": "ABCD",
+      "description": "asasas",
+      "profession": "ok",
+      "tastimonial_image": "avatar.jpg",
+      "half_rating": "4.5"
     }
   ]
 }

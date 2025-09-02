@@ -160,7 +160,12 @@ function ShopDetail() {
                   <NavLink
                     to={"/cart"}
                     onClick={() =>
-                      dispatch(Addtocart({ id: fData.id, qty: counter }))
+                      dispatch(
+                        Addtocart({
+                          userId: "abcd",
+                          cart: { id: fData.id, qty: counter },
+                        })
+                      )
                     }
                     className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
                   >

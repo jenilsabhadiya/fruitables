@@ -452,7 +452,12 @@ function Shop() {
                                 <a
                                   onClick={(event) =>
                                     event.preventDefault(
-                                      dispatch(Addtocart({ id: v.id, qty: 1 }))
+                                      dispatch(
+                                        Addtocart({
+                                          userId: "abcd",
+                                          cart: { id: v.id, qty: 1 },
+                                        })
+                                      )
                                     )
                                   }
                                   className="btn border border-secondary rounded-pill px-3 text-primary"

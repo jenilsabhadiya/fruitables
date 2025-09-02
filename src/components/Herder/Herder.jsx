@@ -70,7 +70,7 @@ function Herder() {
                 <NavLink to={"/shop"} className="nav-item nav-link">
                   Shop
                 </NavLink>
-                <NavLink to={"/shopDetail"} className="nav-item nav-link">
+                <NavLink to={"/shopDetail/f85a"} className="nav-item nav-link">
                   Shop Detail
                 </NavLink>
                 <div className="nav-item dropdown">
@@ -114,7 +114,7 @@ function Herder() {
                     className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                     style={{ top: "-5px", left: 15, height: 20, minWidth: 20 }}
                   >
-                    {cartData?.reduce((acc, v) => acc + v.qty, 0)}
+                    {cartData?.cart?.reduce((acc, v) => acc + v.qty, 0)}
                   </span>
                 </NavLink>
                 <a href="#" className="my-auto">
