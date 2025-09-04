@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { BASE_URL } from "../../constant/url";
 
 const initialState = {
   isLongin: false,
@@ -9,7 +10,7 @@ const initialState = {
 export const getAllData = createAsyncThunk(
   "tastimonial/getAllData",
   async () => {
-    const response = await fetch("http://localhost:3000/tastimonial");
+    const response = await fetch(`${BASE_URL}/tastimonial`);
     const data = await response.json();
 
     return data;
@@ -20,7 +21,7 @@ export const addTastimonial = createAsyncThunk(
   "tastimonial/addTastimonial",
   async (data) => {
     try {
-      const response = await fetch("http://localhost:3000/tastimonial", {
+      const response = await fetch(`${BASE_URL}/tastimonial`, {
         method: "POST",
         body: JSON.stringify({
           ...data,
@@ -44,7 +45,7 @@ export const deleteTastimonial = createAsyncThunk(
   "tastimonial/deleteTastimonial",
   async (id) => {
     try {
-      await fetch("http://localhost:3000/tastimonial/" + id, {
+      await fetch(`${BASE_URL}/tastimonial` + id, {
         method: "DELETE",
       });
 
@@ -59,16 +60,13 @@ export const updateTastimonial = createAsyncThunk(
   "tastimonial/updateTastimonial",
   async (data) => {
     try {
-      const response = await fetch(
-        "http://localhost:3000/tastimonial/" + data.id,
-        {
-          method: "PUT",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/tastimonial` + data.id, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const rData = await response.json();
       return rData;

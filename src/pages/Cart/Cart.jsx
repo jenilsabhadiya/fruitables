@@ -8,15 +8,17 @@ import {
 } from "../../redux/slice/cart.slice";
 import { NavLink } from "react-router-dom";
 import { getAllProductsData } from "../../redux/slice/products.slice";
+import { getAllData } from "../../redux/slice/cart1.slice";
 
 function Cart() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProductsData());
+    dispatch(getAllData());
   });
 
-  const cartData = useSelector((state) => state.cart?.cart);
+  const cartData = useSelector((state) => state.cart1?.cart);
   const productsData = useSelector((state) => state.product?.products);
 
   // console.log(cartData, productsData);
@@ -307,11 +309,11 @@ function Cart() {
                 </div>
                 <div className="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                   <h5 className="mb-0 ps-4 me-4">Total</h5>
-                  <p className="mb-0 pe-4">
+                  {/* <p className="mb-0 pe-4">
                     $
                     {cartDisplay.reduce((acc, v) => acc + v.price * v.qty, 0) +
                       3}
-                  </p>
+                  </p> */}
                 </div>
                 <button
                   className="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"

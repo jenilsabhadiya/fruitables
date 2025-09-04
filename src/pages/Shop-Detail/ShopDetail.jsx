@@ -5,6 +5,8 @@ import { getAllProductsData } from "../../redux/slice/products.slice";
 import { Addtocart } from "../../redux/slice/cart.slice";
 import ReviewForm from "./ReviewForm";
 import { Rating } from "@mui/material";
+import { Addtocart1 } from "../../redux/slice/cart1.slice";
+import { BASE_URL } from "../../constant/url";
 
 function ShopDetail() {
   const [counter, setCounter] = useState(1);
@@ -21,7 +23,7 @@ function ShopDetail() {
 
   const getAllData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/reviews");
+      const response = await fetch(`${BASE_URL}/reviews`);
       const data = await response.json();
 
       const filtered = data.filter(
@@ -179,7 +181,7 @@ function ShopDetail() {
                     to={"/cart"}
                     onClick={() =>
                       dispatch(
-                        Addtocart({
+                        Addtocart1({
                           userId: "abcd",
                           cart: { id: fData.id, qty: counter },
                         })

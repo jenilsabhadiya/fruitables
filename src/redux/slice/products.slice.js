@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { BASE_URL } from "../../constant/url";
 
 const initialState = {
   isLongin: false,
@@ -9,7 +10,7 @@ const initialState = {
 export const getAllProductsData = createAsyncThunk(
   "products/getAllProductsData",
   async () => {
-    const response = await fetch("http://localhost:3000/products");
+    const response = await fetch(`${BASE_URL}/products`);
     const data = await response.json();
 
     return data;
@@ -20,7 +21,7 @@ export const addProduct = createAsyncThunk(
   "products/addProduct",
   async (data) => {
     try {
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch(`${BASE_URL}/products`, {
         method: "POST",
         body: JSON.stringify({
           ...data,
@@ -44,7 +45,7 @@ export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id) => {
     try {
-      await fetch("http://localhost:3000/products/" + id, {
+      await fetch(`${BASE_URL}/products/` + id, {
         method: "DELETE",
       });
 
@@ -59,16 +60,13 @@ export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async (data) => {
     try {
-      const response = await fetch(
-        "http://localhost:3000/products/" + data.id,
-        {
-          method: "PUT",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/products/` + data.id, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const rData = await response.json();
 
@@ -82,7 +80,7 @@ export const updateProduct = createAsyncThunk(
 export const updateStatus = createAsyncThunk(
   "products/updateStatus",
   async (data) => {
-    const response = await fetch("http://localhost:3000/products/" + data.id, {
+    const response = await fetch(`${BASE_URL}/products/` + data.id, {
       method: "PUT",
       body: JSON.stringify({ ...data, status: !data.status }),
       headers: {
