@@ -8,15 +8,21 @@ import {
 } from "../../redux/slice/cart.slice";
 import { NavLink } from "react-router-dom";
 import { getAllProductsData } from "../../redux/slice/products.slice";
-import { getAllData } from "../../redux/slice/cart1.slice";
+import {
+  countQut1,
+  decrementQut1,
+  getCart,
+  incrementQut1,
+  removeQut1,
+} from "../../redux/slice/cart1.slice";
 
 function Cart() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProductsData());
-    dispatch(getAllData());
-  });
+    dispatch(getCart("abcd"));
+  }, []);
 
   const cartData = useSelector((state) => state.cart1?.cart);
   const productsData = useSelector((state) => state.product?.products);
@@ -31,7 +37,7 @@ function Cart() {
 
   const handleCounter = (val, id) => {
     if (val >= 1 && val <= 10) {
-      dispatch(countQut({ id: id, qty: val }));
+      dispatch(countQut1({ id: id, qty: val }));
     }
   };
 
@@ -131,7 +137,7 @@ function Cart() {
                         <div className="input-group-btn">
                           <button
                             className="btn btn-sm btn-minus rounded-circle bg-light border"
-                            onClick={() => dispatch(decrementQut(v.id))}
+                            onClick={() => dispatch(decrementQut1(v.id))}
                             disabled={v.qty === 1}
                           >
                             <i className="fa fa-minus" />
@@ -148,7 +154,7 @@ function Cart() {
                         <div className="input-group-btn">
                           <button
                             className="btn btn-sm btn-plus rounded-circle bg-light border"
-                            onClick={() => dispatch(incrementQut(v.id))}
+                            onClick={() => dispatch(incrementQut1(v.id))}
                             disabled={v.qty === 10}
                           >
                             <i className="fa fa-plus" />
@@ -162,7 +168,7 @@ function Cart() {
                     <td>
                       <button
                         className="btn btn-md rounded-circle bg-light border mt-4"
-                        onClick={() => dispatch(removeQut(v.id))}
+                        onClick={() => dispatch(removeQut1(v.id))}
                       >
                         <i className="fa fa-times text-danger" />
                       </button>
@@ -309,11 +315,11 @@ function Cart() {
                 </div>
                 <div className="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                   <h5 className="mb-0 ps-4 me-4">Total</h5>
-                  {/* <p className="mb-0 pe-4">
+                  <p className="mb-0 pe-4">
                     $
-                    {cartDisplay.reduce((acc, v) => acc + v.price * v.qty, 0) +
+                    {cartDisplay?.reduce((acc, v) => acc + v.price * v.qty, 0) +
                       3}
-                  </p> */}
+                  </p>
                 </div>
                 <button
                   className="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"

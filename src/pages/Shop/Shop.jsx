@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsData } from "../../redux/slice/products.slice";
 import { NavLink } from "react-router-dom";
 import { Addtocart } from "../../redux/slice/cart.slice";
+import { Addtocart1 } from "../../redux/slice/cart1.slice";
 
 function Shop() {
   const [search, setSearch] = useState("");
@@ -453,7 +454,7 @@ function Shop() {
                                   onClick={(event) =>
                                     event.preventDefault(
                                       dispatch(
-                                        Addtocart({
+                                        Addtocart1({
                                           userId: "abcd",
                                           cart: { id: v.id, qty: 1 },
                                         })
