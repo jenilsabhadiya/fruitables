@@ -294,12 +294,40 @@
       "cart": [
         {
           "id": "f85a",
-          "qty": 3
+          "qty": 4
         },
         {
           "id": "1981",
-          "qty": 7
+          "qty": 8
+        },
+        {
+          "id": "d896",
+          "qty": 1
         }
+      ]
+    }
+  ],
+  "favorite": [
+    {
+      "id": "aa2f",
+      "userId": "abcd",
+      "products_Id": [
+        "f85a",
+        "1981"
+      ]
+    },
+    {
+      "id": "f0cb",
+      "userId": "abcd",
+      "products_Id": [
+        "f18a"
+      ]
+    },
+    {
+      "id": "e21c",
+      "userId": "abcd",
+      "products_Id": [
+        "a687"
       ]
     }
   ]

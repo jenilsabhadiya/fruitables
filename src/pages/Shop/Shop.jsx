@@ -4,7 +4,13 @@ import { getAllProductsData } from "../../redux/slice/products.slice";
 import { NavLink } from "react-router-dom";
 import { Addtocart } from "../../redux/slice/cart.slice";
 import { Addtocart1 } from "../../redux/slice/cart1.slice";
-
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import {
+  addFavorite,
+  removeFavorite,
+  saveFavorite,
+} from "../../redux/slice/favorite.slice";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 function Shop() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -17,7 +23,8 @@ function Shop() {
   }, []);
 
   const productsData = useSelector((state) => state.product);
-  // console.log(productsData.products, search);
+  const favorites = useSelector((state) => state.favorite.favorites.items);
+  console.log(favorites);
 
   const handleFilter = () => {
     let fData = productsData.products.filter(
@@ -76,6 +83,7 @@ function Shop() {
       setCPage(cPage + 1);
     }
   };
+
   return (
     <div>
       {/* Modal Search Start */}
@@ -424,54 +432,97 @@ function Shop() {
                 </div>
                 <div className="col-lg-9">
                   <div className="row g-4 justify-content-center">
-                    {pData.map((v) => (
-                      <div key={v.id} className="col-md-6 col-lg-6 col-xl-4">
-                        <NavLink to={"/shopDetail/" + v.id}>
-                          <div className="rounded position-relative fruite-item">
-                            <div className="fruite-img">
-                              <img
-                                src={`../public/assets/img/${v.products_image}`}
-                                className="img-fluid w-100 rounded-top"
-                                alt
-                              />
+                    {pData.map((v) => {
+                      const isFavorite = favorites.some(
+                        (fav) => fav.id === v.id
+                      );
 
-                              {/* <img src="../../../public/assets/img/" alt="" /> */}
-                            </div>
-                            <div
-                              className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                              style={{ top: 10, left: 10 }}
-                            >
-                              Fruits
-                            </div>
-                            <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                              <h4>{v.name}</h4>
-                              <p>{v.description}</p>
-                              <div className="d-flex justify-content-between flex-lg-wrap">
-                                <p className="text-dark fs-5 fw-bold mb-0">
-                                  {` $ ${v.price} / kg`}
-                                </p>
-                                <a
-                                  onClick={(event) =>
-                                    event.preventDefault(
+                      return (
+                        <div key={v.id} className="col-md-6 col-lg-6 col-xl-4">
+                          <NavLink to={"/shopDetail/" + v.id}>
+                            <div className="rounded position-relative fruite-item">
+                              <div className="fruite-img position-relative">
+                                <img
+                                  src={`../public/assets/img/${v.products_image}`}
+                                  className="img-fluid w-100 rounded-top"
+                                  alt=""
+                                />
+
+                                <div
+                                  style={{
+                                    position: "absolute",
+                                    top: 10,
+                                    right: 10,
+                                    zIndex: 10,
+                                    cursor: "pointer",
+                                    borderRadius: "50%",
+                                    padding: "5px",
+                                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                  }}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (isFavorite) {
+                                      dispatch(removeFavorite(v.id));
+                                    } else {
                                       dispatch(
-                                        Addtocart1({
+                                        addFavorite({ userId: "abcd", item: v })
+                                      );
+                                      dispatch(
+                                        saveFavorite({
                                           userId: "abcd",
-                                          cart: { id: v.id, qty: 1 },
+                                          item: v,
                                         })
-                                      )
-                                    )
-                                  }
-                                  className="btn border border-secondary rounded-pill px-3 text-primary"
+                                      );
+                                    }
+                                  }}
                                 >
-                                  <i className="fa fa-shopping-bag me-2 text-primary" />{" "}
-                                  Add to cart
-                                </a>
+                                  {isFavorite ? (
+                                    <FavoriteIcon sx={{ color: "red" }} />
+                                  ) : (
+                                    <FavoriteBorderIcon
+                                      sx={{ color: "white" }}
+                                    />
+                                  )}
+                                </div>
+                              </div>
+
+                              <div
+                                className="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                style={{ top: 10, left: 10 }}
+                              >
+                                Fruits
+                              </div>
+                              <div className="p-4 border border-secondary border-top-0 rounded-bottom">
+                                <h4>{v.name}</h4>
+                                <p>{v.description}</p>
+                                <div className="d-flex justify-content-between flex-lg-wrap">
+                                  <p className="text-dark fs-5 fw-bold mb-0">
+                                    {` $ ${v.price} / kg`}
+                                  </p>
+                                  <a
+                                    onClick={(event) =>
+                                      event.preventDefault(
+                                        dispatch(
+                                          Addtocart1({
+                                            userId: "abcd",
+                                            cart: { id: v.id, qty: 1 },
+                                          })
+                                        )
+                                      )
+                                    }
+                                    className="btn border border-secondary rounded-pill px-3 text-primary"
+                                  >
+                                    <i className="fa fa-shopping-bag me-2 text-primary" />{" "}
+                                    Add to cart
+                                  </a>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </NavLink>
-                      </div>
-                    ))}
+                          </NavLink>
+                        </div>
+                      );
+                    })}
 
                     <div className="col-12">
                       <div className="pagination d-flex justify-content-center mt-5">

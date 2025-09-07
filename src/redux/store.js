@@ -5,6 +5,7 @@ import subCategarySlice from "./slice/subCategary.slice";
 import tastimonialSlice from "./slice/Tastimonial.slice";
 import cartSlice from "./slice/cart.slice";
 import cart1Slice from "./slice/cart1.slice";
+import favoriteSlice from "./slice/favorite.slice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   tastimonial: tastimonialSlice,
   cart: cartSlice,
   cart1: cart1Slice,
+  favorite: favoriteSlice,
 });
 
 const persistConfig = {
