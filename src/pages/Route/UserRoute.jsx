@@ -13,10 +13,14 @@ import Footer from "/src/components/Footer/Footer";
 
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import { useContext } from "react";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 function UserRoute() {
+  const theme = useContext(ThemeContext);
+
   return (
-    <>
+    <div className={theme.theme}>
       <Herder />
 
       <Routes>
@@ -34,7 +38,7 @@ function UserRoute() {
       </Routes>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

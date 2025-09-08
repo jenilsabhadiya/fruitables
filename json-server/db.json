@@ -12,9 +12,7 @@
       "price": 321,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -29,9 +27,7 @@
       "price": 100,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -46,9 +42,7 @@
       "price": 97,
       "type": "organic",
       "products_image": "hero-img-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -63,9 +57,7 @@
       "price": 119,
       "type": "organic",
       "products_image": "best-product-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     },
     {
@@ -80,9 +72,7 @@
       "price": 110,
       "type": "organic",
       "products_image": "best-product-3.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -97,9 +87,7 @@
       "price": 119,
       "type": "organic",
       "products_image": "hero-img-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -114,9 +102,7 @@
       "price": 198,
       "type": "not_organic",
       "products_image": "baner-1.png",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": false
     },
     {
@@ -131,9 +117,7 @@
       "price": 295,
       "type": "organic",
       "products_image": "featur-2.jpg",
-      "discount": [
-        "yes"
-      ],
+      "discount": ["yes"],
       "status": true
     }
   ],
@@ -150,9 +134,7 @@
       "name": "ABCDkkkk",
       "description": "hhhmmm",
       "categary_image": "best-product-3.jpg",
-      "status": [
-        "on"
-      ]
+      "status": ["on"]
     }
   ],
   "subCategary": [
@@ -309,26 +291,14 @@
   ],
   "favorite": [
     {
-      "id": "aa2f",
+      "id": "7af0",
       "userId": "abcd",
-      "products_Id": [
-        "f85a",
-        "1981"
-      ]
+      "products_Id": ["1981"]
     },
     {
-      "id": "f0cb",
+      "id": "0c22",
       "userId": "abcd",
-      "products_Id": [
-        "f18a"
-      ]
-    },
-    {
-      "id": "e21c",
-      "userId": "abcd",
-      "products_Id": [
-        "a687"
-      ]
+      "products_Id": ["1981"]
     }
   ]
 }

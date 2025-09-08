@@ -1,9 +1,19 @@
 import React from "react";
+import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 function Herder() {
   const cartData = useSelector((state) => state.cart?.cart);
+
+  const theme = useContext(ThemeContext);
+  console.log(theme);
+
+  const handleTheme = () => {
+    console.log(theme.theme);
+    theme.toggleTheme(theme.theme);
+  };
 
   return (
     <div>
@@ -101,6 +111,10 @@ function Herder() {
                 </NavLink>
               </div>
               <div className="d-flex m-3 me-0">
+                <a href="#" className="my-auto" onClick={handleTheme}>
+                  {/* <i class="fas fa-solid fa-sun fa-2x" /> */}
+                  <i class=" fas fa-solid fa-moon fa-2x " />
+                </a>
                 <button
                   className="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
                   data-bs-toggle="modal"

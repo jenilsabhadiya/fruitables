@@ -6,21 +6,24 @@ import PrivateRoute from "./pages/Route/PrivateRoute";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import CStore from "./redux/store";
+import { ThemeProvider } from "./Context/ThemeContext";
 
 function App() {
   const { store, persistor } = CStore();
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Routes>
-          <Route path="/*" element={<UserRoute />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/admin/*" element={<AdminRoute />} />
-          </Route>
-        </Routes>
-      </PersistGate>
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Routes>
+            <Route path="/*" element={<UserRoute />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/admin/*" element={<AdminRoute />} />
+            </Route>
+          </Routes>
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
   );
 }
 
