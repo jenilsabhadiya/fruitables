@@ -16,7 +16,7 @@ function Home() {
           <div className="row g-5 align-items-center">
             <div className="col-md-12 col-lg-7">
               <h4 className="mb-3 text-secondary">100% Organic Foods</h4>
-              <h1 className="mb-5 display-3 text-primary">
+              <h1 className="mb-5 display-3 text-primary whitetext">
                 Organic Veggies &amp; Fruits Foods
               </h1>
               <div className="position-relative mx-auto">
@@ -102,7 +102,7 @@ function Home() {
                   <i className="fas fa-car-side fa-3x text-white" />
                 </div>
                 <div className="featurs-content text-center">
-                  <h5>Free Shipping</h5>
+                  <h5 className="whitetext">Free Shipping</h5>
                   <p className="mb-0">Free on order over $300</p>
                 </div>
               </div>
@@ -113,7 +113,7 @@ function Home() {
                   <i className="fas fa-user-shield fa-3x text-white" />
                 </div>
                 <div className="featurs-content text-center">
-                  <h5>Security Payment</h5>
+                  <h5 className="whitetext">Security Payment</h5>
                   <p className="mb-0">100% security payment</p>
                 </div>
               </div>
@@ -124,7 +124,7 @@ function Home() {
                   <i className="fas fa-exchange-alt fa-3x text-white" />
                 </div>
                 <div className="featurs-content text-center">
-                  <h5>30 Day Return</h5>
+                  <h5 className="whitetext">30 Day Return</h5>
                   <p className="mb-0">30 day money guarantee</p>
                 </div>
               </div>
@@ -135,7 +135,7 @@ function Home() {
                   <i className="fa fa-phone-alt fa-3x text-white" />
                 </div>
                 <div className="featurs-content text-center">
-                  <h5>24/7 Support</h5>
+                  <h5 className="whitetext">24/7 Support</h5>
                   <p className="mb-0">Support every time fast</p>
                 </div>
               </div>
@@ -150,7 +150,7 @@ function Home() {
           <div className="tab-class text-center">
             <div className="row g-4">
               <div className="col-lg-4 text-start">
-                <h1>Our Organic Products</h1>
+                <h1 className="whitetext">Our Organic Products</h1>
               </div>
               <div className="col-lg-8 text-end">
                 <ul className="nav nav-pills d-inline-flex text-center mb-5">
@@ -160,7 +160,10 @@ function Home() {
                       data-bs-toggle="pill"
                       href="#tab-1"
                     >
-                      <span className="text-dark" style={{ width: 130 }}>
+                      <span
+                        className="text-dark whitetext "
+                        style={{ width: 130 }}
+                      >
                         All Products
                       </span>
                     </a>
@@ -171,7 +174,10 @@ function Home() {
                       data-bs-toggle="pill"
                       href="#tab-2"
                     >
-                      <span className="text-dark" style={{ width: 130 }}>
+                      <span
+                        className="text-dark whitetext"
+                        style={{ width: 130 }}
+                      >
                         Vegetables
                       </span>
                     </a>
@@ -182,7 +188,10 @@ function Home() {
                       data-bs-toggle="pill"
                       href="#tab-3"
                     >
-                      <span className="text-dark" style={{ width: 130 }}>
+                      <span
+                        className="text-dark whitetext"
+                        style={{ width: 130 }}
+                      >
                         Fruits
                       </span>
                     </a>
@@ -193,7 +202,10 @@ function Home() {
                       data-bs-toggle="pill"
                       href="#tab-4"
                     >
-                      <span className="text-dark" style={{ width: 130 }}>
+                      <span
+                        className="text-dark whitetext"
+                        style={{ width: 130 }}
+                      >
                         Bread
                       </span>
                     </a>
@@ -204,7 +216,10 @@ function Home() {
                       data-bs-toggle="pill"
                       href="#tab-5"
                     >
-                      <span className="text-dark" style={{ width: 130 }}>
+                      <span
+                        className="text-dark whitetext"
+                        style={{ width: 130 }}
+                      >
                         Meat
                       </span>
                     </a>
@@ -233,13 +248,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
+                            <h4 className="whitetext">Grapes</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -269,13 +284,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
+                            <h4 className="whitetext">Grapes</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -305,13 +320,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Raspberries</h4>
+                            <h4 className="whitetext">Raspberries</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -341,13 +356,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Apricots</h4>
+                            <h4 className="whitetext">Apricots</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -377,13 +392,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Banana</h4>
+                            <h4 className="whitetext">Banana</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -413,13 +428,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Oranges</h4>
+                            <h4 className="whitetext">Oranges</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -449,13 +464,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Raspberries</h4>
+                            <h4 className="whitetext">Raspberries</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -485,13 +500,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
+                            <h4 className="whitetext">Grapes</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -529,13 +544,13 @@ function Home() {
                             Fruits
                           </div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
+                            <h4 className="whitetext">Grapes</h4>
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -571,7 +586,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -615,7 +630,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -651,7 +666,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -695,7 +710,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -731,7 +746,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -775,7 +790,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -811,7 +826,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -847,7 +862,7 @@ function Home() {
                               elit sed do eiusmod te incididunt
                             </p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">
+                              <p className="text-dark fs-5 fw-bold mb-0 whitetext ">
                                 $4.99 / kg
                               </p>
                               <a
@@ -930,269 +945,6 @@ function Home() {
       </div>
       {/* Featurs End */}
       {/* Vesitable Shop Start*/}
-      {/* <div className="container-fluid vesitable py-5">
-        <div className="container py-5">
-          <h1 className="mb-0">Fresh Organic Vegetables</h1>
-          <div className="owl-carousel vegetable-carousel justify-content-center">
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-6.jpg"
-                  className="img-fluid w-100 rounded-top"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-1.jpg"
-                  className="img-fluid w-100 rounded-top"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-3.png"
-                  className="img-fluid w-100 rounded-top bg-light"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Banana</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-4.jpg"
-                  className="img-fluid w-100 rounded-top"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Bell Papper</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-5.jpg"
-                  className="img-fluid w-100 rounded-top"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Potatoes</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-6.jpg"
-                  className="img-fluid w-100 rounded-top"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-5.jpg"
-                  className="img-fluid w-100 rounded-top"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Potatoes</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border border-primary rounded position-relative vesitable-item">
-              <div className="vesitable-img">
-                <img
-                  src="public/assets/img/vegetable-item-6.jpg"
-                  className="img-fluid w-100 rounded-top"
-                  alt=""
-                />
-              </div>
-              <div
-                className="text-white bg-primary px-3 py-1 rounded position-absolute"
-                style={{ top: 10, right: 10 }}
-              >
-                Vegetable
-              </div>
-              <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod te incididunt
-                </p>
-                <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                  <a
-                    href="#"
-                    className="btn border border-secondary rounded-pill px-3 text-primary"
-                  >
-                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add
-                    to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <FreshOrganicVegetables />
       {/* Vesitable Shop End */}
       {/* Banner Section Start*/}
@@ -1201,7 +953,9 @@ function Home() {
           <div className="row g-4 align-items-center">
             <div className="col-lg-6">
               <div className="py-4">
-                <h1 className="display-3 text-white">Fresh Exotic Fruits</h1>
+                <h1 className="display-3 text-white whitetext">
+                  Fresh Exotic Fruits
+                </h1>
                 <p className="fw-normal display-3 text-dark mb-4">
                   in Our Store
                 </p>
@@ -1228,7 +982,9 @@ function Home() {
                   className="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute"
                   style={{ width: 140, height: 140, top: 0, left: 0 }}
                 >
-                  <h1 style={{ fontSize: 100 }}>1</h1>
+                  <h1 className="whitetext" style={{ fontSize: 100 }}>
+                    1
+                  </h1>
                   <div className="d-flex flex-column">
                     <span className="h2 mb-0">50$</span>
                     <span className="h4 text-muted mb-0">kg</span>
@@ -1244,7 +1000,7 @@ function Home() {
       <div className="container-fluid py-5">
         <div className="container py-5">
           <div className="text-center mx-auto mb-5" style={{ maxWidth: 700 }}>
-            <h1 className="display-4">Bestseller Products</h1>
+            <h1 className="display-4 whitetext">Bestseller Products</h1>
             <p>
               Latin words, combined with a handful of model sentence structures,
               to generate Lorem Ipsum which looks reasonable.
@@ -1262,7 +1018,7 @@ function Home() {
                     />
                   </div>
                   <div className="col-6">
-                    <a href="#" className="h5">
+                    <a href="#" className="h5 whitetext">
                       Organic Tomato
                     </a>
                     <div className="d-flex my-3">
@@ -1295,7 +1051,7 @@ function Home() {
                     />
                   </div>
                   <div className="col-6">
-                    <a href="#" className="h5">
+                    <a href="#" className="h5 whitetext">
                       Organic Tomato
                     </a>
                     <div className="d-flex my-3">
@@ -1328,7 +1084,7 @@ function Home() {
                     />
                   </div>
                   <div className="col-6">
-                    <a href="#" className="h5">
+                    <a href="#" className="h5 whitetext">
                       Organic Tomato
                     </a>
                     <div className="d-flex my-3">
@@ -1361,7 +1117,7 @@ function Home() {
                     />
                   </div>
                   <div className="col-6">
-                    <a href="#" className="h5">
+                    <a href="#" className="h5 whitetext">
                       Organic Tomato
                     </a>
                     <div className="d-flex my-3">
@@ -1394,7 +1150,7 @@ function Home() {
                     />
                   </div>
                   <div className="col-6">
-                    <a href="#" className="h5">
+                    <a href="#" className="h5 whitetext">
                       Organic Tomato
                     </a>
                     <div className="d-flex my-3">
@@ -1427,7 +1183,7 @@ function Home() {
                     />
                   </div>
                   <div className="col-6">
-                    <a href="#" className="h5">
+                    <a href="#" className="h5 whitetext">
                       Organic Tomato
                     </a>
                     <div className="d-flex my-3">
@@ -1457,7 +1213,7 @@ function Home() {
                   alt=""
                 />
                 <div className="py-4">
-                  <a href="#" className="h5">
+                  <a href="#" className="h5 whitetext">
                     Organic Tomato
                   </a>
                   <div className="d-flex my-3 justify-content-center">
@@ -1486,7 +1242,7 @@ function Home() {
                   alt=""
                 />
                 <div className="py-4">
-                  <a href="#" className="h5">
+                  <a href="#" className="h5 whitetext">
                     Organic Tomato
                   </a>
                   <div className="d-flex my-3 justify-content-center">
@@ -1515,7 +1271,7 @@ function Home() {
                   alt=""
                 />
                 <div className="py-4">
-                  <a href="#" className="h5">
+                  <a href="#" className="h5 whitetext">
                     Organic Tomato
                   </a>
                   <div className="d-flex my-3 justify-content-center">
@@ -1544,7 +1300,7 @@ function Home() {
                   alt=""
                 />
                 <div className="py-2">
-                  <a href="#" className="h5">
+                  <a href="#" className="h5 whitetext">
                     Organic Tomato
                   </a>
                   <div className="d-flex my-3 justify-content-center">
@@ -1572,34 +1328,34 @@ function Home() {
       {/* Fact Start */}
       <div className="container-fluid py-5">
         <div className="container">
-          <div className="bg-light p-5 rounded">
+          <div className="bg-light p-5 rounded bg-light1">
             <div className="row g-4 justify-content-center">
               <div className="col-md-6 col-lg-6 col-xl-3">
-                <div className="counter bg-white rounded p-5">
+                <div className="counter bg-white rounded p-5 boxColor boxColor">
                   <i className="fa fa-users text-secondary" />
                   <h4>satisfied customers</h4>
-                  <h1>1963</h1>
+                  <h1 className="whitetext">1963</h1>
                 </div>
               </div>
               <div className="col-md-6 col-lg-6 col-xl-3">
-                <div className="counter bg-white rounded p-5">
+                <div className="counter bg-white rounded p-5 boxColor">
                   <i className="fa fa-users text-secondary" />
                   <h4>quality of service</h4>
-                  <h1>99%</h1>
+                  <h1 className="whitetext">99%</h1>
                 </div>
               </div>
               <div className="col-md-6 col-lg-6 col-xl-3">
-                <div className="counter bg-white rounded p-5">
+                <div className="counter bg-white rounded p-5 boxColor">
                   <i className="fa fa-users text-secondary" />
                   <h4>quality certificates</h4>
-                  <h1>33</h1>
+                  <h1 className="whitetext">33</h1>
                 </div>
               </div>
               <div className="col-md-6 col-lg-6 col-xl-3">
-                <div className="counter bg-white rounded p-5">
+                <div className="counter bg-white rounded p-5 boxColor">
                   <i className="fa fa-users text-secondary" />
                   <h4>Available Products</h4>
-                  <h1>789</h1>
+                  <h1 className="whitetext">789</h1>
                 </div>
               </div>
             </div>

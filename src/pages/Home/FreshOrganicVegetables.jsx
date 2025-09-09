@@ -10,7 +10,7 @@ function FreshOrganicVegetables() {
   return (
     <div className="container-fluid vesitable py-5">
       <div className="container py-5">
-        <h1 className="mb-0">Fresh Organic Vegetables</h1>
+        <h1 className="mb-0 whitetext">Fresh Organic Vegetables</h1>
 
         <Swiper
           slidesPerView={4}
@@ -54,13 +54,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
+                <h4 className="whitetext">Parsely</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $4.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"
@@ -88,13 +90,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
+                <h4 className="whitetext">Parsely</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $4.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"
@@ -122,13 +126,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Banana</h4>
+                <h4 className="whitetext">Banana</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $7.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"
@@ -156,13 +162,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Bell Papper</h4>
+                <h4 className="whitetext">Bell Papper</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $7.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"
@@ -190,13 +198,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Potatoes</h4>
+                <h4 className="whitetext">Potatoes</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $7.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"
@@ -224,13 +234,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
+                <h4 className="whitetext">Parsely</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $7.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"
@@ -258,13 +270,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Potatoes</h4>
+                <h4 className="whitetext">Potatoes</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $7.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"
@@ -292,13 +306,15 @@ function FreshOrganicVegetables() {
                 Vegetable
               </div>
               <div className="p-4 rounded-bottom">
-                <h4>Parsely</h4>
+                <h4 className="whitetext">Parsely</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                   eiusmod te incididunt
                 </p>
                 <div className="d-flex justify-content-between flex-lg-wrap">
-                  <p className="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
+                    $7.99 / kg
+                  </p>
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-3 text-primary"

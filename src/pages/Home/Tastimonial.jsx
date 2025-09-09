@@ -27,7 +27,9 @@ function Tastimonial() {
         <div className="container py-5">
           <div className="testimonial-header text-center">
             <h4 className="text-primary">Our Testimonial</h4>
-            <h1 className="display-5 mb-5 text-dark">Our Client Saying!</h1>
+            <h1 className="display-5 mb-5 text-dark whitetext">
+              Our Client Saying!
+            </h1>
           </div>
           <Swiper
             slidesPerView={2}
@@ -64,7 +66,7 @@ function Tastimonial() {
                       style={{ bottom: 30, right: 0 }}
                     />
                     <div className="mb-4 pb-4 border-bottom border-secondary">
-                      <p className="mb-0">{v.description}</p>
+                      <p className="mb-0 whitetext">{v.description}</p>
                     </div>
                     <div className="d-flex align-items-center flex-nowrap">
                       <div className="bg-secondary rounded">
@@ -76,7 +78,7 @@ function Tastimonial() {
                         />
                       </div>
                       <div className="ms-4 d-block">
-                        <h4 className="text-dark">{v.name}</h4>
+                        <h4 className="text-dark whitetext">{v.name}</h4>
                         <p className="m-0 pb-3">{v.profession}</p>
 
                         <div className="d-flex pe-5">

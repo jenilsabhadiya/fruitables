@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import UserRoute from "./pages/Route/UserRoute";
 import AdminRoute from "./pages/Route/AdminRoute";
 import PrivateRoute from "./pages/Route/PrivateRoute";

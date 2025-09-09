@@ -493,6 +493,14 @@
   color: red;
 }
 
+.rounded {
+  border-radius: 0 !important;
+}
+
+.border-bottom {
+  border-bottom: 0 !important;
+}
+
 .light {
   background-color: white !important;
   color: black !important;
@@ -522,11 +530,7 @@
 }
 
 .dark .hero-header {
-  background: gray !important;
-}
-
-.dark .hero-header {
-  background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)),
+  background: linear-gradient(rgba(0, 0, 0, 50), rgba(0, 0, 0, 50)),
     url(/public/assets/img/hero-img.jpg);
 }
 
@@ -539,29 +543,31 @@
   color: #9a9c9f !important;
 }
 
-.dark .h6,
-.h6,
-h5,
-.h5,
-h4,
-.h4,
-h3,
-.h3,
-h2,
-.h2,
-h1,
-.h1 {
-  color: white !important;
-}
-
-.dark .form-control {
-  background-color: black !important;
-}
+/* .dark .form-control {
+  background-color: rgb(36, 34, 34) !important;
+} */
 
 .dark .bg-dark {
   background-color: rgb(36, 34, 34) !important;
 }
 
-.dark #root {
-  background-color: black !important;
+.dark .whitetext {
+  color: white !important;
+}
+
+.dark .boxColor {
+  background-color: #27283c !important;
+}
+
+.dark .bg-light1 {
+  background: #5d6382 !important;
+  color: #9a9c9f !important;
+}
+
+.dark .fruite .fruite-item {
+  background-color: rgb(46, 45, 45) !important;
+}
+
+.h-300 {
+  height: 18rem;
 }

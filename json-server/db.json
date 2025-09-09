@@ -276,7 +276,7 @@
       "cart": [
         {
           "id": "f85a",
-          "qty": 4
+          "qty": 3
         },
         {
           "id": "1981",
@@ -292,11 +292,6 @@
   "favorite": [
     {
       "id": "7af0",
-      "userId": "abcd",
-      "products_Id": ["1981"]
-    },
-    {
-      "id": "0c22",
       "userId": "abcd",
       "products_Id": ["1981"]
     }

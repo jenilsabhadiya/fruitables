@@ -444,7 +444,7 @@ function Shop() {
                               <div className="fruite-img position-relative">
                                 <img
                                   src={`../public/assets/img/${v.products_image}`}
-                                  className="img-fluid w-100 rounded-top"
+                                  className="img-fluid w-100 h-300 rounded-top"
                                   alt=""
                                 />
 
@@ -494,10 +494,10 @@ function Shop() {
                                 Fruits
                               </div>
                               <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>{v.name}</h4>
-                                <p>{v.description}</p>
+                                <h4 className="whitetext">{v.name}</h4>
+                                {/* <p>{v.description}</p> */}
                                 <div className="d-flex justify-content-between flex-lg-wrap">
-                                  <p className="text-dark fs-5 fw-bold mb-0">
+                                  <p className="text-dark fs-5 fw-bold mb-0 whitetext">
                                     {` $ ${v.price} / kg`}
                                   </p>
                                   <a

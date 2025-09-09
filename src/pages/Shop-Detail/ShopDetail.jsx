@@ -31,7 +31,7 @@ function ShopDetail() {
       );
       setReviews(filtered);
     } catch (error) {
-      console.error("Error fetching reviews:", error);
+      console.log(error);
     }
   };
 

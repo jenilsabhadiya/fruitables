@@ -112,8 +112,11 @@ function Herder() {
               </div>
               <div className="d-flex m-3 me-0">
                 <a href="#" className="my-auto" onClick={handleTheme}>
-                  {/* <i class="fas fa-solid fa-sun fa-2x" /> */}
-                  <i class=" fas fa-solid fa-moon fa-2x " />
+                  {theme.theme === "light" ? (
+                    <i class=" fas fa-solid fa-moon fa-2x " />
+                  ) : (
+                    <i class="fas fa-solid fa-sun fa-2x" />
+                  )}
                 </a>
                 <button
                   className="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
