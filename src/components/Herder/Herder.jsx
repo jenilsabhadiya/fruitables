@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../Context/ThemeContext";
 
 function Herder() {
-  const cartData = useSelector((state) => state.cart?.cart);
+  const cartData = useSelector((state) => state.cart?.cart?.cart);
 
   const theme = useContext(ThemeContext);
   console.log(theme);
@@ -111,13 +111,20 @@ function Herder() {
                 </NavLink>
               </div>
               <div className="d-flex m-3 me-0">
-                <a href="#" className="my-auto" onClick={handleTheme}>
-                  {theme.theme === "light" ? (
-                    <i class=" fas fa-solid fa-moon fa-2x " />
-                  ) : (
-                    <i class="fas fa-solid fa-sun fa-2x" />
-                  )}
-                </a>
+                <button className=" btn border border-secondary btn-md-square rounded-circle bg-white me-4">
+                  <NavLink to={"/favorite"} className="my-auto">
+                    <i className="fas fa-solid fa-heart fa-1x"></i>
+                  </NavLink>
+                </button>
+                <button className=" btn border border-secondary btn-md-square rounded-circle bg-white me-4">
+                  <a href="#" className="my-auto" onClick={handleTheme}>
+                    {theme.theme === "light" ? (
+                      <i className=" fas fa-solid fa-moon fa-1x " />
+                    ) : (
+                      <i className="fas fa-solid fa-sun fa-1x" />
+                    )}
+                  </a>
+                </button>
                 <button
                   className="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
                   data-bs-toggle="modal"
@@ -131,7 +138,7 @@ function Herder() {
                     className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                     style={{ top: "-5px", left: 15, height: 20, minWidth: 20 }}
                   >
-                    {cartData?.cart?.reduce((acc, v) => acc + v.qty, 0)}
+                    {cartData?.reduce((acc, v) => acc + v.qty, 0)}
                   </span>
                 </NavLink>
                 <a href="#" className="my-auto">
@@ -186,3 +193,5 @@ function Herder() {
 }
 
 export default Herder;
+
+// FavoriteIcon

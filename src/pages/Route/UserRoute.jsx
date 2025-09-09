@@ -15,6 +15,7 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { useContext } from "react";
 import { ThemeContext } from "../../Context/ThemeContext";
+import Favorite from "../Favorite/Favorite";
 
 function UserRoute() {
   const theme = useContext(ThemeContext);
@@ -32,6 +33,7 @@ function UserRoute() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/chackout" element={<Chackout />} />
         </Route>
+        <Route path="/favorite" element={<Favorite />} />
         <Route path="/testimonial" element={<Testimonial />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/contact" element={<Contact />} />

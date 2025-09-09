@@ -6,7 +6,7 @@ import { Addtocart } from "../../redux/slice/cart.slice";
 import { Addtocart1 } from "../../redux/slice/cart1.slice";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {
-  addFavorite,
+  getFavorites,
   removeFavorite,
   saveFavorite,
 } from "../../redux/slice/favorite.slice";
@@ -20,10 +20,13 @@ function Shop() {
 
   useEffect(() => {
     dispatch(getAllProductsData());
+    dispatch(getFavorites("abcd"));
   }, []);
 
   const productsData = useSelector((state) => state.product);
-  const favorites = useSelector((state) => state.favorite.favorites.items);
+  const favorites = useSelector(
+    (state) => state.favorite.favorites.items || []
+  );
   console.log(favorites);
 
   const handleFilter = () => {
@@ -433,9 +436,9 @@ function Shop() {
                 <div className="col-lg-9">
                   <div className="row g-4 justify-content-center">
                     {pData.map((v) => {
-                      const isFavorite = favorites.some(
-                        (fav) => fav.id === v.id
-                      );
+                      const isFavorite =
+                        Array.isArray(favorites) && favorites.includes(v.id);
+                      console.log(isFavorite);
 
                       return (
                         <div key={v.id} className="col-md-6 col-lg-6 col-xl-4">
@@ -462,16 +465,19 @@ function Shop() {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
+
                                     if (isFavorite) {
-                                      dispatch(removeFavorite(v.id));
-                                    } else {
                                       dispatch(
-                                        addFavorite({ userId: "abcd", item: v })
+                                        removeFavorite({
+                                          userId: "abcd",
+                                          item: { id: v.id },
+                                        })
                                       );
+                                    } else {
                                       dispatch(
                                         saveFavorite({
                                           userId: "abcd",
-                                          item: v,
+                                          item: { id: v.id },
                                         })
                                       );
                                     }
