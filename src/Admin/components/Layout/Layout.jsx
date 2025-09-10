@@ -25,7 +25,9 @@ import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRig
 import CalculateIcon from "@mui/icons-material/Calculate";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import PreviewIcon from "@mui/icons-material/Preview";
-
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { ThemeContext } from "../../../Context/ThemeContext";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -108,6 +110,9 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Layout({ children }) {
   const theme = useTheme();
+
+  const themeMy = React.useContext(ThemeContext);
+
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -173,6 +178,13 @@ export default function Layout({ children }) {
           <Typography variant="h6" noWrap component="div">
             Fruitables Admin panel
           </Typography>
+          <IconButton
+            aria-label="delete"
+            onClick={() => themeMy.toggleTheme(theme.palette.mode)}
+            sx={{ ml: "auto" }}
+          >
+            {themeMy.theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

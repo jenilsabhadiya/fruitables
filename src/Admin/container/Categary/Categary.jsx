@@ -24,6 +24,7 @@ import {
   updateCategary,
   updateStatus,
 } from "../../../redux/slice/categary.slice";
+import Heading from "../../components/Heading/Heading";
 
 function Categary() {
   const [open, setOpen] = React.useState(false);
@@ -207,7 +208,8 @@ function Categary() {
             marginBottom: "50px",
           }}
         >
-          <h2>Categary</h2>
+          <Heading title={"Categary"} />
+
           <Button variant="outlined" onClick={handleClickOpen}>
             Add Categary
           </Button>

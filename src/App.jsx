@@ -11,7 +11,7 @@ function App() {
   const { store, persistor } = CStore();
 
   return (
-    <ThemeProvider>
+    <ThemeProvider >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Routes>
