@@ -25,6 +25,7 @@ import {
   updateStatus,
 } from "../../../redux/slice/categary.slice";
 import Heading from "../../components/Heading/Heading";
+import DataGridBG from "../../components/DataGridBG/DataGridBG";
 
 function Categary() {
   const [open, setOpen] = React.useState(false);
@@ -271,13 +272,21 @@ function Categary() {
         </Dialog>
       </React.Fragment>
 
-      <DataGrid
+      {/* <DataGrid
         rows={categarySlice.categary}
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
         sx={{ border: 0 }}
+      /> */}
+
+      <DataGridBG
+        rows={categarySlice.categary}
+        columns={columns}
+        initialState={{ pagination: { paginationModel } }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
       />
     </div>
   );

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { BASE_URL } from "../../constant/url";
 
 const initialState = {
   isLongin: false,
@@ -7,7 +8,7 @@ const initialState = {
 };
 
 export const getAllData = createAsyncThunk("categary/getAllData", async () => {
-  const response = await fetch("http://localhost:3000/categary");
+  const response = await fetch(`${BASE_URL}/categary`);
   const data = await response.json();
 
   return data;
@@ -17,7 +18,7 @@ export const addCategary = createAsyncThunk(
   "categary/addCategary",
   async (data) => {
     try {
-      const response = await fetch("http://localhost:3000/categary", {
+      const response = await fetch(`${BASE_URL}/categary`, {
         method: "POST",
         body: JSON.stringify({
           ...data,
@@ -41,7 +42,7 @@ export const deleteCategary = createAsyncThunk(
   "categary/deleteCategary",
   async (id) => {
     try {
-      await fetch("http://localhost:3000/categary/" + id, {
+      await fetch(`${BASE_URL}/categary/` + id, {
         method: "DELETE",
       });
 
@@ -56,16 +57,13 @@ export const updateCategary = createAsyncThunk(
   "categary/updateCategary",
   async (data) => {
     try {
-      const response = await fetch(
-        "http://localhost:3000/categary/" + data.id,
-        {
-          method: "PUT",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/categary/` + data.id, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const rData = await response.json();
       return rData;
@@ -79,16 +77,13 @@ export const updateStatus = createAsyncThunk(
   "categary/updateStatus",
   async (data) => {
     try {
-      const response = await fetch(
-        "http://localhost:3000/categary/" + data.id,
-        {
-          method: "PUT",
-          body: JSON.stringify({ ...data, status: !data.status }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/categary/` + data.id, {
+        method: "PUT",
+        body: JSON.stringify({ ...data, status: !data.status }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const rData = await response.json();
       return rData;
