@@ -55,11 +55,13 @@ export const tokensSetting = (mode) => {
   const color = tokens(mode);
 
   console.log(color);
-  
 
   return {
     palette: {
       mode: mode,
+      DataGrid: {
+        headerBg: color.primary[900],
+      },
       ...(mode === "dark"
         ? {
             primary: {

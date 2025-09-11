@@ -11,6 +11,7 @@ import Reviews from "../../Admin/container/Reviews/Reviews";
 import { ThemeContext } from "../../Context/ThemeContext";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { tokensSetting } from "../../Admin/theme";
+import Dashboard from "../../Admin/container/Dashboard/Dashboard";
 
 function AdminRoute() {
   const theme = useContext(ThemeContext);
@@ -25,6 +26,7 @@ function AdminRoute() {
     <ThemeProvider theme={muiTheme}>
       <Layout>
         <Routes>
+          <Route path="/" element={<Dashboard />} />
           <Route path="/categary" element={<Categary />} />
           <Route path="/sub-categary" element={<SubCategary />} />
           <Route path="/products" element={<Products />} />

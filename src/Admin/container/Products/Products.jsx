@@ -35,6 +35,8 @@ import {
   updateProduct,
   updateStatus,
 } from "../../../redux/slice/products.slice";
+import DataGridBG from "../../components/DataGridBG/DataGridBG";
+import Heading from "../../components/Heading/Heading";
 
 function Products() {
   const [open, setOpen] = React.useState(false);
@@ -225,8 +227,6 @@ function Products() {
     },
   ];
 
-  const paginationModel = { page: 0, pageSize: 5 };
-
   const handleUpdate = async (data) => {
     let updateData = [];
 
@@ -257,19 +257,14 @@ function Products() {
             marginBottom: "50px",
           }}
         >
-          <h2>Products</h2>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          {/* <h2>Products</h2> */}
+          <Heading title={"Products"} />
+
+          <Button variant="outlined" onClick={handleClickOpen} sx={{ my: 2 }}>
             Add Products
           </Button>
         </Box>
-        <DataGrid
-          rows={productsSlice.products}
-          columns={columns}
-          initialState={{ pagination: { paginationModel } }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          sx={{ border: 0 }}
-        />
+        <DataGridBG rows={productsSlice.products} columns={columns} />
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Products</DialogTitle>
           <DialogContent>

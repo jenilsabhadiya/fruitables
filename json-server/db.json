@@ -11,8 +11,10 @@
       "description": "sss",
       "price": 321,
       "type": "not_organic",
-      "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "products_image": "best-product-1.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -26,8 +28,10 @@
       "description": "Jqwer",
       "price": 100,
       "type": "not_organic",
-      "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "products_image": "best-product-2.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -41,8 +45,10 @@
       "description": "qwqwok",
       "price": 97,
       "type": "organic",
-      "products_image": "hero-img-1.png",
-      "discount": ["yes"],
+      "products_image": "best-product-3.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -56,8 +62,10 @@
       "description": "qwqw",
       "price": 119,
       "type": "organic",
-      "products_image": "best-product-2.jpg",
-      "discount": ["yes"],
+      "products_image": "best-product-4.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": true
     },
     {
@@ -71,8 +79,10 @@
       "description": "ssd s",
       "price": 110,
       "type": "organic",
-      "products_image": "best-product-3.jpg",
-      "discount": ["yes"],
+      "products_image": "best-product-5.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -86,8 +96,10 @@
       "description": "okok",
       "price": 119,
       "type": "organic",
-      "products_image": "hero-img-2.jpg",
-      "discount": ["yes"],
+      "products_image": "best-product-6.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -101,8 +113,10 @@
       "description": "jiji ",
       "price": 198,
       "type": "not_organic",
-      "products_image": "baner-1.png",
-      "discount": ["yes"],
+      "products_image": "best-product-1.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": false
     },
     {
@@ -116,8 +130,10 @@
       "description": "MY FRUIT",
       "price": 295,
       "type": "organic",
-      "products_image": "featur-2.jpg",
-      "discount": ["yes"],
+      "products_image": "best-product-2.jpg",
+      "discount": [
+        "yes"
+      ],
       "status": true
     }
   ],
@@ -196,7 +212,9 @@
       "name": "okok",
       "description": "Done",
       "sub_categary_image": "best-product-2.jpg",
-      "status": ["on"]
+      "status": [
+        "on"
+      ]
     }
   ],
   "tastimonial": [
@@ -312,7 +330,7 @@
       "cart": [
         {
           "id": "f85a",
-          "qty": 9
+          "qty": 8
         },
         {
           "id": "d896",
@@ -329,7 +347,11 @@
     {
       "id": "8e8e",
       "userId": "abcd",
-      "products_Id": ["f85a", "d896", "f18a"]
+      "products_Id": [
+        "f85a",
+        "d896",
+        "f18a"
+      ]
     }
   ]
 }

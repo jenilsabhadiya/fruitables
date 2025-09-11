@@ -95,8 +95,6 @@ function Categary() {
     },
   ];
 
-  const paginationModel = { page: 0, pageSize: 5 };
-
   let categarySchema = object({
     name: string()
       .required()
@@ -211,7 +209,7 @@ function Categary() {
         >
           <Heading title={"Categary"} />
 
-          <Button variant="outlined" onClick={handleClickOpen}>
+          <Button variant="outlined" onClick={handleClickOpen} sx={{ my: 2 }}>
             Add Categary
           </Button>
         </Box>
@@ -281,13 +279,7 @@ function Categary() {
         sx={{ border: 0 }}
       /> */}
 
-      <DataGridBG
-        rows={categarySlice.categary}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-      />
+      <DataGridBG rows={categarySlice.categary} columns={columns} />
     </div>
   );
 }

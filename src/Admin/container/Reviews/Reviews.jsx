@@ -10,6 +10,9 @@ import {
   Switch,
 } from "@mui/material";
 import PreviewIcon from "@mui/icons-material/Preview";
+import { BASE_URL } from "../../../constant/url";
+import DataGridBG from "../../components/DataGridBG/DataGridBG";
+import Heading from "../../components/Heading/Heading";
 function Reviews() {
   const [rows, setRows] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -61,7 +64,7 @@ function Reviews() {
 
   const getAllData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/reviews");
+      const response = await fetch(`${BASE_URL}/reviews`);
       const result = await response.json();
       //   console.log(result);
       setRows(result);
@@ -70,11 +73,9 @@ function Reviews() {
     }
   };
 
-  const paginationModel = { page: 0, pageSize: 5 };
-
   const handleStatus = async (data) => {
     try {
-      const response = await fetch("http://localhost:3000/reviews/" + data.id, {
+      const response = await fetch(`${BASE_URL}/reviews/` + data.id, {
         method: "PUT",
         body: JSON.stringify({ ...data, status: !data.status }),
         headers: {
@@ -92,15 +93,10 @@ function Reviews() {
 
   return (
     <div>
-      <h1>Review Data</h1>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-        sx={{ border: 0 }}
-      />
+      {/* <h1>Review Data</h1> */}
+      <Heading title={"Review Data"} />
+
+      <DataGridBG rows={rows} columns={columns} sx={{ border: 0 }} />
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Review Details</DialogTitle>

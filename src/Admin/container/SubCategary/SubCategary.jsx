@@ -25,6 +25,8 @@ import {
   updateStatus,
   updatesubCategary,
 } from "../../../redux/slice/subCategary.slice";
+import DataGridBG from "../../components/DataGridBG/DataGridBG";
+import Heading from "../../components/Heading/Heading";
 
 function SubCategary() {
   const [open, setOpen] = React.useState(false);
@@ -97,8 +99,6 @@ function SubCategary() {
       ),
     },
   ];
-
-  const paginationModel = { page: 0, pageSize: 5 };
 
   let subcategarySchema = object({
     categary: string().required(),
@@ -205,8 +205,10 @@ function SubCategary() {
             marginBottom: "50px",
           }}
         >
-          <h2>Sub Categary</h2>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          {/* <h2>Sub Categary</h2> */}
+          <Heading title={"Sub Categary"} />
+
+          <Button variant="outlined" onClick={handleClickOpen} sx={{ my: 2 }}>
             Add Sub Categary
           </Button>
         </Box>
@@ -276,12 +278,9 @@ function SubCategary() {
         </Dialog>
       </React.Fragment>
 
-      <DataGrid
+      <DataGridBG
         rows={subCategarySlice.subCategary}
         columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
         sx={{ border: 0 }}
       />
     </div>

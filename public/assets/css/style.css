@@ -493,10 +493,6 @@
   color: red;
 }
 
-.rounded {
-  border-radius: 0 !important;
-}
-
 .border-bottom {
   border-bottom: 0 !important;
 }

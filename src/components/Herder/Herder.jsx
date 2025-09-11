@@ -5,7 +5,9 @@ import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../Context/ThemeContext";
 
 function Herder() {
-  const cartData = useSelector((state) => state.cart?.cart?.cart);
+  // const cartData = useSelector((state) => state.cart?.cart?.cart);
+  const cartData = useSelector((state) => state.cart1?.cart);
+  console.log(cartData);
 
   const theme = useContext(ThemeContext);
   console.log(theme);
@@ -138,7 +140,8 @@ function Herder() {
                     className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                     style={{ top: "-5px", left: 15, height: 20, minWidth: 20 }}
                   >
-                    {cartData?.reduce((acc, v) => acc + v.qty, 0)}
+                    {/* {cartData?.reduce((acc, v) => acc + v.qty, 0)} */}
+                    {cartData.cart?.reduce((acc, v) => acc + v.qty, 0)}
                   </span>
                 </NavLink>
                 <a href="#" className="my-auto">

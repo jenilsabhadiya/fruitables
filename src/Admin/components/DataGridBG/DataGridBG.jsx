@@ -3,9 +3,11 @@ import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import { tokens } from "../../theme";
 
-function DataGridBG({ rows, columns, ...otherProps }) {
+function DataGridBG({ rows, columns }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const paginationModel = { page: 0, pageSize: 5 };
 
   return (
     <Box sx={{ height: 400, width: "100%" }}>
@@ -14,14 +16,14 @@ function DataGridBG({ rows, columns, ...otherProps }) {
         columns={columns}
         sx={{
           border: 0,
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.primary[800], // Header background
-          },
           "& .MuiDataGrid-footerContainer": {
             backgroundColor: colors.primary[900], // Footer background
           },
         }}
-        {...otherProps}
+        initialState={{ pagination: { paginationModel } }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        showToolbar
       />
     </Box>
   );
