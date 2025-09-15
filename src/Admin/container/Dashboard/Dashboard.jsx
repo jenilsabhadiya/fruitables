@@ -16,6 +16,7 @@ import {
   Stack,
   Avatar,
   Divider,
+  AvatarGroup,
 } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
@@ -23,268 +24,151 @@ import { tokens } from "../../theme";
 import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
 import { DataGrid } from "@mui/x-data-grid";
 import { BarChart, LineChart, PieChart } from "@mui/x-charts";
+import PieChartData from "./PieChartData";
+import BarChartData from "./BarChartData";
+import LineChartData from "./LineChartData";
 
 const ProductCard = ({ data }) => (
+  <Paper sx={{ borderRadius: 3, paddingTop: 2, paddingBottom: 0 }}>
+    <Typography
+      variant="h6"
+      mb={2}
+      color="text.primary"
+      sx={{ px: 4, fontSize: "1.125rem", fontWeight: "600" }}
+    >
+      Best Products
+    </Typography>
+    <Table>
+      <TableHead>
+        <TableRow
+          sx={{
+            backgroundColor: "#F4F6F8",
+          }}
+        >
+          <TableCell
+            sx={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              color: "#637381",
+            }}
+          >
+            Products Img
+          </TableCell>
+          <TableCell
+            sx={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              color: "#637381",
+            }}
+          >
+            Name
+          </TableCell>
+          <TableCell
+            sx={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              color: "#637381",
+            }}
+          >
+            Price
+          </TableCell>
+          <TableCell
+            sx={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              color: "#637381",
+            }}
+          >
+            Total Orders
+          </TableCell>
+          <TableCell
+            sx={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              color: "#637381",
+            }}
+          >
+            Rank
+          </TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {data.map((v) => (
+          <TableRow key={v._id}>
+            <TableCell>
+              <Avatar
+                src={v.products_img}
+                sx={{ width: 56, height: 56 }}
+              ></Avatar>
+            </TableCell>
+            <TableCell>{v.name}</TableCell>
+            <TableCell>{v.price}</TableCell>
+            <TableCell>{v.total_orders}</TableCell>
+            <TableCell>
+              <Stack direction="row" spacing={1}>
+                <Chip label={v.rank} color={v.rankColor} size="small" />
+              </Stack>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </Paper>
+);
+
+const Latestproducts = ({ data }) => (
   <Card sx={{ borderRadius: 3, py: 2 }}>
     <CardContent>
       <Typography
         variant="h6"
         mb={2}
         color="text.primary"
-        sx={{ px: 4, fontSize: "1.125rem", fontWeight: "600" }}
+        sx={{ fontSize: "1.125rem", fontWeight: "600" }}
       >
-        Best Products
-      </Typography>
-      <Table>
-        <TableHead>
-          <TableRow
-            sx={{
-              backgroundColor: "#F4F6F8",
-            }}
-          >
-            <TableCell
-              sx={{
-                fontSize: "1rem",
-                fontWeight: "bold",
-                color: "#637381",
-              }}
-            >
-              Products Img
-            </TableCell>
-            <TableCell
-              sx={{
-                fontSize: "1rem",
-                fontWeight: "bold",
-                color: "#637381",
-              }}
-            >
-              Name
-            </TableCell>
-            <TableCell
-              sx={{
-                fontSize: "1rem",
-                fontWeight: "bold",
-                color: "#637381",
-              }}
-            >
-              Price
-            </TableCell>
-            <TableCell
-              sx={{
-                fontSize: "1rem",
-                fontWeight: "bold",
-                color: "#637381",
-              }}
-            >
-              Total Orders
-            </TableCell>
-            <TableCell
-              sx={{
-                fontSize: "1rem",
-                fontWeight: "bold",
-                color: "#637381",
-              }}
-            >
-              Rank
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((v) => (
-            <TableRow key={v._id}>
-              <TableCell>
-                <img
-                  src={v.products_img}
-                  alt="product"
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "50%",
-                  }}
-                />
-              </TableCell>
-              <TableCell>{v.name}</TableCell>
-              <TableCell>{v.price}</TableCell>
-              <TableCell>{v.total_orders}</TableCell>
-              <TableCell>
-                <Chip label={v.rank} color={v.rankColor} size="small" />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </CardContent>
-  </Card>
-);
-
-const Latestproducts = ({ data }) => (
-  <Card sx={{ borderRadius: 3, py: 2 }}>
-    <CardContent>
-      <Typography variant="h6" mb={2}>
         Latest Products
       </Typography>
       <Stack spacing={4}>
         {data.map((v) => (
           <Stack key={v._id} direction="row" spacing={2} alignItems="center">
-            <img
+            <Avatar
               src={v.products_img}
-              alt="product"
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: 14,
-              }}
-            />
+              variant="rounded"
+              sx={{ borderRadius: "12px" }}
+            ></Avatar>
             <Box flex={1}>
               <Typography variant="body1">{v.name}</Typography>
               <Typography variant="body2" color="text.secondary">
                 {v.oldPrice && (
                   <span
-                    style={{ textDecoration: "line-through", marginRight: 8 }}
+                    style={{
+                      textDecoration: "line-through",
+                      marginRight: 8,
+                      color: "#FF5630",
+                    }}
                   >
                     {v.oldPrice}
                   </span>
                 )}
-                <strong>{v.discountPrice || v.price}</strong>
+                <span>{v.discountPrice || v.price}</span>
               </Typography>
             </Box>
-            <Box sx={{ position: "relative", width: 40, height: 16 }}>
-              {v.colors.slice(0, 3).map((color, i) => (
-                <Box
+
+            <AvatarGroup max={4} spacing="medium">
+              {v.colors.map((c, i) => (
+                <Avatar
                   key={i}
-                  sx={{
-                    width: 12,
-                    height: 12,
-                    bgcolor: color,
-                    borderRadius: "50%",
-                    position: "absolute",
-                    left: `${i * 10}px`,
-                    zIndex: 3 - i,
-                  }}
-                />
-              ))}
-              {v.colors.length > 3 && (
-                <Typography
-                  variant="caption"
-                  sx={{
-                    position: "absolute",
-                    left: `${3 * 11}px`,
-                    top: -3,
-                    color: "text.secondary",
-                    fontSize: "0.75rem",
-                    zIndex: 0,
-                  }}
+                  alt="Colors"
+                  sx={{ width: 20, height: 20, bgcolor: c }}
                 >
-                  +{v.colors.length - 3}
-                </Typography>
-              )}
-            </Box>
+                  {" "}
+                </Avatar>
+              ))}
+            </AvatarGroup>
           </Stack>
         ))}
       </Stack>
     </CardContent>
   </Card>
-);
-
-const PieChartData = ({ data, settings }) => (
-  <Paper sx={{ p: 3, borderRadius: 3 }}>
-    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-      Current download
-    </Typography>
-    <Typography
-      variant="body2"
-      sx={{ paddingTop: 1, paddingBottom: 4 }}
-      color="text.secondary"
-    >
-      Downloaded by operating system
-    </Typography>
-    <PieChart
-      series={[
-        {
-          innerRadius: 50,
-          outerRadius: 100,
-          data: data.map((v) => ({ ...v, color: v.color })),
-          arcLabel: "value",
-        },
-      ]}
-      {...settings}
-    />
-    <Typography sx={{ paddingTop: 2 }}>
-      <Divider sx={{ borderStyle: "dashed" }} />
-    </Typography>
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        mt: 2,
-      }}
-    >
-      {data.map((v, i) => (
-        <Box key={i} sx={{ display: "flex", alignItems: "center" }}>
-          <Box
-            sx={{
-              width: 10,
-              height: 10,
-              borderRadius: "50%",
-              backgroundColor: v.color,
-              mr: 1,
-            }}
-          />
-          <Typography variant="body2">{v.label}</Typography>
-        </Box>
-      ))}
-    </Box>
-  </Paper>
-);
-
-const BarChartData = ({ pData, uData, xLabels }) => (
-  <Paper sx={{ p: 3, borderRadius: 3 }}>
-    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-      <Box>
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          Area installed
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          (+43%) than last year
-        </Typography>
-      </Box>
-    </Box>
-
-    <BarChart
-      height={300}
-      series={[
-        { data: pData, label: "pv", id: "pvId", stack: "total" },
-        { data: uData, label: "uv", id: "uvId", stack: "total" },
-      ]}
-      xAxis={[{ data: xLabels }]}
-      yAxis={[{ width: 50 }]}
-    />
-  </Paper>
-);
-
-const LineChartData = ({ margin, pDataLine, uDataLine, xLabelsLine }) => (
-  <Paper sx={{ p: 3, borderRadius: 3 }}>
-    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-      <Box>
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          Yearly sales
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          (+43%) than last year
-        </Typography>
-      </Box>
-    </Box>
-    <LineChart
-      height={300}
-      series={[
-        { data: pDataLine, label: "pv" },
-        { data: uDataLine, label: "uv" },
-      ]}
-      xAxis={[{ scaleType: "point", data: xLabelsLine }]}
-      yAxis={[{ width: 50 }]}
-      margin={margin}
-    />
-  </Paper>
 );
 
 function Dashboard() {
@@ -294,13 +178,13 @@ function Dashboard() {
   const [showHighlight, setShowHighlight] = React.useState(true);
   const [showTooltip, setShowTooltip] = React.useState(true);
 
-  const handleHighlightChange = (event) => {
-    setShowHighlight(event.target.checked);
-  };
+  // const handleHighlightChange = (event) => {
+  //   setShowHighlight(event.target.checked);
+  // };
 
-  const handleTooltipChange = (event) => {
-    setShowTooltip(event.target.checked);
-  };
+  // const handleTooltipChange = (event) => {
+  //   setShowTooltip(event.target.checked);
+  // };
 
   const stats = [
     {
@@ -313,16 +197,16 @@ function Dashboard() {
       dataColor: colors.primary[500],
     },
     {
-      title: "Total installed",
+      title: "Total Products",
       value: "4,876",
       change: "+0.2%",
       status: true,
-      color: colors.primary[800],
+      color: colors.primary[400],
       data: [8, 5, 2, 5, 9, 2, 8, 1],
       dataColor: colors.primary[300],
     },
     {
-      title: "Total downloads",
+      title: "Total Orders",
       value: "678",
       change: "-0.1%",
       status: false,
@@ -331,7 +215,7 @@ function Dashboard() {
       dataColor: colors.primary[100],
     },
     {
-      title: "Custom stat",
+      title: "Total Revenue Gauge",
       value: "1,234",
       change: "+1.0%",
       status: true,
@@ -410,7 +294,7 @@ function Dashboard() {
       price: "$150",
       total_orders: "280",
       rank: "Top1",
-      rankColor: "success",
+      rankColor: "primary",
     },
     {
       _id: 4,
@@ -419,7 +303,7 @@ function Dashboard() {
       price: "$350",
       total_orders: "50",
       rank: "Top2",
-      rankColor: "success",
+      rankColor: "secondary",
     },
     {
       _id: 5,
@@ -428,7 +312,7 @@ function Dashboard() {
       price: "$150",
       total_orders: "200",
       rank: "Top3",
-      rankColor: "success",
+      rankColor: "error",
     },
     {
       _id: 6,
@@ -437,7 +321,7 @@ function Dashboard() {
       price: "$50",
       total_orders: "300",
       rank: "Top4",
-      rankColor: "success",
+      rankColor: "info",
     },
     {
       _id: 7,
@@ -497,11 +381,43 @@ function Dashboard() {
     },
   ];
 
+  const Fruits = [
+    4000, 3000, 2000, 2780, 1890, 2390, 3490, 2400, 1398, 9800, 3908, 4800,
+    3800,
+  ];
+  const Vegitables = [
+    2400, 1398, 9800, 3908, 4800, 3800, 4300, 4000, 3000, 2000, 2780, 1890,
+    2390,
+  ];
+  const DayFruits = [
+    4000, 3000, 2000, 2780, 1890, 2390, 3490, 2400, 1398, 9800, 3908, 4800,
+    3800,
+  ];
+  const OrganicItems = [
+    2400, 1398, 9800, 3908, 4800, 3800, 4300, 4000, 3000, 2000, 2780, 1890,
+    2390,
+  ];
+  const xLabels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const margin = { right: 24 };
+
   const data = [
-    { label: "Group A", value: 400, color: colors.primary[300] },
-    { label: "Group B", value: 300, color: colors.primary[500] },
-    { label: "Group C", value: 300, color: colors.secondary[300] },
-    { label: "Group D", value: 200, color: colors.secondary[300] },
+    { label: "Fruits", value: 400, color: colors.primary[300] },
+    { label: "Vegitables", value: 300, color: colors.primary[500] },
+    { label: "DayFruits", value: 300, color: colors.secondary[300] },
+    { label: "OrganicItems", value: 200, color: colors.secondary[300] },
   ];
 
   const settings = {
@@ -511,31 +427,6 @@ function Dashboard() {
     hideLegend: true,
   };
 
-  const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-  const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-  const xLabels = [
-    "Page A",
-    "Page B",
-    "Page C",
-    "Page D",
-    "Page E",
-    "Page F",
-    "Page G",
-  ];
-
-  const margin = { right: 24 };
-  const uDataLine = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-  const pDataLine = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-  const xLabelsLine = [
-    "Page A",
-    "Page B",
-    "Page C",
-    "Page D",
-    "Page E",
-    "Page F",
-    "Page G",
-  ];
-
   return (
     <Box sx={{ p: 2, minHeight: "100vh" }}>
       <Grid container spacing={2}>
@@ -544,25 +435,64 @@ function Dashboard() {
             <StatCard {...v} />
           </Grid>
         ))}
-        <Grid size={8}>
+
+        <Grid size={12}>
+          <BarChartData
+            Fruits={Fruits}
+            Vegitables={Vegitables}
+            DayFruits={DayFruits}
+            OrganicItems={OrganicItems}
+            xLabels={xLabels}
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 6, lg: 8 }}>
+          <LineChartData
+            Fruits={Fruits}
+            Vegitables={Vegitables}
+            DayFruits={DayFruits}
+            OrganicItems={OrganicItems}
+            xLabels={xLabels}
+            margin={margin}
+            label={"Orders trend over time"}
+            text={"(+43%) than last year"}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+          <PieChartData
+            data={data}
+            settings={settings}
+            label={"Orders Status distribution"}
+            text={"(+43%) than last year"}
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+          <PieChartData
+            data={data}
+            settings={settings}
+            label={"SubCategory-Wise sales percentage"}
+            text={"(+43%) than last year"}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6, lg: 8 }}>
+          <LineChartData
+            Fruits={Fruits}
+            Vegitables={Vegitables}
+            DayFruits={DayFruits}
+            OrganicItems={OrganicItems}
+            xLabels={xLabels}
+            margin={margin}
+            label={"Revenue Year"}
+            text={"(+43%) than last year"}
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 6, lg: 8 }}>
           <ProductCard data={product} />
         </Grid>
-        <Grid size={4}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <Latestproducts data={latestproducts} />
-        </Grid>
-        <Grid size={4}>
-          <PieChartData data={data} settings={settings} />
-        </Grid>
-        <Grid size={8}>
-          <BarChartData uData={uData} pData={pData} xLabels={xLabels} />
-        </Grid>
-        <Grid size={12}>
-          <LineChartData
-            uDataLine={uDataLine}
-            pDataLine={pDataLine}
-            xLabelsLine={xLabelsLine}
-            margin={margin}
-          />
         </Grid>
       </Grid>
     </Box>
