@@ -353,5 +353,14 @@
         "f18a"
       ]
     }
+  ],
+  "coupon": [
+    {
+      "id": "70cf",
+      "coupon": "ABC12",
+      "percentage": 102,
+      "expiry": "2025-10-11",
+      "stock": 90
+    }
   ]
 }

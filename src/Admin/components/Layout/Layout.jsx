@@ -154,6 +154,11 @@ export default function Layout({ children }) {
       icon: <PreviewIcon />,
       to: "/admin/reviews",
     },
+    {
+      label: "Coupon",
+      icon: <PreviewIcon />,
+      to: "/admin/coupon",
+    },
   ];
 
   return (

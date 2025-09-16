@@ -9,6 +9,7 @@ import favoriteSlice from "./slice/favorite.slice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { couponApi } from "./Api/coupon.api";
 
 const rootReducer = combineReducers({
   count: counterSlice,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   cart: cartSlice,
   cart1: cart1Slice,
   favorite: favoriteSlice,
+  [couponApi.reducerPath]: couponApi.reducer,
 });
 
 const persistConfig = {
@@ -35,7 +37,7 @@ const CStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }),
+      }).concat(couponApi.middleware),
   });
   let persistor = persistStore(store);
   return { store, persistor };

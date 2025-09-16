@@ -153,12 +153,26 @@ const Latestproducts = ({ data }) => (
               </Typography>
             </Box>
 
-            <AvatarGroup max={4} spacing="medium">
+            <AvatarGroup
+              max={4}
+              spacing="medium"
+              sx={{
+                "& .MuiAvatarGroup-avatar": {
+                  width: "20px !important",
+                  height: "20px !important",
+                  fontSize: "10px",
+                },
+              }}
+            >
               {v.colors.map((c, i) => (
                 <Avatar
                   key={i}
                   alt="Colors"
-                  sx={{ width: 20, height: 20, bgcolor: c }}
+                  sx={{
+                    width: 20,
+                    height: 20,
+                    bgcolor: c,
+                  }}
                 >
                   {" "}
                 </Avatar>
@@ -420,6 +434,12 @@ function Dashboard() {
     { label: "OrganicItems", value: 200, color: colors.secondary[300] },
   ];
 
+  const orderDistribution = [
+    { label: "Delivered", value: 70, color: colors.primary[300] },
+    { label: "Padding", value: 20, color: colors.primary[500] },
+    { label: "Cancelled", value: 10, color: colors.secondary[300] },
+  ];
+
   const settings = {
     margin: { right: 5 },
     width: 200,
@@ -448,19 +468,21 @@ function Dashboard() {
 
         <Grid size={{ xs: 12, md: 6, lg: 8 }}>
           <LineChartData
-            Fruits={Fruits}
-            Vegitables={Vegitables}
-            DayFruits={DayFruits}
-            OrganicItems={OrganicItems}
-            xLabels={xLabels}
-            margin={margin}
-            label={"Orders trend over time"}
-            text={"(+43%) than last year"}
+            data={{
+              Fruits,
+              Vegitables,
+              DayFruits,
+              OrganicItems,
+              xLabels,
+              margin,
+              label: "Orders trend over time",
+              text: "(+43%) than last year",
+            }}
           />
         </Grid>
         <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <PieChartData
-            data={data}
+            data={orderDistribution}
             settings={settings}
             label={"Orders Status distribution"}
             text={"(+43%) than last year"}
@@ -477,14 +499,16 @@ function Dashboard() {
         </Grid>
         <Grid size={{ xs: 12, md: 6, lg: 8 }}>
           <LineChartData
-            Fruits={Fruits}
-            Vegitables={Vegitables}
-            DayFruits={DayFruits}
-            OrganicItems={OrganicItems}
-            xLabels={xLabels}
-            margin={margin}
-            label={"Revenue Year"}
-            text={"(+43%) than last year"}
+            data={{
+              Fruits,
+              Vegitables,
+              DayFruits,
+              OrganicItems,
+              xLabels,
+              margin,
+              label: "Revenue Year",
+              text: "(+43%) than last year",
+            }}
           />
         </Grid>
 

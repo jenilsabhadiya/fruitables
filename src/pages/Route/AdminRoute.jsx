@@ -12,6 +12,7 @@ import { ThemeContext } from "../../Context/ThemeContext";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { tokensSetting } from "../../Admin/theme";
 import Dashboard from "../../Admin/container/Dashboard/Dashboard";
+import Coupon from "../../Admin/container/Coupon/Coupon";
 
 function AdminRoute() {
   const theme = useContext(ThemeContext);
@@ -34,6 +35,8 @@ function AdminRoute() {
 
           <Route path="/counter" element={<Counter />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/coupon" element={<Coupon />} />
+
 
           <Route path="/*" element={<NotFound />} />
         </Routes>

@@ -2,16 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import { LineChart } from "@mui/x-charts";
 import React from "react";
 
-function LineChartData({
-  Fruits,
-  Vegitables,
-  DayFruits,
-  OrganicItems,
-  xLabels,
-  margin,
-  label,
-  text
-}) {
+function LineChartData({ data }) {
   return (
     <Paper sx={{ p: 3, borderRadius: 3 }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
@@ -22,25 +13,40 @@ function LineChartData({
             // color={colors.primary[500]}
             color={(theme) => (theme.palette.mode === "dark" ? "#fff" : "#000")}
           >
-            {label}
+            {data.label}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {text}
+            {data.text}
           </Typography>
         </Box>
       </Box>
       <LineChart
         height={300}
         series={[
-          { data: Fruits, label: "Fruits" },
-          { data: Vegitables, label: "Vegitables" },
-          { data: DayFruits, label: "DayFruits" },
-          { data: OrganicItems, label: "OrganicItems" },
+          { data: data.Fruits, label: "Fruits" },
+          { data: data.Vegitables, label: "Vegitables" },
+          { data: data.DayFruits, label: "DayFruits" },
+          { data: data.OrganicItems, label: "OrganicItems" },
         ]}
-        xAxis={[{ scaleType: "point", data: xLabels }]}
+        xAxis={[{ scaleType: "point", data: data.xLabels }]}
         yAxis={[{ width: 50 }]}
-        margin={margin}
+        margin={data.margin}
       />
+
+      {/* <LineChart
+        height={300}
+        series={[
+          ...["Fruits", "Vegitables", "DayFruits", "OrganicItems"].map(
+            (v) => ({
+              data: data[v],
+              label: v,
+            })
+          ),
+        ]}
+        xAxis={[{ scaleType: "point", data: data.xLabels }]}
+        yAxis={[{ width: 50 }]}
+        margin={data.margin}
+      /> */}
     </Paper>
   );
 }
