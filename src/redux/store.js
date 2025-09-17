@@ -10,11 +10,13 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { couponApi } from "./Api/coupon.api";
+import { categaryApi } from "./Api/categary.api";
 
 const rootReducer = combineReducers({
   count: counterSlice,
   product: productsSlice,
-  categary: categarySlice,
+  // categary: categarySlice,
+  [categaryApi.reducerPath]: categaryApi.reducer,
   subCategary: subCategarySlice,
   tastimonial: tastimonialSlice,
   cart: cartSlice,
@@ -37,7 +39,9 @@ const CStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat(couponApi.middleware),
+      })
+        .concat(couponApi.middleware)
+        .concat(categaryApi.middleware),
   });
   let persistor = persistStore(store);
   return { store, persistor };

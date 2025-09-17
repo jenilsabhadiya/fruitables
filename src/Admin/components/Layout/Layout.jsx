@@ -27,6 +27,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import PreviewIcon from "@mui/icons-material/Preview";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import DiscountIcon from "@mui/icons-material/Discount";
 import { ThemeContext } from "../../../Context/ThemeContext";
 const drawerWidth = 240;
 
@@ -156,7 +157,7 @@ export default function Layout({ children }) {
     },
     {
       label: "Coupon",
-      icon: <PreviewIcon />,
+      icon: <DiscountIcon />,
       to: "/admin/coupon",
     },
   ];

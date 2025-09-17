@@ -4,7 +4,6 @@ import { BASE_URL } from "../../constant/url";
 export const couponApi = createApi({
   reducerPath: "couponApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
-  tagTypes: ["Coupon"],
   endpoints: (build) => ({
     getAllcoupon: build.query({
       query: () => "/coupon",
@@ -16,14 +15,49 @@ export const couponApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Coupon"],
+
+      // https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates
+      async onQueryStarted(data, { dispatch, queryFulfilled }) {
+        const tempId = crypto.randomUUID();
+        const patchResult = dispatch(
+          couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
+            draft.push({ id: tempId, ...data });
+          })
+        );
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+
+          couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
+            const index = draft.findIndex((v) => v.id === tempId);
+
+            draft[index] = { data };
+          });
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     deletecoupon: build.mutation({
       query: (id) => ({
         url: `/coupon/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Coupon"],
+      // invalidatesTags: ["Coupon"],
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
+            const index = draft.findIndex((v) => v.id === id);
+
+            draft.splice(index, 1);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     updatecoupon: build.mutation({
       query: ({ id, ...data }) => ({
@@ -31,7 +65,21 @@ export const couponApi = createApi({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["Coupon"],
+      // invalidatesTags: ["Coupon"],
+      async onQueryStarted({ id, ...data }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
+            const index = draft.findIndex((v) => v.id === id);
+
+            draft[index] = { ...draft[index], ...data };
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });

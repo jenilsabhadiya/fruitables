@@ -140,7 +140,7 @@
   "categary": [
     {
       "id": "c1c7",
-      "name": "ABCokqkok",
+      "name": "ABCqq",
       "description": "ksksks",
       "categary_image": "banner-fruits.jpg",
       "status": true
@@ -179,6 +179,24 @@
       "description": "okok",
       "categary_image": "best-product-5.jpg",
       "status": true
+    },
+    {
+      "id": "cbf6",
+      "name": "cs",
+      "description": "okkok",
+      "categary_image": "best-product-3.jpg",
+      "status": [
+        "on"
+      ]
+    },
+    {
+      "id": "26c7",
+      "name": "ABCD",
+      "description": "aqq",
+      "categary_image": {},
+      "status": [
+        "on"
+      ]
     }
   ],
   "subCategary": [
@@ -356,11 +374,18 @@
   ],
   "coupon": [
     {
-      "id": "70cf",
+      "id": "a182",
       "coupon": "ABC12",
-      "percentage": 102,
-      "expiry": "2025-10-11",
+      "percentage": 90999,
+      "expiry": "2025-09-19",
       "stock": 90
+    },
+    {
+      "id": "4642",
+      "coupon": "ABC1200",
+      "percentage": 90,
+      "expiry": "2025-09-26",
+      "stock": 80
     }
   ]
 }

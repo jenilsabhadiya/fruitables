@@ -26,24 +26,37 @@ import {
 } from "../../../redux/slice/categary.slice";
 import Heading from "../../components/Heading/Heading";
 import DataGridBG from "../../components/DataGridBG/DataGridBG";
+import {
+  useAddcategaryMutation,
+  useDeletecategaryMutation,
+  useGetAllcategaryQuery,
+  useStatuscategaryMutation,
+  useUpdatecategaryMutation,
+} from "../../../redux/Api/categary.api";
 
 function Categary() {
   const [open, setOpen] = React.useState(false);
   // const [categaryData, setCategaryData] = useState([]);
   const [update, setUpdate] = useState();
 
-  const dispatch = useDispatch();
+  const { data, error, isLoading } = useGetAllcategaryQuery();
+  const [addcategary] = useAddcategaryMutation();
+  const [deleteCategary] = useDeletecategaryMutation();
+  const [updateCategary] = useUpdatecategaryMutation();
+  const [statuscategary] = useStatuscategaryMutation();
 
-  const categarySlice = useSelector((state) => state.categary);
-  console.log(categarySlice);
+  // const dispatch = useDispatch();
 
-  const getData = () => {
-    dispatch(getAllData());
-  };
+  // const categarySlice = useSelector((state) => state.categary);
+  // console.log(categarySlice);
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // const getData = () => {
+  //   dispatch(getAllData());
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -73,7 +86,7 @@ function Categary() {
       renderCell: (params) => (
         <Switch
           checked={params.row.status || false}
-          onChange={() => handleStatus(params.row)}
+          onChange={() => statuscategary(params.row)}
         />
       ),
     },
@@ -86,7 +99,7 @@ function Categary() {
           </IconButton>
           <IconButton
             aria-label="delete"
-            onClick={() => handleDelete(params.row.id)}
+            onClick={() => deleteCategary(params.row.id)}
           >
             <DeleteIcon />
           </IconButton>
@@ -165,13 +178,13 @@ function Categary() {
 
   // console.log(errors, touched);
 
-  const handleCategarySubmit = (data) => {
-    dispatch(addCategary(data));
-  };
+  // const handleCategarySubmit = (data) => {
+  //   dispatch(addCategary(data));
+  // };
 
-  const handleDelete = (id) => {
-    dispatch(deleteCategary(id));
-  };
+  // const handleDelete = (id) => {
+  //   dispatch(deleteCategary(id));
+  // };
 
   const handleEdit = (data) => {
     console.log(data);
@@ -179,23 +192,23 @@ function Categary() {
     handleClickOpen();
   };
 
-  const handleUpdate = (data) => {
-    let updateData = [];
+  // const handleUpdate = (data) => {
+  //   let updateData = [];
 
-    if (typeof data.categary_image === "string") {
-      updateData = { ...data };
-    } else {
-      updateData = {
-        ...data,
-        categary_image: data.categary_image.name,
-      };
-    }
-    dispatch(updateCategary(updateData));
-  };
+  //   if (typeof data.categary_image === "string") {
+  //     updateData = { ...data };
+  //   } else {
+  //     updateData = {
+  //       ...data,
+  //       categary_image: data.categary_image.name,
+  //     };
+  //   }
+  //   dispatch(updateCategary(updateData));
+  // };
 
-  const handleStatus = (data) => {
-    dispatch(updateStatus(data));
-  };
+  // const handleStatus = (data) => {
+  //   dispatch(updateStatus(data));
+  // };
 
   return (
     <div>
@@ -230,9 +243,11 @@ function Categary() {
               onSubmit={(values, { resetForm }) => {
                 console.log(values);
                 if (update) {
-                  handleUpdate(values);
+                  // handleUpdate(values);
+                  updateCategary(values);
                 } else {
-                  handleCategarySubmit(values);
+                  // handleCategarySubmit(values);
+                  addcategary(values);
                 }
 
                 resetForm();
@@ -279,7 +294,9 @@ function Categary() {
         sx={{ border: 0 }}
       /> */}
 
-      <DataGridBG rows={categarySlice.categary} columns={columns} />
+      {/* <DataGridBG rows={categarySlice.categary} columns={columns} /> */}
+
+      <DataGridBG rows={data} columns={columns} />
     </div>
   );
 }
