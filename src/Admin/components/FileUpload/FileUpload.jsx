@@ -4,6 +4,8 @@ function FileUpload({ type, ...props }) {
   const [field, meta, helpers] = useField(props.name);
   // console.log(field, meta);
 
+  // console.log("field?.value", field?.value, field?.value?.url);
+
   return (
     <div>
       <input
@@ -16,9 +18,17 @@ function FileUpload({ type, ...props }) {
 
       <img
         style={{ width: "100px", height: "100px" }}
+        // src={
+        //   typeof field?.value === "string"
+        //     ? "../public/assets/img/" + field?.value
+        //     : field?.value
+        //     ? URL.createObjectURL(field?.value)
+        //     : ""
+        // }
+
         src={
-          typeof field?.value === "string"
-            ? "../public/assets/img/" + field?.value
+          typeof field?.value?.url === "string"
+            ? field?.value?.url
             : field?.value
             ? URL.createObjectURL(field?.value)
             : ""

@@ -4,11 +4,9 @@ import { BASE_URL } from "../../constant/url";
 export const categaryApi = createApi({
   reducerPath: "categaryApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
-  tagTypes: ["Products"],
   endpoints: (build) => ({
     getAllcategary: build.query({
       query: () => "/categary",
-      providesTags: ["Products"],
     }),
     addcategary: build.mutation({
       query: (data) => ({
@@ -16,14 +14,59 @@ export const categaryApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Products"],
+      // https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates
+      async onQueryStarted(data, { dispatch, queryFulfilled }) {
+        const tempId = crypto.randomUUID();
+        const patchResult = dispatch(
+          categaryApi.util.updateQueryData(
+            "getAllcategary",
+            undefined,
+            (draft) => {
+              draft.push({ id: tempId, ...data });
+            }
+          )
+        );
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+
+          categaryApi.util.updateQueryData(
+            "getAllcategary",
+            undefined,
+            (draft) => {
+              const index = draft.findIndex((v) => v.id === tempId);
+
+              draft[index] = { data };
+            }
+          );
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     deletecategary: build.mutation({
       query: (id) => ({
         url: `/categary/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Products"],
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          categaryApi.util.updateQueryData(
+            "getAllcategary",
+            undefined,
+            (draft) => {
+              const index = draft.findIndex((v) => v.id === id);
+
+              draft.splice(index, 1);
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     updatecategary: build.mutation({
       query: ({ id, ...data }) => ({
@@ -31,7 +74,24 @@ export const categaryApi = createApi({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["Products"],
+      async onQueryStarted({ id, ...data }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          categaryApi.util.updateQueryData(
+            "getAllcategary",
+            undefined,
+            (draft) => {
+              const index = draft.findIndex((v) => v.id === id);
+
+              draft[index] = { ...draft[index], ...data };
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     statuscategary: build.mutation({
       query: ({ id, ...data }) => ({
@@ -39,7 +99,24 @@ export const categaryApi = createApi({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["Products"],
+      // async onQueryStarted({ id, ...data }, { dispatch, queryFulfilled }) {
+      //   const patchResult = dispatch(
+      //     categaryApi.util.updateQueryData(
+      //       "getAllcategary",
+      //       undefined,
+      //       (draft) => {
+      //         const index = draft.findIndex((v) => v.id === id);
+
+      //         draft[index] = { ...draft[index], ...data };
+      //       }
+      //     )
+      //   );
+      //   try {
+      //     await queryFulfilled;
+      //   } catch {
+      //     patchResult.undo();
+      //   }
+      // },
     }),
   }),
 });

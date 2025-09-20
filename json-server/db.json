@@ -140,7 +140,7 @@
   "categary": [
     {
       "id": "c1c7",
-      "name": "ABCqq",
+      "name": "ABCokok",
       "description": "ksksks",
       "categary_image": "banner-fruits.jpg",
       "status": true
@@ -190,13 +190,10 @@
       ]
     },
     {
-      "id": "26c7",
+      "id": "9873",
       "name": "ABCD",
-      "description": "aqq",
-      "categary_image": {},
-      "status": [
-        "on"
-      ]
+      "description": "ok",
+      "categary_image": "baner-1.png"
     }
   ],
   "subCategary": [
@@ -348,7 +345,7 @@
       "cart": [
         {
           "id": "f85a",
-          "qty": 8
+          "qty": 6
         },
         {
           "id": "d896",
@@ -378,14 +375,24 @@
       "coupon": "ABC12",
       "percentage": 90999,
       "expiry": "2025-09-19",
-      "stock": 90
+      "stock": 90,
+      "coupon_image": "banner-fruits.jpg"
     },
     {
       "id": "4642",
       "coupon": "ABC1200",
       "percentage": 90,
       "expiry": "2025-09-26",
-      "stock": 80
+      "stock": 800,
+      "coupon_image": "baner-1.png"
+    },
+    {
+      "id": "236f",
+      "coupon": "ABC10",
+      "percentage": 20,
+      "expiry": "2025-09-26",
+      "stock": 10,
+      "coupon_image": "best-product-1.jpg"
     }
   ]
 }

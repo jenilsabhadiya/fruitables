@@ -6,22 +6,29 @@ export const couponApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (build) => ({
     getAllcoupon: build.query({
-      query: () => "/coupon",
+      query: () => "/coupon/list-coupon",
       providesTags: ["Coupon"],
     }),
     addcoupon: build.mutation({
       query: (data) => ({
-        url: `/coupon`,
+        url: `/coupon/add-coupon`,
         method: "POST",
         body: data,
       }),
-
       // https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates
       async onQueryStarted(data, { dispatch, queryFulfilled }) {
         const tempId = crypto.randomUUID();
+        const tempImg = {url: URL.createObjectURL(data.get("coupon_image"))};
         const patchResult = dispatch(
           couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
-            draft.push({ id: tempId, ...data });
+            draft?.data?.push({
+              _id: tempId,
+              coupon: data.get("coupon"),
+              percentage: data.get("percentage"),
+              expiry: data.get("expiry"),
+              stock: data.get("stock"),
+              coupon_image: tempImg,
+            });
           })
         );
         try {
@@ -29,9 +36,9 @@ export const couponApi = createApi({
           console.log(data);
 
           couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
-            const index = draft.findIndex((v) => v.id === tempId);
+            const index = draft?.data?.findIndex((v) => v._id === tempId);
 
-            draft[index] = { data };
+            draft.data[index] = { data };
           });
         } catch {
           patchResult.undo();
@@ -40,16 +47,15 @@ export const couponApi = createApi({
     }),
     deletecoupon: build.mutation({
       query: (id) => ({
-        url: `/coupon/${id}`,
+        url: `/coupon/delete-coupon/${id}`,
         method: "DELETE",
       }),
-      // invalidatesTags: ["Coupon"],
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
-            const index = draft.findIndex((v) => v.id === id);
+            const index = draft?.data.findIndex((v) => v._id === id);
 
-            draft.splice(index, 1);
+            draft?.data.splice(index, 1);
           })
         );
         try {
@@ -60,16 +66,16 @@ export const couponApi = createApi({
       },
     }),
     updatecoupon: build.mutation({
-      query: ({ id, ...data }) => ({
-        url: `/coupon/${id}`,
+      query: ({ _id, body }) => ({
+        url: `/coupon/update-coupon/${_id}`,
         method: "PATCH",
-        body: data,
+        body: body,
       }),
       // invalidatesTags: ["Coupon"],
       async onQueryStarted({ id, ...data }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
-            const index = draft.findIndex((v) => v.id === id);
+            const index = draft?.data.findIndex((v) => v.id === id);
 
             draft[index] = { ...draft[index], ...data };
           })

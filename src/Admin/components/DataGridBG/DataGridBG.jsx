@@ -24,6 +24,7 @@ function DataGridBG({ rows, columns }) {
         pageSizeOptions={[5, 10]}
         checkboxSelection
         showToolbar
+        getRowId={(row) => row._id}
       />
     </Box>
   );

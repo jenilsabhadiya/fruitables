@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Box, IconButton } from "@mui/material";
-import { date, number, object, string } from "yup";
+import { date, mixed, number, object, string } from "yup";
 import { Form, Formik } from "formik";
 import TestInput from "../../components/TestInput/TestInput";
 import DataGridBG from "../../components/DataGridBG/DataGridBG";
@@ -18,6 +18,7 @@ import {
 } from "../../../redux/Api/coupon.api";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import FileUpload from "../../components/FileUpload/FileUpload";
 
 function Coupon() {
   const [open, setOpen] = React.useState(false);
@@ -26,6 +27,9 @@ function Coupon() {
   const [addcoupon] = useAddcouponMutation();
   const [deletecoupon] = useDeletecouponMutation();
   const [updatecoupon] = useUpdatecouponMutation();
+
+  const { data, error, isLoading } = useGetAllcouponQuery();
+  console.log("data", data?.data);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,6 +45,18 @@ function Coupon() {
     { field: "expiry", headerName: "Expiry", width: 200 },
     { field: "stock", headerName: "Stock", width: 200 },
     {
+      field: "coupon_image",
+      headerName: "Image",
+      width: 70,
+      renderCell: (params) => (
+        <img
+          style={{ width: "100px", height: "100px", objectFit: "contain" }}
+          // src={"../public/assets/img/" + params.row.coupon_image}
+          src={params.row.coupon_image?.url}
+        />
+      ),
+    },
+    {
       headerName: "Action",
       renderCell: (params) => (
         <>
@@ -49,7 +65,7 @@ function Coupon() {
           </IconButton>
           <IconButton
             aria-label="delete"
-            onClick={() => deletecoupon(params.row.id)}
+            onClick={() => deletecoupon(params.row._id)}
           >
             <DeleteIcon />
           </IconButton>
@@ -69,10 +85,36 @@ function Coupon() {
     percentage: number().required(),
     expiry: date().required(),
     stock: number().required(),
-  });
+    coupon_image: mixed()
+      .required()
+      .test("coupon_image", "Only png or jpeg file allowed", (val) => {
+        // console.log(val);
+        if (typeof val?.url === "string") {
+          return true;
+        }
 
-  const { data, error, isLoading } = useGetAllcouponQuery();
-  console.log(data);
+        let type = val.type.toLowerCase();
+
+        if (type === "image/png" || type === "image/jpeg") {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .test("coupon_image", "Only 2MB size file allowed", (val) => {
+        // console.log("eeeeeeeeeeeee", val);
+
+        if (typeof val?.url === "string") {
+          return true;
+        }
+
+        if (val.size <= 2 * 1024 * 1024) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+  });
 
   return (
     <React.Fragment>
@@ -89,7 +131,7 @@ function Coupon() {
           Add Coupon
         </Button>
       </Box>
-      <DataGridBG rows={data} columns={columns} />
+      <DataGridBG rows={data?.data} columns={columns} />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Coupon</DialogTitle>
         <DialogContent>
@@ -102,18 +144,45 @@ function Coupon() {
                     percentage: "",
                     expiry: "",
                     stock: "",
+                    coupon_image: "",
                   }
             }
             validationSchema={couponSchema}
             onSubmit={(values, { resetForm }) => {
-              console.log(values);
+              console.log("values", values, Object.entries(values));
+
+              let formData = new FormData();
+              Object.entries(values).map(([key, val]) => {
+                console.log("key, val", key, val);
+
+                if (key === "coupon_image") {
+                  if (val instanceof File) {
+                    formData.append(key, val);
+                  }
+                } else {
+                  formData.append(key, val);
+                }
+              });
 
               if (update) {
-                updatecoupon(values);
                 // handleUpdate(values);
+
+                // let updateData = [];
+
+                // if (typeof values.coupon_image === "string") {
+                //   updateData = { ...values };
+                // } else {
+                //   updateData = {
+                //     ...values,
+                //     coupon_image: values.coupon_image.name,
+                //   };
+                // }
+
+                updatecoupon({ _id: values._id, body: formData });
               } else {
-                addcoupon(values);
-                // handleProuctsSubmit(values);
+                // handleCategarySubmit(values);
+
+                addcoupon(formData);
               }
 
               resetForm();
@@ -143,6 +212,8 @@ function Coupon() {
                 label="Stcok:-"
                 type="number"
               />
+
+              <FileUpload type="file" name="coupon_image" />
             </Form>
           </Formik>
         </DialogContent>

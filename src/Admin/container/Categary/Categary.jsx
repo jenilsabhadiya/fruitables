@@ -244,10 +244,25 @@ function Categary() {
                 console.log(values);
                 if (update) {
                   // handleUpdate(values);
-                  updateCategary(values);
+
+                  let updateData = [];
+
+                  if (typeof values.categary_image === "string") {
+                    updateData = { ...values };
+                  } else {
+                    updateData = {
+                      ...values,
+                      categary_image: values.categary_image.name,
+                    };
+                  }
+
+                  updateCategary(updateData);
                 } else {
                   // handleCategarySubmit(values);
-                  addcategary(values);
+                  addcategary({
+                    ...values,
+                    categary_image: values.categary_image.name,
+                  });
                 }
 
                 resetForm();
