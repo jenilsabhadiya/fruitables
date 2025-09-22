@@ -30,7 +30,7 @@ import {
   useAddcategaryMutation,
   useDeletecategaryMutation,
   useGetAllcategaryQuery,
-  useStatuscategaryMutation,
+  useStatusCategoryMutation,
   useUpdatecategaryMutation,
 } from "../../../redux/Api/categary.api";
 
@@ -40,10 +40,12 @@ function Categary() {
   const [update, setUpdate] = useState();
 
   const { data, error, isLoading } = useGetAllcategaryQuery();
+  console.log(data);
+
   const [addcategary] = useAddcategaryMutation();
   const [deleteCategary] = useDeletecategaryMutation();
   const [updateCategary] = useUpdatecategaryMutation();
-  const [statuscategary] = useStatuscategaryMutation();
+  const [statusCategary] = useStatusCategoryMutation();
 
   // const dispatch = useDispatch();
 
@@ -69,24 +71,28 @@ function Categary() {
   const columns = [
     { field: "name", headerName: "Name", width: 170 },
     {
-      field: "categary_image",
+      field: "cat_img",
       headerName: "Image",
       width: 170,
       renderCell: (params) => (
         <img
           style={{ width: "100px", height: "100px", objectFit: "contain" }}
-          src={"../public/assets/img/" + params.row.categary_image}
+          // src={"../public/assets/img/" + params.row.cat_img}
+          src={params.row.cat_img?.url}
         />
       ),
     },
     {
-      field: "status",
+      field: "active",
       headerName: "Status",
       width: 170,
       renderCell: (params) => (
         <Switch
-          checked={params.row.status || false}
-          onChange={() => statuscategary(params.row)}
+          checked={params.row.active || false}
+          // onChange={() => statusCategary(params.row._id)}
+          onChange={() =>
+            statusCategary({ _id: params.row._id, active: !params.row.active })
+          }
         />
       ),
     },
@@ -99,7 +105,7 @@ function Categary() {
           </IconButton>
           <IconButton
             aria-label="delete"
-            onClick={() => deleteCategary(params.row.id)}
+            onClick={() => deleteCategary(params.row._id)}
           >
             <DeleteIcon />
           </IconButton>
@@ -124,12 +130,12 @@ function Categary() {
           return false;
         }
       }),
-    categary_image: mixed()
+    cat_img: mixed()
       .required()
-      .test("categary_image", "Only png or jpeg file allowed", (val) => {
+      .test("cat_img", "Only png or jpeg file allowed", (val) => {
         // console.log(val);
 
-        if (typeof val === "string") {
+        if (typeof val?.url === "string") {
           return true;
         }
 
@@ -140,10 +146,10 @@ function Categary() {
           return false;
         }
       })
-      .test("categary_image", "Only 2MB size file allowed", (val) => {
+      .test("cat_img", "Only 2MB size file allowed", (val) => {
         // console.log("eeeeeeeeeeeee", val);
 
-        if (typeof val === "string") {
+        if (typeof val?.url === "string") {
           return true;
         }
 
@@ -195,19 +201,20 @@ function Categary() {
   // const handleUpdate = (data) => {
   //   let updateData = [];
 
-  //   if (typeof data.categary_image === "string") {
+  //   if (typeof data.cat_img === "string") {
   //     updateData = { ...data };
   //   } else {
   //     updateData = {
   //       ...data,
-  //       categary_image: data.categary_image.name,
+  //       cat_img: data.cat_img.name,
   //     };
   //   }
   //   dispatch(updateCategary(updateData));
   // };
 
   // const handleStatus = (data) => {
-  //   dispatch(updateStatus(data));
+  //   ststusCategary(data);
+  //   console.log(data, "data");
   // };
 
   return (
@@ -236,33 +243,31 @@ function Categary() {
                   : {
                       name: "",
                       description: "",
-                      categary_image: "",
+                      cat_img: "",
+                      active: "",
                     }
               }
               validationSchema={categarySchema}
               onSubmit={(values, { resetForm }) => {
                 console.log(values);
-                if (update) {
-                  // handleUpdate(values);
+                let formData = new FormData();
+                Object.entries(values).map(([key, val]) => {
+                  console.log("key, val", key, val);
 
-                  let updateData = [];
-
-                  if (typeof values.categary_image === "string") {
-                    updateData = { ...values };
+                  if (key === "cat_img") {
+                    if (val instanceof File) {
+                      formData.append(key, val);
+                    }
                   } else {
-                    updateData = {
-                      ...values,
-                      categary_image: values.categary_image.name,
-                    };
+                    formData.append(key, val);
                   }
+                });
 
-                  updateCategary(updateData);
+                if (update) {
+                  updateCategary({ _id: values._id, body: formData });
                 } else {
                   // handleCategarySubmit(values);
-                  addcategary({
-                    ...values,
-                    categary_image: values.categary_image.name,
-                  });
+                  addcategary(formData);
                 }
 
                 resetForm();
@@ -280,11 +285,11 @@ function Categary() {
                   rows={4}
                 />
 
-                <FileUpload type="file" name="categary_image" />
+                <FileUpload type="file" name="cat_img" />
 
                 <SwitchOnOff
                   id="active"
-                  name="status"
+                  name="active"
                   label="Active or Not Active"
                 />
 
@@ -311,7 +316,7 @@ function Categary() {
 
       {/* <DataGridBG rows={categarySlice.categary} columns={columns} /> */}
 
-      <DataGridBG rows={data} columns={columns} />
+      <DataGridBG rows={data?.data} columns={columns} />
     </div>
   );
 }

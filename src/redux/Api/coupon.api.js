@@ -18,7 +18,7 @@ export const couponApi = createApi({
       // https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates
       async onQueryStarted(data, { dispatch, queryFulfilled }) {
         const tempId = crypto.randomUUID();
-        const tempImg = {url: URL.createObjectURL(data.get("coupon_image"))};
+        const tempImg = { url: URL.createObjectURL(data.get("coupon_image")) };
         const patchResult = dispatch(
           couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
             draft?.data?.push({
@@ -72,12 +72,59 @@ export const couponApi = createApi({
         body: body,
       }),
       // invalidatesTags: ["Coupon"],
-      async onQueryStarted({ id, ...data }, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ _id, body }, { dispatch, queryFulfilled }) {
+        const tempImg = body.get("coupon_image")
+          ? { url: URL.createObjectURL(body.get("coupon_image")) }
+          : null;
+
+        const newStatus = !body.get("active");
+
         const patchResult = dispatch(
           couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
-            const index = draft?.data.findIndex((v) => v.id === id);
+            const index = draft?.data.findIndex((v) => v._id === _id);
 
-            draft[index] = { ...draft[index], ...data };
+            if (index !== -1) {
+              const updateData = {
+                coupon: body.get("coupon"),
+                percentage: body.get("percentage"),
+                expiry: body.get("expiry"),
+                stock: body.get("stock"),
+                active: newStatus,
+              };
+
+              if (tempImg) {
+                updateData.coupon_image = tempImg;
+              }
+
+              console.log("updateData", updateData, index, tempImg);
+
+              draft.data[index] = { ...draft.data[index], ...updateData };
+
+              draft.data[index].active = newStatus;
+            }
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+    }),
+    statusCoupon: build.mutation({
+      query: ({ _id, active }) => ({
+        url: `/coupon/update-coupon/${_id}`,
+        method: "PATCH",
+        body: { active },
+      }),
+      async onQueryStarted({ _id, active }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
+            const index = draft?.data.findIndex((v) => v._id === _id);
+
+            if (index !== -1) {
+              draft.data[index].active = active;
+            }
           })
         );
         try {
@@ -95,4 +142,5 @@ export const {
   useAddcouponMutation,
   useDeletecouponMutation,
   useUpdatecouponMutation,
+  useStatusCouponMutation,
 } = couponApi;

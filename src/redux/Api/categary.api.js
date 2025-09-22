@@ -6,23 +6,31 @@ export const categaryApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (build) => ({
     getAllcategary: build.query({
-      query: () => "/categary",
+      query: () => "/category/list-category",
+      providesTags: ["categary"],
     }),
     addcategary: build.mutation({
-      query: (data) => ({
-        url: `/categary`,
+      query: (formData) => ({
+        url: `/category/add-category`,
         method: "POST",
-        body: data,
+        body: formData,
       }),
-      // https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates
+
       async onQueryStarted(data, { dispatch, queryFulfilled }) {
         const tempId = crypto.randomUUID();
+        const tempImg = { url: URL.createObjectURL(data.get("cat_img")) };
         const patchResult = dispatch(
           categaryApi.util.updateQueryData(
             "getAllcategary",
             undefined,
             (draft) => {
-              draft.push({ id: tempId, ...data });
+              draft?.data?.push({
+                _id: tempId,
+                name: data.get("name"),
+                description: data.get("description"),
+                active: data.get("active"),
+                cat_img: tempImg,
+              });
             }
           )
         );
@@ -34,8 +42,7 @@ export const categaryApi = createApi({
             "getAllcategary",
             undefined,
             (draft) => {
-              const index = draft.findIndex((v) => v.id === tempId);
-
+              const index = draft?.data.findIndex((v) => v._id === tempId);
               draft[index] = { data };
             }
           );
@@ -46,7 +53,7 @@ export const categaryApi = createApi({
     }),
     deletecategary: build.mutation({
       query: (id) => ({
-        url: `/categary/${id}`,
+        url: `/category/delete-category/${id}`,
         method: "DELETE",
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
@@ -55,9 +62,9 @@ export const categaryApi = createApi({
             "getAllcategary",
             undefined,
             (draft) => {
-              const index = draft.findIndex((v) => v.id === id);
+              const index = draft?.data.findIndex((v) => v._id === id);
 
-              draft.splice(index, 1);
+              draft?.data.splice(index, 1);
             }
           )
         );
@@ -69,20 +76,42 @@ export const categaryApi = createApi({
       },
     }),
     updatecategary: build.mutation({
-      query: ({ id, ...data }) => ({
-        url: `/categary/${id}`,
-        method: "PATCH",
-        body: data,
+      query: ({ _id, body }) => ({
+        url: `/category/update-category/${_id}`,
+        method: "PUT",
+        body: body,
       }),
-      async onQueryStarted({ id, ...data }, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ _id, body }, { dispatch, queryFulfilled }) {
+        const tempImg = body.get("cat_img")
+          ? { url: URL.createObjectURL(body.get("cat_img")) }
+          : null;
+
+        const newStatus = !body.get("active");
+
         const patchResult = dispatch(
           categaryApi.util.updateQueryData(
             "getAllcategary",
             undefined,
             (draft) => {
-              const index = draft.findIndex((v) => v.id === id);
+              const index = draft?.data.findIndex((v) => v._id === _id);
 
-              draft[index] = { ...draft[index], ...data };
+              if (index !== -1) {
+                draft.data[index].active = newStatus;
+
+                const updateData = {
+                  name: body.get("name"),
+                  description: body.get("description"),
+                  active: newStatus,
+                };
+
+                if (tempImg) {
+                  updateData.cat_img = tempImg;
+                }
+
+                console.log("updateData", updateData, index, tempImg);
+
+                draft.data[index] = { ...draft.data[index], ...updateData };
+              }
             }
           )
         );
@@ -93,30 +122,32 @@ export const categaryApi = createApi({
         }
       },
     }),
-    statuscategary: build.mutation({
-      query: ({ id, ...data }) => ({
-        url: `/categary/${id}`,
-        method: "PATCH",
-        body: data,
+    statusCategory: build.mutation({
+      query: ({ _id, active }) => ({
+        url: `/category/update-category/${_id}`,
+        method: "PUT",
+        body: { active },
       }),
-      // async onQueryStarted({ id, ...data }, { dispatch, queryFulfilled }) {
-      //   const patchResult = dispatch(
-      //     categaryApi.util.updateQueryData(
-      //       "getAllcategary",
-      //       undefined,
-      //       (draft) => {
-      //         const index = draft.findIndex((v) => v.id === id);
+      async onQueryStarted({ _id, active }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          categaryApi.util.updateQueryData(
+            "getAllcategary",
+            undefined,
+            (draft) => {
+              const index = draft?.data.findIndex((v) => v._id === _id);
 
-      //         draft[index] = { ...draft[index], ...data };
-      //       }
-      //     )
-      //   );
-      //   try {
-      //     await queryFulfilled;
-      //   } catch {
-      //     patchResult.undo();
-      //   }
-      // },
+              if (index !== -1) {
+                draft.data[index].active = active;
+              }
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });
@@ -126,5 +157,5 @@ export const {
   useAddcategaryMutation,
   useDeletecategaryMutation,
   useUpdatecategaryMutation,
-  useStatuscategaryMutation,
+  useStatusCategoryMutation,
 } = categaryApi;

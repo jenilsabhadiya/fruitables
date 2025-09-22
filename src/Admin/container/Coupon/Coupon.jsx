@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Switch } from "@mui/material";
 import { date, mixed, number, object, string } from "yup";
 import { Form, Formik } from "formik";
 import TestInput from "../../components/TestInput/TestInput";
@@ -14,11 +14,13 @@ import {
   useAddcouponMutation,
   useDeletecouponMutation,
   useGetAllcouponQuery,
+  useStatusCouponMutation,
   useUpdatecouponMutation,
 } from "../../../redux/Api/coupon.api";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import FileUpload from "../../components/FileUpload/FileUpload";
+import SwitchOnOff from "../../components/SwitchOnOff/SwitchOnOff";
 
 function Coupon() {
   const [open, setOpen] = React.useState(false);
@@ -27,6 +29,7 @@ function Coupon() {
   const [addcoupon] = useAddcouponMutation();
   const [deletecoupon] = useDeletecouponMutation();
   const [updatecoupon] = useUpdatecouponMutation();
+  const [statusCoupon] = useStatusCouponMutation();
 
   const { data, error, isLoading } = useGetAllcouponQuery();
   console.log("data", data?.data);
@@ -53,6 +56,19 @@ function Coupon() {
           style={{ width: "100px", height: "100px", objectFit: "contain" }}
           // src={"../public/assets/img/" + params.row.coupon_image}
           src={params.row.coupon_image?.url}
+        />
+      ),
+    },
+    {
+      field: "active",
+      headerName: "Status",
+      width: 170,
+      renderCell: (params) => (
+        <Switch
+          checked={params.row.active || false}
+          onChange={() =>
+            statusCoupon({ _id: params.row._id, active: !params.row.active })
+          }
         />
       ),
     },
@@ -144,6 +160,7 @@ function Coupon() {
                     percentage: "",
                     expiry: "",
                     stock: "",
+                    active: true,
                     coupon_image: "",
                   }
             }
@@ -211,6 +228,12 @@ function Coupon() {
                 name="stock"
                 label="Stcok:-"
                 type="number"
+              />
+
+              <SwitchOnOff
+                id="active"
+                name="active"
+                label="Active or Not Active"
               />
 
               <FileUpload type="file" name="coupon_image" />
