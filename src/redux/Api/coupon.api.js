@@ -28,6 +28,7 @@ export const couponApi = createApi({
               expiry: data.get("expiry"),
               stock: data.get("stock"),
               coupon_image: tempImg,
+              active: data.get("active") === "true" ? true : false,
             });
           })
         );
@@ -59,7 +60,14 @@ export const couponApi = createApi({
           })
         );
         try {
-          await queryFulfilled;
+          const { data } = await queryFulfilled;
+          console.log(data);
+
+          couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
+            const index = draft?.data?.findIndex((v) => v._id === data._id);
+
+            draft.data[index] = { data };
+          });
         } catch {
           patchResult.undo();
         }
@@ -77,8 +85,6 @@ export const couponApi = createApi({
           ? { url: URL.createObjectURL(body.get("coupon_image")) }
           : null;
 
-        const newStatus = !body.get("active");
-
         const patchResult = dispatch(
           couponApi.util.updateQueryData("getAllcoupon", undefined, (draft) => {
             const index = draft?.data.findIndex((v) => v._id === _id);
@@ -89,7 +95,7 @@ export const couponApi = createApi({
                 percentage: body.get("percentage"),
                 expiry: body.get("expiry"),
                 stock: body.get("stock"),
-                active: newStatus,
+                active: body.get("active") === "true" ? true : false,
               };
 
               if (tempImg) {
@@ -99,8 +105,6 @@ export const couponApi = createApi({
               console.log("updateData", updateData, index, tempImg);
 
               draft.data[index] = { ...draft.data[index], ...updateData };
-
-              draft.data[index].active = newStatus;
             }
           })
         );

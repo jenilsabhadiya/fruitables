@@ -244,7 +244,7 @@ function Categary() {
                       name: "",
                       description: "",
                       cat_img: "",
-                      active: "",
+                      active: true,
                     }
               }
               validationSchema={categarySchema}

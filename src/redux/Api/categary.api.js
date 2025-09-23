@@ -28,7 +28,6 @@ export const categaryApi = createApi({
                 _id: tempId,
                 name: data.get("name"),
                 description: data.get("description"),
-                active: data.get("active"),
                 cat_img: tempImg,
               });
             }
@@ -86,8 +85,6 @@ export const categaryApi = createApi({
           ? { url: URL.createObjectURL(body.get("cat_img")) }
           : null;
 
-        const newStatus = !body.get("active");
-
         const patchResult = dispatch(
           categaryApi.util.updateQueryData(
             "getAllcategary",
@@ -96,12 +93,10 @@ export const categaryApi = createApi({
               const index = draft?.data.findIndex((v) => v._id === _id);
 
               if (index !== -1) {
-                draft.data[index].active = newStatus;
-
                 const updateData = {
                   name: body.get("name"),
                   description: body.get("description"),
-                  active: newStatus,
+                  active: body.get("active") === "true" ? true : false,
                 };
 
                 if (tempImg) {
