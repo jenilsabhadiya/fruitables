@@ -144,9 +144,9 @@ function Herder() {
                     {cartData.cart?.reduce((acc, v) => acc + v.qty, 0)}
                   </span>
                 </NavLink>
-                <a href="#" className="my-auto">
+                <NavLink to={"/auth"} className="my-auto">
                   <i className="fas fa-user fa-2x" />
-                </a>
+                </NavLink>
               </div>
             </div>
           </nav>
