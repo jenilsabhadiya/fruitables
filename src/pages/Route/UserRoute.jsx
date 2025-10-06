@@ -16,7 +16,6 @@ import PrivateRoute from "./PrivateRoute";
 import { useContext } from "react";
 import { ThemeContext } from "../../Context/ThemeContext";
 import Favorite from "../Favorite/Favorite";
-import Users from "../Users/Users";
 import Auth from "../Auth/Auth";
 
 function UserRoute() {
@@ -35,7 +34,7 @@ function UserRoute() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/chackout" element={<Chackout />} />
         </Route>
-        
+
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/testimonial" element={<Testimonial />} />
         <Route path="/contact" element={<Contact />} />
