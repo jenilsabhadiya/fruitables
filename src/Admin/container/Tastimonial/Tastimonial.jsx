@@ -22,7 +22,7 @@ import {
   deleteTastimonial,
   getAllData,
   updateTastimonial,
-} from "../../../redux/slice/Tastimonial.slice";
+} from "../../../redux/slice/tastimonial.slice";
 import Rating1 from "../../components/Rating/Rating1";
 
 function Tastimonial() {
