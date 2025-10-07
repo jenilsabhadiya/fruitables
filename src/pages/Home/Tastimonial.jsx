@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Tastimonial.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllData } from "../../redux/slice/Tastimonial.slice";
+import { getAllData } from "../../redux/slice/tastimonial.slice";
 import Rating1 from "../../Admin/components/Rating/Rating1";
 import { Rating } from "@mui/material";
 
