@@ -1,5 +1,6 @@
 import counterSlice from "./slice/counter.slice";
 import productsSlice from "./slice/products.slice";
+import authSlice from "./slice/auth.slice";
 // import categarySlice from "./slice/categary.slice";
 import subCategarySlice from "./slice/subCategary.slice";
 import tastimonialSlice from "./slice/Tastimonial.slice";
@@ -15,6 +16,7 @@ import { categaryApi } from "./Api/categary.api";
 const rootReducer = combineReducers({
   count: counterSlice,
   product: productsSlice,
+  auth: authSlice,
   // categary: categarySlice,
   [categaryApi.reducerPath]: categaryApi.reducer,
   subCategary: subCategarySlice,
