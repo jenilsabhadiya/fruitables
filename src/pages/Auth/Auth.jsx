@@ -3,12 +3,13 @@ import { useFormik } from "formik";
 import { object, string } from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser, loginUser } from "../../redux/slice/auth.slice";
+import signup from "../../../public/assets/img/signup.jpg";
+import login from "../../../public/assets/img/login.jpg";
+import forgot from "../../../public/assets/img/Data_security_01.jpg";
 
 function Auth() {
   const [type, setType] = useState("login");
-
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.auth);
   console.log(user);
 
@@ -22,8 +23,8 @@ function Auth() {
     };
 
     formikSchema = {
-      email: string().required().email(),
-      password: string().required(),
+      email: string().required("Email is required").email("Invalid email"),
+      password: string().required("Password is required"),
     };
   } else if (type === "register") {
     initialValues = {
@@ -33,9 +34,17 @@ function Auth() {
     };
 
     formikSchema = {
-      name: string().required(),
-      email: string().required().email(),
-      password: string().required(),
+      name: string().required("Name is required"),
+      email: string().required("Email is required").email("Invalid email"),
+      password: string().required("Password is required"),
+    };
+  } else if (type === "forgot") {
+    initialValues = {
+      email: "",
+    };
+
+    formikSchema = {
+      email: string().required("Email is required").email("Invalid email"),
     };
   }
 
@@ -47,6 +56,8 @@ function Auth() {
         dispatch(RegisterUser({ ...values, role: "user" }));
       } else if (type === "login") {
         dispatch(loginUser(values));
+      } else if (type === "forgot") {
+        dispatch(values);
       }
     },
   });
@@ -54,107 +65,165 @@ function Auth() {
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     formik;
 
-  console.log("login");
-
   return (
     <div>
-      {/* Single Page Header start */}
       <div className="container-fluid page-header py-5">
         <h1 className="text-center text-white display-6">
-          {type === "login" ? "Login" : "Register"}
+          {type === "login"
+            ? "Login"
+            : type === "register"
+            ? "Register"
+            : "Forgot Password"}
         </h1>
         <ol className="breadcrumb justify-content-center mb-0">
           <li className="breadcrumb-item">
             <a href="/">Home</a>
           </li>
-          <li className="breadcrumb-item">
-            <a href="#">{type === "login" ? "Login" : "Register"}</a>
+          <li className="breadcrumb-item active text-white">
+            {type === "login"
+              ? "Login"
+              : type === "register"
+              ? "Register"
+              : "Forgot Password"}
           </li>
         </ol>
       </div>
-      {/* Single Page Header End */}
+
       <div className="container-fluid contact py-5">
         <div className="container py-5">
           <div className="p-5 bg-light rounded">
             <div className="row g-4">
               <div className="col-12">
                 <div className="text-center mx-auto" style={{ maxWidth: 700 }}>
-                  <h1 className="text-primary">
-                    {type === "login" ? "Login" : "Register"}
+                  <h1 className="text-primary mb-4">
+                    {type === "login"
+                      ? "Login"
+                      : type === "register"
+                      ? "Register"
+                      : "Forgot Password"}
                   </h1>
                 </div>
               </div>
+
               <div className="col-lg-7">
                 <form onSubmit={handleSubmit}>
-                  {type === "register" ? (
+                  {type === "register" && (
                     <>
                       <input
                         type="text"
                         name="name"
-                        className="w-100 form-control border-0 py-3 mb-4"
+                        className="w-100 form-control border-0 py-3 mb-3"
                         placeholder="Your Name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.name}
                       />
-                      {touched.name && errors.name ? (
-                        <span className="error">{errors.name}</span>
-                      ) : null}
+                      {touched.name && errors.name && (
+                        <div className="text-danger mb-2">{errors.name}</div>
+                      )}
                     </>
-                  ) : (
-                    ""
                   )}
 
-                  <input
-                    type="email"
-                    name="email"
-                    className="w-100 form-control border-0 py-3 mb-4"
-                    placeholder="Enter Your Email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                  {touched.email && errors.email ? (
-                    <span className="error">{errors.email}</span>
-                  ) : null}
-                  <input
-                    type="password"
-                    name="password"
-                    className="w-100 form-control border-0 py-3 mb-4"
-                    placeholder="Enter Your Password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                  />
-                  {touched.password && errors.password ? (
-                    <span className="error">{errors.password}</span>
-                  ) : null}
+                  {(type === "login" ||
+                    type === "register" ||
+                    type === "forgot") && (
+                    <>
+                      <input
+                        type="email"
+                        name="email"
+                        className="w-100 form-control border-0 py-3 mb-3"
+                        placeholder="Enter Your Email"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.email}
+                      />
+                      {touched.email && errors.email && (
+                        <div className="text-danger mb-2">{errors.email}</div>
+                      )}
+                    </>
+                  )}
+
+                  {(type === "login" || type === "register") && (
+                    <>
+                      <input
+                        type="password"
+                        name="password"
+                        className="w-100 form-control border-0 py-3 mb-3"
+                        placeholder="Enter Your Password"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password}
+                      />
+                      {touched.password && errors.password && (
+                        <div className="text-danger mb-2">
+                          {errors.password}
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   <button
-                    className="w-100 btn form-control border-secondary py-3 bg-white text-primary "
+                    className="w-100 btn form-control border-secondary py-3 bg-white text-primary"
                     type="submit"
                   >
-                    {type === "login" ? "Login" : "Register"}
+                    {type === "login"
+                      ? "Login"
+                      : type === "register"
+                      ? "Register"
+                      : "Send Reset Link"}
                   </button>
                 </form>
 
-                {type === "login" ? (
-                  <>
-                    <span>Create an account: </span>
-                    <a href="#" onClick={() => setType("register")}>
-                      Register
-                    </a>
-                  </>
-                ) : (
-                  <>
-                    <span>Already have an account ?</span>
-                    <a href="#" onClick={() => setType("login")}>
-                      Login
-                    </a>
-                  </>
-                )}
+                <div className="mt-4">
+                  {type === "login" && (
+                    <>
+                      <p>
+                        Forgot your password?{" "}
+                        <a href="#" onClick={() => setType("forgot")}>
+                          Click here
+                        </a>
+                      </p>
+                      <p>
+                        Don't have an account?{" "}
+                        <a href="#" onClick={() => setType("register")}>
+                          Register
+                        </a>
+                      </p>
+                    </>
+                  )}
+
+                  {type === "register" && (
+                    <p>
+                      Already have an account?{" "}
+                      <a href="#" onClick={() => setType("login")}>
+                        Login
+                      </a>
+                    </p>
+                  )}
+
+                  {type === "forgot" && (
+                    <p>
+                      Remember your password?{" "}
+                      <a href="#" onClick={() => setType("login")}>
+                        Login
+                      </a>
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="col-lg-5">
-                <img src="../../../public/assets/img/avatar.jpg" alt="" />
+
+              <div className="col-lg-5 text-center">
+                <img
+                  src={
+                    type === "login"
+                      ? login
+                      : type === "register"
+                      ? signup
+                      : forgot
+                  }
+                  alt="avatar"
+                  className="img-fluid rounded"
+                />
               </div>
             </div>
           </div>
