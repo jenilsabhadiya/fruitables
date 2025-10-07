@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { object, string } from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { RegisterUser, loginUser } from "../../redux/slice/auth.slice";
 
 function Auth() {
   const [type, setType] = useState("login");
+
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.auth);
+  console.log(user);
 
   let initialValues = {};
   let formikSchema = {};
@@ -36,7 +43,11 @@ function Auth() {
     initialValues: initialValues,
     validationSchema: object(formikSchema),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      if (type === "register") {
+        dispatch(RegisterUser({ ...values, role: "user" }));
+      } else if (type === "login") {
+        dispatch(loginUser(values));
+      }
     },
   });
 
