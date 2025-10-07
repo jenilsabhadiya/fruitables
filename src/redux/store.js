@@ -2,7 +2,7 @@ import counterSlice from "./slice/counter.slice";
 import productsSlice from "./slice/products.slice";
 // import categarySlice from "./slice/categary.slice";
 import subCategarySlice from "./slice/subCategary.slice";
-import tastimonialSlice from "./slice/Tastimonial.slice";
+import tastimonialSlice from "./slice/tastimonial.slice";
 import cartSlice from "./slice/cart.slice";
 import cart1Slice from "./slice/cart1.slice";
 import favoriteSlice from "./slice/favorite.slice";
