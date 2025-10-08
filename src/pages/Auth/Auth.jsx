@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { RegisterUser, loginUser } from "../../redux/slice/auth.slice";
+import {
+  RegisterUser,
+  loginUser,
+  verifyOtp,
+} from "../../redux/slice/auth.slice";
 import signup from "../../../public/assets/img/signup.jpg";
 import login from "../../../public/assets/img/login.jpg";
 import forgot from "../../../public/assets/img/Data_security_01.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Auth() {
   const [type, setType] = useState("login");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
   console.log(user);
+
+  const nav = useNavigate();
 
   let initialValues = {};
   let formikSchema = {};
@@ -46,16 +53,38 @@ function Auth() {
     formikSchema = {
       email: string().required("Email is required").email("Invalid email"),
     };
+  } else if (type === "otp") {
+    initialValues = {
+      otp: "",
+    };
+
+    formikSchema = {
+      otp: string().required(),
+    };
   }
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: object(formikSchema),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (type === "register") {
-        dispatch(RegisterUser({ ...values, role: "user" }));
+        let res = await dispatch(RegisterUser({ ...values, role: "user" }));
+
+        if (res.type === "auth/RegisterUser/fulfilled") {
+          setType("otp");
+        }
       } else if (type === "login") {
-        dispatch(loginUser(values));
+        let res = await dispatch(loginUser(values));
+
+        if (res.type === "auth/loginUser/fulfilled") {
+          nav("/");
+        }
+      } else if (type === "otp") {
+        let res = await dispatch(verifyOtp(values));
+
+        if (res.type === "auth/verifyOtp/fulfilled") {
+          setType("login");
+        }
       } else if (type === "forgot") {
         dispatch(values);
       }
@@ -68,23 +97,13 @@ function Auth() {
   return (
     <div>
       <div className="container-fluid page-header py-5">
-        <h1 className="text-center text-white display-6">
-          {type === "login"
-            ? "Login"
-            : type === "register"
-            ? "Register"
-            : "Forgot Password"}
-        </h1>
+        <h1 className="text-center text-white display-6 capitalize">{type}</h1>
         <ol className="breadcrumb justify-content-center mb-0">
           <li className="breadcrumb-item">
             <a href="/">Home</a>
           </li>
-          <li className="breadcrumb-item active text-white">
-            {type === "login"
-              ? "Login"
-              : type === "register"
-              ? "Register"
-              : "Forgot Password"}
+          <li className="breadcrumb-item active text-white capitalize">
+            {type}
           </li>
         </ol>
       </div>
@@ -95,82 +114,95 @@ function Auth() {
             <div className="row g-4">
               <div className="col-12">
                 <div className="text-center mx-auto" style={{ maxWidth: 700 }}>
-                  <h1 className="text-primary mb-4">
-                    {type === "login"
-                      ? "Login"
-                      : type === "register"
-                      ? "Register"
-                      : "Forgot Password"}
-                  </h1>
+                  <h1 className="text-primary mb-4 capitalize">{type}</h1>
                 </div>
               </div>
 
               <div className="col-lg-7">
                 <form onSubmit={handleSubmit}>
-                  {type === "register" && (
+                  {type === "otp" ? (
                     <>
                       <input
-                        type="text"
-                        name="name"
+                        type="number"
+                        name="otp"
                         className="w-100 form-control border-0 py-3 mb-3"
-                        placeholder="Your Name"
+                        placeholder="Enter Your otp"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.name}
+                        value={values.otp}
                       />
-                      {touched.name && errors.name && (
-                        <div className="text-danger mb-2">{errors.name}</div>
+                      {touched.otp && errors.otp && (
+                        <div className="text-danger mb-2">{errors.otp}</div>
                       )}
                     </>
-                  )}
-
-                  {(type === "login" ||
-                    type === "register" ||
-                    type === "forgot") && (
+                  ) : (
                     <>
-                      <input
-                        type="email"
-                        name="email"
-                        className="w-100 form-control border-0 py-3 mb-3"
-                        placeholder="Enter Your Email"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.email}
-                      />
-                      {touched.email && errors.email && (
-                        <div className="text-danger mb-2">{errors.email}</div>
+                      {type === "register" && (
+                        <>
+                          <input
+                            type="text"
+                            name="name"
+                            className="w-100 form-control border-0 py-3 mb-3"
+                            placeholder="Your Name"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                          />
+                          {touched.name && errors.name && (
+                            <div className="text-danger mb-2">
+                              {errors.name}
+                            </div>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
 
-                  {(type === "login" || type === "register") && (
-                    <>
-                      <input
-                        type="password"
-                        name="password"
-                        className="w-100 form-control border-0 py-3 mb-3"
-                        placeholder="Enter Your Password"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.password}
-                      />
-                      {touched.password && errors.password && (
-                        <div className="text-danger mb-2">
-                          {errors.password}
-                        </div>
+                      {(type === "login" ||
+                        type === "register" ||
+                        type === "forgot") && (
+                        <>
+                          <input
+                            type="email"
+                            name="email"
+                            className="w-100 form-control border-0 py-3 mb-3"
+                            placeholder="Enter Your Email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                          />
+                          {touched.email && errors.email && (
+                            <div className="text-danger mb-2">
+                              {errors.email}
+                            </div>
+                          )}
+                        </>
+                      )}
+
+                      {(type === "login" || type === "register") && (
+                        <>
+                          <input
+                            type="password"
+                            name="password"
+                            className="w-100 form-control border-0 py-3 mb-3"
+                            placeholder="Enter Your Password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                          />
+                          {touched.password && errors.password && (
+                            <div className="text-danger mb-2">
+                              {errors.password}
+                            </div>
+                          )}
+                        </>
                       )}
                     </>
                   )}
 
                   <button
-                    className="w-100 btn form-control border-secondary py-3 bg-white text-primary"
+                    className="w-100 btn form-control border-secondary py-3 bg-white text-primary capitalize"
                     type="submit"
                   >
-                    {type === "login"
-                      ? "Login"
-                      : type === "register"
-                      ? "Register"
-                      : "Send Reset Link"}
+                    {type}
                   </button>
                 </form>
 
