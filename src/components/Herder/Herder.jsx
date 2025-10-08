@@ -1,13 +1,19 @@
 import React from "react";
 import { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../Context/ThemeContext";
+import { logout } from "../../redux/slice/auth.slice";
 
 function Herder() {
   // const cartData = useSelector((state) => state.cart?.cart?.cart);
   const cartData = useSelector((state) => state.cart1?.cart);
   console.log(cartData);
+
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
+
+  const dispatch = useDispatch();
 
   const theme = useContext(ThemeContext);
   console.log(theme);
@@ -15,6 +21,10 @@ function Herder() {
   const handleTheme = () => {
     console.log(theme.theme);
     theme.toggleTheme(theme.theme);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout(auth._id));
   };
 
   return (
@@ -112,7 +122,7 @@ function Herder() {
                   Contact
                 </NavLink>
               </div>
-              <div className="d-flex m-3 me-0">
+              <div className="d-flex m-3 me-0 align-items">
                 <button className=" btn border border-secondary btn-md-square rounded-circle bg-white me-4">
                   <NavLink to={"/favorite"} className="my-auto">
                     <i className="fas fa-solid fa-heart fa-1x"></i>
@@ -144,9 +154,16 @@ function Herder() {
                     {cartData.cart?.reduce((acc, v) => acc + v.qty, 0)}
                   </span>
                 </NavLink>
-                <NavLink to={"/auth"} className="my-auto">
-                  <i className="fas fa-user fa-2x" />
-                </NavLink>
+
+                {auth?.isLongin ? (
+                  <a href="#" onClick={() => handleLogout(auth.auth._id)}>
+                    <i className="fas fa-sign-out-alt fa-2x me-2"></i>
+                  </a>
+                ) : (
+                  <NavLink to={"/auth"} className="my-auto">
+                    <i className="fas fa-user fa-2x" />
+                  </NavLink>
+                )}
               </div>
             </div>
           </nav>

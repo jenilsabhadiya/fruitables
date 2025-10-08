@@ -572,3 +572,13 @@
   background-color: rgb(46, 45, 45) !important;
   border-radius: 0 0 10px 10px !important;
 }
+
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+
+.align-items{
+  align-items: center;
+}
