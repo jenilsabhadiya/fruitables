@@ -24,7 +24,7 @@ function Herder() {
   };
 
   const handleLogout = () => {
-    dispatch(logout(auth._id));
+    dispatch(logout(auth.auth._id));
   };
 
   return (
@@ -155,8 +155,8 @@ function Herder() {
                   </span>
                 </NavLink>
 
-                {auth?.isLongin ? (
-                  <a href="#" onClick={() => handleLogout(auth.auth._id)}>
+                {auth?.auth?.isVarifind ? (
+                  <a href="#" onClick={() => handleLogout()}>
                     <i className="fas fa-sign-out-alt fa-2x me-2"></i>
                   </a>
                 ) : (

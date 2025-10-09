@@ -55,6 +55,20 @@ export const logout = createAsyncThunk("auth/logout", async (_id) => {
   }
 });
 
+export const chackAuth = createAsyncThunk("auth/chackAuth", async () => {
+  const response = await axios.post(
+    `${BASE_URL}/users/chackAuth`,
+    {},
+    { withCredentials: true }
+  );
+
+  if (response.data.success) {
+    return response.data.data;
+  }
+
+  // console.log("response", response.data.data);
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -64,15 +78,19 @@ const authSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.auth = action.payload;
-      state.isLongin = true;
+      state.isVarifind = true;
     });
     builder.addCase(verifyOtp.fulfilled, (state, action) => {
       state.auth = action.payload;
-      state.isLongin = true;
+      state.isVarifind = true;
     });
     builder.addCase(logout.fulfilled, (state, action) => {
       state.auth = action.payload;
-      state.isLongin = false;
+      state.isVarifind = false;
+    });
+    builder.addCase(chackAuth.fulfilled, (state, action) => {
+      state.auth = action.payload;
+      state.isVarifind = true;
     });
   },
 });
