@@ -41,7 +41,11 @@ function PrivateRoute() {
     );
   }
 
-  return auth?.auth?.isVarifind ? <Outlet /> : <Navigate to={"/"} replace />;
+  return auth?.auth?.isVarifind ? (
+    <Outlet />
+  ) : (
+    <Navigate to={"/auth"} replace />
+  );
 }
 
 export default PrivateRoute;

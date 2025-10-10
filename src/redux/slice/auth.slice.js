@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../constant/url";
-import axios from "axios";
+import { axiosInstance } from "../../../utlis/axiosInterceptors";
 
 const initialState = {
   isLongin: false,
@@ -11,9 +10,7 @@ const initialState = {
 export const RegisterUser = createAsyncThunk(
   "auth/RegisterUser",
   async (data) => {
-    const response = await axios.post(`${BASE_URL}/users/registration`, data, {
-      withCredentials: true,
-    });
+    const response = await axiosInstance.post(`/users/registration`, data);
 
     console.log(response, data, response.data.data[0]);
 
@@ -24,9 +21,7 @@ export const RegisterUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk("auth/loginUser", async (data) => {
-  const response = await axios.post(`${BASE_URL}/users/login`, data, {
-    withCredentials: true,
-  });
+  const response = await axiosInstance.post(`/users/login`, data);
 
   console.log(response, data, response.data.data[0]);
 
@@ -36,9 +31,7 @@ export const loginUser = createAsyncThunk("auth/loginUser", async (data) => {
 });
 
 export const verifyOtp = createAsyncThunk("auth/verifyOtp", async (data) => {
-  const response = await axios.post(`${BASE_URL}/users/verifyOtp`, data, {
-    withCredentials: true,
-  });
+  const response = await axiosInstance.post(`/users/verifyOtp`, data);
 
   console.log(response, data, response.data.data[0]);
 
@@ -48,7 +41,7 @@ export const verifyOtp = createAsyncThunk("auth/verifyOtp", async (data) => {
 });
 
 export const logout = createAsyncThunk("auth/logout", async (_id) => {
-  const response = await axios.post(`${BASE_URL}/users/logout`, { _id });
+  const response = await axiosInstance.post(`/users/logout`, { _id });
 
   if (response.data.success) {
     return response.data.data;
@@ -56,11 +49,7 @@ export const logout = createAsyncThunk("auth/logout", async (_id) => {
 });
 
 export const chackAuth = createAsyncThunk("auth/chackAuth", async () => {
-  const response = await axios.post(
-    `${BASE_URL}/users/chackAuth`,
-    {},
-    { withCredentials: true }
-  );
+  const response = await axiosInstance.post(`/users/chackAuth`, {});
 
   if (response.data.success) {
     return response.data.data;
