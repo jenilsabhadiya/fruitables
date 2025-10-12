@@ -11,10 +11,13 @@ import signup from "../../../public/assets/img/signup.jpg";
 import login from "../../../public/assets/img/login.jpg";
 import forgot from "../../../public/assets/img/Data_security_01.jpg";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 function Auth() {
   const [type, setType] = useState("login");
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+
   const user = useSelector((state) => state.auth);
   console.log(user);
 
@@ -71,21 +74,39 @@ function Auth() {
         let res = await dispatch(RegisterUser({ ...values, role: "user" }));
 
         if (res.type === "auth/RegisterUser/fulfilled") {
+          enqueueSnackbar("Registration successful! Please enter OTP.", {
+            variant: "success",
+          });
           setType("otp");
         }
       } else if (type === "login") {
         let res = await dispatch(loginUser(values));
 
         if (res.type === "auth/loginUser/fulfilled") {
+          enqueueSnackbar("Login successful!", {
+            variant: "success",
+          });
           nav("/");
+        } else {
+          enqueueSnackbar("Login failed. Please check your Email/Password.", {
+            variant: "error",
+          });
         }
       } else if (type === "otp") {
         let res = await dispatch(verifyOtp(values));
 
         if (res.type === "auth/verifyOtp/fulfilled") {
+          enqueueSnackbar("OTP verified successfully!", { variant: "success" });
           setType("login");
+        } else {
+          enqueueSnackbar("otp failed. Please check your Email.", {
+            variant: "error",
+          });
         }
       } else if (type === "forgot") {
+        enqueueSnackbar("Password reset link sent (mock).", {
+          variant: "info",
+        });
         dispatch(values);
       }
     },

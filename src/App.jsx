@@ -6,20 +6,26 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import CStore from "./redux/store";
 import { ThemeProvider } from "./Context/ThemeContext";
+import { SnackbarProvider } from "notistack";
 
 function App() {
   const { store, persistor } = CStore();
 
   return (
-    <ThemeProvider >
+    <ThemeProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Routes>
-            <Route path="/*" element={<UserRoute />} />
-            <Route element={<PrivateRoute />}>
-              <Route path="/admin/*" element={<AdminRoute />} />
-            </Route>
-          </Routes>
+          <SnackbarProvider
+            maxSnack={3}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          >
+            <Routes>
+              <Route path="/*" element={<UserRoute />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/admin/*" element={<AdminRoute />} />
+              </Route>
+            </Routes>
+          </SnackbarProvider>
         </PersistGate>
       </Provider>
     </ThemeProvider>
