@@ -8,11 +8,11 @@ import { Rating } from "@mui/material";
 import { Addtocart1 } from "../../redux/slice/cart1.slice";
 import { BASE_URL } from "../../constant/url";
 
-function ShopDetail() {
+function ShopDetail({ setCartData }) {
   const [counter, setCounter] = useState(1);
   const [reviews, setReviews] = useState([]);
   const { id } = useParams();
-  console.log(id);
+  console.log(setCartData);
 
   const dispatch = useDispatch();
 
@@ -179,13 +179,20 @@ function ShopDetail() {
                   </div>
                   <NavLink
                     to={"/cart"}
+                    // onClick={() =>
+                    //   dispatch(
+                    //     Addtocart1({
+                    //       userId: "abcd",
+                    //       cart: { id: fData.id, qty: counter },
+                    //     })
+                    //   )
+                    // }
+                    // href="#"
                     onClick={() =>
-                      dispatch(
-                        Addtocart1({
-                          userId: "abcd",
-                          cart: { id: fData.id, qty: counter },
-                        })
-                      )
+                      setCartData({
+                        userId: "abcd",
+                        cart: { id: fData.id, qty: counter },
+                      })
                     }
                     className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
                   >

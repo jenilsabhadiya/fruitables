@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  countQut,
-  decrementQut,
-  incrementQut,
-  removeQut,
-} from "../../redux/slice/cart.slice";
 import { NavLink } from "react-router-dom";
 import { getAllProductsData } from "../../redux/slice/products.slice";
 import {
@@ -16,7 +10,9 @@ import {
   removeQut1,
 } from "../../redux/slice/cart1.slice";
 
-function Cart() {
+function Cart({ cartData }) {
+  // console.log(cartData);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,12 +20,12 @@ function Cart() {
     dispatch(getCart("abcd"));
   }, []);
 
-  const cartData = useSelector((state) => state.cart1?.cart);
+  // const cartData = useSelector((state) => state.cart1?.cart);
   const productsData = useSelector((state) => state.product?.products);
 
   // console.log(cartData, productsData);
 
-  const cartDisplay = cartData?.cart?.map((v) => {
+  const cartDisplay = cartData?.cart?.cart.map((v) => {
     const product = productsData.find((v1) => v1.id === v.id);
 
     return { ...product, qty: v.qty };

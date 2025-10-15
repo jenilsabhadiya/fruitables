@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../Context/ThemeContext";
 import { logout } from "../../redux/slice/auth.slice";
 
-function Herder() {
+function Herder({ cartData }) {
   // const cartData = useSelector((state) => state.cart?.cart?.cart);
-  const cartData = useSelector((state) => state.cart1?.cart);
+  // const cartData = useSelector((state) => state.cart1?.cart);
   console.log(cartData);
 
   const auth = useSelector((state) => state.auth);
@@ -151,7 +151,7 @@ function Herder() {
                     style={{ top: "-5px", left: 15, height: 20, minWidth: 20 }}
                   >
                     {/* {cartData?.reduce((acc, v) => acc + v.qty, 0)} */}
-                    {cartData.cart?.reduce((acc, v) => acc + v.qty, 0)}
+                    {cartData.cart?.cart.reduce((acc, v) => acc + v.qty, 0)}
                   </span>
                 </NavLink>
 
