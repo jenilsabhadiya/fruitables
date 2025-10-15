@@ -11,12 +11,12 @@ import signup from "../../../public/assets/img/signup.jpg";
 import login from "../../../public/assets/img/login.jpg";
 import forgot from "../../../public/assets/img/Data_security_01.jpg";
 import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "notistack";
+// import { useSnackbar } from "notistack";
 
 function Auth() {
   const [type, setType] = useState("login");
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
 
   const user = useSelector((state) => state.auth);
   console.log(user);
@@ -74,39 +74,39 @@ function Auth() {
         let res = await dispatch(RegisterUser({ ...values, role: "user" }));
 
         if (res.type === "auth/RegisterUser/fulfilled") {
-          enqueueSnackbar("Registration successful! Please enter OTP.", {
-            variant: "success",
-          });
+          // enqueueSnackbar("Registration successful! Please enter OTP.", {
+          //   variant: "success",
+          // });
           setType("otp");
         }
       } else if (type === "login") {
         let res = await dispatch(loginUser(values));
 
         if (res.type === "auth/loginUser/fulfilled") {
-          enqueueSnackbar("Login successful!", {
-            variant: "success",
-          });
+          // enqueueSnackbar("Login successful!", {
+          //   variant: "success",
+          // });
           nav("/");
         } else {
-          enqueueSnackbar("Login failed. Please check your Email/Password.", {
-            variant: "error",
-          });
+          // enqueueSnackbar("Login failed. Please check your Email/Password.", {
+          //   variant: "error",
+          // });
         }
       } else if (type === "otp") {
         let res = await dispatch(verifyOtp(values));
 
         if (res.type === "auth/verifyOtp/fulfilled") {
-          enqueueSnackbar("OTP verified successfully!", { variant: "success" });
+          // enqueueSnackbar("OTP verified successfully!", { variant: "success" });
           setType("login");
         } else {
-          enqueueSnackbar("otp failed. Please check your Email.", {
-            variant: "error",
-          });
+          // enqueueSnackbar("otp failed. Please check your Email.", {
+          //   variant: "error",
+          // });
         }
       } else if (type === "forgot") {
-        enqueueSnackbar("Password reset link sent (mock).", {
-          variant: "info",
-        });
+        // enqueueSnackbar("Password reset link sent (mock).", {
+        //   variant: "info",
+        // });
         dispatch(values);
       }
     },
@@ -114,6 +114,17 @@ function Auth() {
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     formik;
+
+  if (user?.isLongin) {
+    return (
+      <div
+        id="spinner"
+        className="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center"
+      >
+        <div className="spinner-grow text-primary" role="status" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -138,6 +149,8 @@ function Auth() {
                   <h1 className="text-primary mb-4 capitalize">{type}</h1>
                 </div>
               </div>
+
+              {user?.error ? <p className="error">{user?.error}</p> : null}
 
               <div className="col-lg-7">
                 <form onSubmit={handleSubmit}>

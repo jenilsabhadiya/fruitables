@@ -5,6 +5,7 @@ import authSlice from "./slice/auth.slice";
 import subCategarySlice from "./slice/subCategary.slice";
 import tastimonialSlice from "./slice/Tastimonial.slice";
 import cartSlice from "./slice/cart.slice";
+import alertSlice from "./slice/alert.slice";
 import cart1Slice from "./slice/cart1.slice";
 import favoriteSlice from "./slice/favorite.slice";
 import { persistStore, persistReducer } from "redux-persist";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   subCategary: subCategarySlice,
   tastimonial: tastimonialSlice,
   cart: cartSlice,
+  alert: alertSlice,
   cart1: cart1Slice,
   favorite: favoriteSlice,
   [couponApi.reducerPath]: couponApi.reducer,

@@ -19,6 +19,7 @@ import Favorite from "../Favorite/Favorite";
 import Auth from "../Auth/Auth";
 import { useDispatch } from "react-redux";
 import { chackAuth } from "../../redux/slice/auth.slice";
+import Chat from "../Chat/Chat";
 
 function UserRoute() {
   const theme = useContext(ThemeContext);
@@ -74,6 +75,7 @@ function UserRoute() {
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/testimonial" element={<Testimonial />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
