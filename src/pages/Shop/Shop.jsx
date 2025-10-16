@@ -11,10 +11,10 @@ import {
   saveFavorite,
 } from "../../redux/slice/favorite.slice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Pagination from "../Hook/Pagination";
+import useSearch from "../Hook/useSearch";
 function Shop() {
-  const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
-  const [cPage, setCPage] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -29,13 +29,14 @@ function Shop() {
   );
   console.log(favorites);
 
+  const { setSearch, filteredData } = useSearch(productsData.products, [
+    "name",
+    "description",
+    "price",
+  ]);
+
   const handleFilter = () => {
-    let fData = productsData.products.filter(
-      (v) =>
-        v.name.toLowerCase().includes(search.toLowerCase()) ||
-        v.description.toLowerCase().includes(search.toLowerCase()) ||
-        v.price.toString().includes(search)
-    );
+    let fData = [...filteredData];
     // console.log(fData);
 
     if (sort === "az") {
@@ -53,39 +54,12 @@ function Shop() {
 
   const fData = handleFilter();
 
-  const ItemprePage = 5;
-  // console.log(ItemprePage);
+  console.log(fData);
 
-  const totalPage = Math.ceil(fData.length / ItemprePage);
-  // console.log(totalPage);
-
-  const page = Array.from({ length: totalPage });
-  // console.log(page);
-  // console.log(cPage);
-
-  const handlePagination = () => {
-    const startData = (cPage - 1) * ItemprePage;
-    const endData = startData + ItemprePage;
-
-    const pData = fData.slice(startData, endData);
-    // console.log(pData);
-
-    return pData;
-  };
-
-  const pData = handlePagination();
-
-  const handlePrev = () => {
-    if (cPage > 1) {
-      setCPage(cPage - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (cPage < totalPage) {
-      setCPage(cPage + 1);
-    }
-  };
+  const { pdata, handleNext, handlePrev, setCPage, page, cPage } = Pagination(
+    fData,
+    5
+  );
 
   return (
     <div>
@@ -435,7 +409,7 @@ function Shop() {
                 </div>
                 <div className="col-lg-9">
                   <div className="row g-4 justify-content-center">
-                    {pData.map((v) => {
+                    {pdata?.map((v) => {
                       const isFavorite =
                         Array.isArray(favorites) && favorites.includes(v.id);
                       console.log(isFavorite);
