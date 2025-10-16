@@ -7,6 +7,7 @@ function Chat() {
   const [to, setTo] = useState("");
   const [message, setMessage] = useState("");
   const [megList, setMegList] = useState([]);
+  const [group, setGroup] = useState([]);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -31,6 +32,12 @@ function Chat() {
     socket.emit("send_message", { to, message });
   };
 
+  const handleGroupSubmit = () => {
+    event.preventDefault();
+
+    socket.emit("join_group", group);
+  };
+
   return (
     <div>
       <h1>Chat</h1>
@@ -52,6 +59,17 @@ function Chat() {
       <br />
       <br />
       <br />
+
+      <form action="" onSubmit={() => handleGroupSubmit()}>
+        <input
+          type="text"
+          name="group"
+          placeholder="Join Group "
+          onChange={(e) => setGroup(e.target.value)}
+        />
+
+        <input type="submit" />
+      </form>
 
       <form action="" onSubmit={() => handleSubmit()}>
         <input
