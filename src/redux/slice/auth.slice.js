@@ -98,11 +98,11 @@ export const logout = createAsyncThunk(
 );
 
 export const chackAuth = createAsyncThunk("auth/chackAuth", async () => {
-  const response = await axiosInstance.post(`/users/chackAuth`, {});
+  // const response = await axiosInstance.post(`/users/chackAuth`, {});
 
-  if (response.data.success) {
-    return response.data.data;
-  }
+  // if (response.data.success) {
+  //   return response.data.data;
+  // }
 
   // console.log("response", response.data.data);
 });

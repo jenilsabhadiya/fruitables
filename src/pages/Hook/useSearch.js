@@ -14,9 +14,12 @@ function useSearch(data, keys) {
     };
   }, [search]);
 
-  const filteredData = data.filter((item) =>
-    keys.some((key) =>
-      item[key]?.toString().toLowerCase().includes(debusearch.toLowerCase())
+  const filteredData = data.filter((v) =>
+    keys.some((v1) =>
+      //   item[v1]?.toString().toLowerCase().includes(debusearch.toLowerCase())
+      typeof v[v1] === "string"
+        ? v[v1].toLowerCase().includes(debusearch.toLowerCase())
+        : v[v1].toString().includes(debusearch)
     )
   );
 

@@ -13,23 +13,24 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Pagination from "../Hook/Pagination";
 import useSearch from "../Hook/useSearch";
-function Shop() {
+import WithRedux from "../../Hocs/withRedux";
+function Shop(products) {
   const [sort, setSort] = useState("");
+
+  console.log(products);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProductsData());
     dispatch(getFavorites("abcd"));
   }, []);
 
-  const productsData = useSelector((state) => state.product);
   const favorites = useSelector(
     (state) => state.favorite.favorites.items || []
   );
   console.log(favorites);
 
-  const { setSearch, filteredData } = useSearch(productsData.products, [
+  const { setSearch, filteredData } = useSearch(products.products, [
     "name",
     "description",
     "price",
@@ -412,7 +413,9 @@ function Shop() {
                     {pdata?.map((v) => {
                       const isFavorite =
                         Array.isArray(favorites) && favorites.includes(v.id);
-                      console.log(isFavorite);
+                      {
+                        /* console.log(isFavorite) */
+                      }
 
                       return (
                         <div key={v.id} className="col-md-6 col-lg-6 col-xl-4">
@@ -538,4 +541,4 @@ function Shop() {
   );
 }
 
-export default Shop;
+export default WithRedux(Shop, getAllProductsData, (state) => state.product);

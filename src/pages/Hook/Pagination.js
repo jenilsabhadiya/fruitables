@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 
 function Pagination(fData, ItemprePage) {
-  console.log(fData);
+  // console.log(fData);
 
   const [cPage, setCPage] = useState(1);
 

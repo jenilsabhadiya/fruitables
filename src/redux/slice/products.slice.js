@@ -13,6 +13,8 @@ export const getAllProductsData = createAsyncThunk(
     const response = await fetch(`${BASE_URL}/products`);
     const data = await response.json();
 
+    console.log(data);
+
     return data;
   }
 );
