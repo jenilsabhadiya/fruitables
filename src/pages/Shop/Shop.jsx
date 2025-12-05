@@ -11,31 +11,33 @@ import {
   saveFavorite,
 } from "../../redux/slice/favorite.slice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-function Shop() {
-  const [search, setSearch] = useState("");
+import Pagination from "../Hook/Pagination";
+import useSearch from "../Hook/useSearch";
+import WithRedux from "../../Hocs/withRedux";
+function Shop(products) {
   const [sort, setSort] = useState("");
-  const [cPage, setCPage] = useState(1);
+
+  console.log(products);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProductsData());
     dispatch(getFavorites("abcd"));
   }, []);
 
-  const productsData = useSelector((state) => state.product);
   const favorites = useSelector(
     (state) => state.favorite.favorites.items || []
   );
   console.log(favorites);
 
+  const { setSearch, filteredData } = useSearch(products.products, [
+    "name",
+    "description",
+    "price",
+  ]);
+
   const handleFilter = () => {
-    let fData = productsData.products.filter(
-      (v) =>
-        v.name.toLowerCase().includes(search.toLowerCase()) ||
-        v.description.toLowerCase().includes(search.toLowerCase()) ||
-        v.price.toString().includes(search)
-    );
+    let fData = [...filteredData];
     // console.log(fData);
 
     if (sort === "az") {
@@ -53,39 +55,12 @@ function Shop() {
 
   const fData = handleFilter();
 
-  const ItemprePage = 5;
-  // console.log(ItemprePage);
+  console.log(fData);
 
-  const totalPage = Math.ceil(fData.length / ItemprePage);
-  // console.log(totalPage);
-
-  const page = Array.from({ length: totalPage });
-  // console.log(page);
-  // console.log(cPage);
-
-  const handlePagination = () => {
-    const startData = (cPage - 1) * ItemprePage;
-    const endData = startData + ItemprePage;
-
-    const pData = fData.slice(startData, endData);
-    // console.log(pData);
-
-    return pData;
-  };
-
-  const pData = handlePagination();
-
-  const handlePrev = () => {
-    if (cPage > 1) {
-      setCPage(cPage - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (cPage < totalPage) {
-      setCPage(cPage + 1);
-    }
-  };
+  const { pdata, handleNext, handlePrev, setCPage, page, cPage } = Pagination(
+    fData,
+    5
+  );
 
   return (
     <div>
@@ -435,10 +410,12 @@ function Shop() {
                 </div>
                 <div className="col-lg-9">
                   <div className="row g-4 justify-content-center">
-                    {pData.map((v) => {
+                    {pdata?.map((v) => {
                       const isFavorite =
                         Array.isArray(favorites) && favorites.includes(v.id);
-                      console.log(isFavorite);
+                      {
+                        /* console.log(isFavorite) */
+                      }
 
                       return (
                         <div key={v.id} className="col-md-6 col-lg-6 col-xl-4">
@@ -564,4 +541,4 @@ function Shop() {
   );
 }
 
-export default Shop;
+export default WithRedux(Shop, getAllProductsData, (state) => state.product);
