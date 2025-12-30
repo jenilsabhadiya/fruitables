@@ -13,8 +13,7 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Pagination from "../Hook/Pagination";
 import useSearch from "../Hook/useSearch";
-import withRedux from "../../Hocs/WithRedux";
-
+import withRedux from "../../Hocs/withRedux";
 function Shop(products) {
   const [sort, setSort] = useState("");
 
