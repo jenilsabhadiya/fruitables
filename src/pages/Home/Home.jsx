@@ -43,7 +43,7 @@ function Home() {
                 <div className="carousel-inner" role="listbox">
                   <div className="carousel-item active rounded">
                     <img
-                      src="public/assets/img/hero-img-1.png"
+                      src="assets/img/hero-img-1.png"
                       className="img-fluid w-100 h-100 bg-secondary rounded"
                       alt="First slide"
                     />
@@ -53,7 +53,7 @@ function Home() {
                   </div>
                   <div className="carousel-item rounded">
                     <img
-                      src="public/assets/img/hero-img-2.jpg"
+                      src="assets/img/hero-img-2.jpg"
                       className="img-fluid w-100 h-100 rounded"
                       alt="Second slide"
                     />
@@ -236,7 +236,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-5.jpg"
+                              src="assets/img/fruite-item-5.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -272,7 +272,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-5.jpg"
+                              src="assets/img/fruite-item-5.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -308,7 +308,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-2.jpg"
+                              src="assets/img/fruite-item-2.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -344,7 +344,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-4.jpg"
+                              src="assets/img/fruite-item-4.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -380,7 +380,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-3.jpg"
+                              src="assets/img/fruite-item-3.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -416,7 +416,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-1.jpg"
+                              src="assets/img/fruite-item-1.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -452,7 +452,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-2.jpg"
+                              src="assets/img/fruite-item-2.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -488,7 +488,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-5.jpg"
+                              src="assets/img/fruite-item-5.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -532,7 +532,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-5.jpg"
+                              src="assets/img/fruite-item-5.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -568,7 +568,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-2.jpg"
+                              src="assets/img/fruite-item-2.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -612,7 +612,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-1.jpg"
+                              src="assets/img/fruite-item-1.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -648,7 +648,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-6.jpg"
+                              src="assets/img/fruite-item-6.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -692,7 +692,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-5.jpg"
+                              src="assets/img/fruite-item-5.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -728,7 +728,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-4.jpg"
+                              src="assets/img/fruite-item-4.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -772,7 +772,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-3.jpg"
+                              src="assets/img/fruite-item-3.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -808,7 +808,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-2.jpg"
+                              src="assets/img/fruite-item-2.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -844,7 +844,7 @@ function Home() {
                         <div className="rounded position-relative fruite-item">
                           <div className="fruite-img">
                             <img
-                              src="public/assets/img/fruite-item-1.jpg"
+                              src="assets/img/fruite-item-1.jpg"
                               className="img-fluid w-100 rounded-top"
                               alt=""
                             />
@@ -893,7 +893,7 @@ function Home() {
               <a href="#">
                 <div className="service-item bg-secondary rounded border border-secondary">
                   <img
-                    src="public/assets/img/featur-1.jpg"
+                    src="assets/img/featur-1.jpg"
                     className="img-fluid rounded-top w-100"
                     alt=""
                   />
@@ -910,7 +910,7 @@ function Home() {
               <a href="#">
                 <div className="service-item bg-dark rounded border border-dark">
                   <img
-                    src="public/assets/img/featur-2.jpg"
+                    src="assets/img/featur-2.jpg"
                     className="img-fluid rounded-top w-100"
                     alt=""
                   />
@@ -927,7 +927,7 @@ function Home() {
               <a href="#">
                 <div className="service-item bg-primary rounded border border-primary">
                   <img
-                    src="public/assets/img/featur-3.jpg"
+                    src="assets/img/featur-3.jpg"
                     className="img-fluid rounded-top w-100"
                     alt=""
                   />
@@ -974,7 +974,7 @@ function Home() {
             <div className="col-lg-6">
               <div className="position-relative">
                 <img
-                  src="public/assets/img/baner-1.png"
+                  src="assets/img/baner-1.png"
                   className="img-fluid w-100 rounded"
                   alt=""
                 />
@@ -1012,7 +1012,7 @@ function Home() {
                 <div className="row align-items-center">
                   <div className="col-6">
                     <img
-                      src="public/assets/img/best-product-1.jpg"
+                      src="assets/img/best-product-1.jpg"
                       className="img-fluid rounded-circle w-100"
                       alt=""
                     />
@@ -1045,7 +1045,7 @@ function Home() {
                 <div className="row align-items-center">
                   <div className="col-6">
                     <img
-                      src="public/assets/img/best-product-2.jpg"
+                      src="assets/img/best-product-2.jpg"
                       className="img-fluid rounded-circle w-100"
                       alt=""
                     />
@@ -1078,7 +1078,7 @@ function Home() {
                 <div className="row align-items-center">
                   <div className="col-6">
                     <img
-                      src="public/assets/img/best-product-3.jpg"
+                      src="assets/img/best-product-3.jpg"
                       className="img-fluid rounded-circle w-100"
                       alt=""
                     />
@@ -1111,7 +1111,7 @@ function Home() {
                 <div className="row align-items-center">
                   <div className="col-6">
                     <img
-                      src="public/assets/img/best-product-4.jpg"
+                      src="assets/img/best-product-4.jpg"
                       className="img-fluid rounded-circle w-100"
                       alt=""
                     />
@@ -1144,7 +1144,7 @@ function Home() {
                 <div className="row align-items-center">
                   <div className="col-6">
                     <img
-                      src="public/assets/img/best-product-5.jpg"
+                      src="assets/img/best-product-5.jpg"
                       className="img-fluid rounded-circle w-100"
                       alt=""
                     />
@@ -1177,7 +1177,7 @@ function Home() {
                 <div className="row align-items-center">
                   <div className="col-6">
                     <img
-                      src="public/assets/img/best-product-6.jpg"
+                      src="assets/img/best-product-6.jpg"
                       className="img-fluid rounded-circle w-100"
                       alt=""
                     />
@@ -1208,7 +1208,7 @@ function Home() {
             <div className="col-md-6 col-lg-6 col-xl-3">
               <div className="text-center">
                 <img
-                  src="public/assets/img/fruite-item-1.jpg"
+                  src="assets/img/fruite-item-1.jpg"
                   className="img-fluid rounded"
                   alt=""
                 />
@@ -1237,7 +1237,7 @@ function Home() {
             <div className="col-md-6 col-lg-6 col-xl-3">
               <div className="text-center">
                 <img
-                  src="public/assets/img/fruite-item-2.jpg"
+                  src="assets/img/fruite-item-2.jpg"
                   className="img-fluid rounded"
                   alt=""
                 />
@@ -1266,7 +1266,7 @@ function Home() {
             <div className="col-md-6 col-lg-6 col-xl-3">
               <div className="text-center">
                 <img
-                  src="public/assets/img/fruite-item-3.jpg"
+                  src="assets/img/fruite-item-3.jpg"
                   className="img-fluid rounded"
                   alt=""
                 />
@@ -1295,7 +1295,7 @@ function Home() {
             <div className="col-md-6 col-lg-6 col-xl-3">
               <div className="text-center">
                 <img
-                  src="public/assets/img/fruite-item-4.jpg"
+                  src="assets/img/fruite-item-4.jpg"
                   className="img-fluid rounded"
                   alt=""
                 />
