@@ -13,7 +13,7 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Pagination from "../Hook/Pagination";
 import useSearch from "../Hook/useSearch";
-import WithRedux from "../../Hocs/withRedux";
+import withRedux from "../../Hocs/withRedux";
 function Shop(products) {
   const [sort, setSort] = useState("");
 
@@ -541,4 +541,4 @@ function Shop(products) {
   );
 }
 
-export default WithRedux(Shop, getAllProductsData, (state) => state.product);
+export default withRedux(Shop, getAllProductsData, (state) => state.product);

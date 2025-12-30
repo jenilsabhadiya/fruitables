@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function WithRedux(Component, fetchAction, state) {
+function withRedux(Component, fetchAction, state) {
   console.log(Component, fetch, state);
   //   console.log(fetch);
   //   console.log(state);
@@ -31,7 +31,7 @@ function WithRedux(Component, fetchAction, state) {
     console.log(data);
 
     return <Component {...props} {...data} />;
-  }
+  };
 }
 
-export default WithRedux;
+export default withRedux;
