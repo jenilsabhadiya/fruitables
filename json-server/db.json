@@ -344,15 +344,7 @@
       "userId": "abcd",
       "cart": [
         {
-          "id": "f85a",
-          "qty": 6
-        },
-        {
-          "id": "d896",
-          "qty": 1
-        },
-        {
-          "id": "1981",
+          "id": "f18a",
           "qty": 2
         }
       ]
@@ -364,7 +356,6 @@
       "userId": "abcd",
       "products_Id": [
         "f85a",
-        "d896",
         "f18a"
       ]
     }

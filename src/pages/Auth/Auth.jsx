@@ -19,7 +19,7 @@ function Auth() {
   // const { enqueueSnackbar } = useSnackbar();
 
   const user = useSelector((state) => state.auth);
-  console.log(user);
+  // console.log(user);
 
   const nav = useNavigate();
 
