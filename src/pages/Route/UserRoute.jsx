@@ -69,9 +69,9 @@ function UserRoute() {
         <Route element={<PrivateRoute />}>
           <Route path="/cart" element={<Cart />} />
           <Route path="/chackout" element={<Chackout />} />
-          <Route path="/contact" element={<Contact />} />
         </Route>
 
+        <Route path="/contact" element={<Contact />} />
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/testimonial" element={<Testimonial />} />
         <Route path="/auth" element={<Auth />} />
